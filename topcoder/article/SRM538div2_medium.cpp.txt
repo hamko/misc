@@ -1,0 +1,36 @@
+**538DIV2
+***538DIV2-2
+-何だこの問題。
+--直感的に答えが分かって、それを実装すれば通ってしまう。
+--絶対証明とかしないで点数もらってる人多いでしょー。
+-使う距離が1次元の距離で、しかも距離はmod 2していいらしいので、各点は二次元の情報だけど、実際にはx+y(mod 2)として、高々0, 1の情報に落としてよい。
+--a[i]=x[i]+y[i] (mod 2)とする。
+-今、初めに行く点a[s]と、最後に行く点a[t]を指定したとき、原点からa[s]に行って適当な経路を通ってa[t]に到達するまでの距離(mod 2)を求める。
+--まず、原点->a[s]に行くので、距離a[s] (mod 2)
+--次に、s->a[i_1]に行くので、距離a[i_1]-a[s] (mod 2)
+--次に、a[i_1]->a[i_2]に行くので、距離a[i_2]-a[i_1] (mod 2)
+--次に、a[i_2]->a[i_3]に行くので、距離a[i_3]-a[i_2] (mod 2)
+--…
+--最後に、a[i_(n-2)]->a[t]に行くので、距離a[t]-a[i_(n-2)]
+-これらの距離を全て足すと、なんとa[t] (mod 2)となる。
+--あはは、つまり最後に行った場所にのみ依存するんですね。
+-求めたいのは、全ての距離の総和a[t](mod 2)がwantedParityに一致するか、ということ。
+--つまり、!((a[t] + wantedParity) % 2)なるtが存在すれば、CAN, しなければCANNNOT。
+--tの存在量化問題で、tの探索空間は高々50個だからいけますね。
+-にしてもこういうのは、証明問題としては面白いけど…うーん。
+
+ #include <iostream>
+ #include <vector>
+ using namespace std;
+ 
+ class EvenRoute {
+ public:
+   string isItPossible(vector <int> x, vector <int> y, int wantedParity);
+ 
+ string EvenRoute::isItPossible(vector <int> x, vector <int> y, int wantedParity) {
+    for (int i = 0; i < x.size(); i++)
+        if (!((x[i] + y[i] + wantedParity) % 2))
+            return "CAN";
+    return "CANNOT";
+ }
+

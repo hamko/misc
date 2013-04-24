@@ -1,0 +1,10 @@
+/*!
+\mainpage
+
+
+とりあえず、開発に携わる人は\link coding_rules コーディング規約\endlink、\link develop_rule 開発上のルール\endlinkあたりを読んでください。
+
+ライブラリの提供する機能のヘルプを読みたい方は、まず\link library_usage ライブラリの使用方法\endlinkを読み、上のメニューのモジュールから読みたい項目を参照してください。
+
+
+*/

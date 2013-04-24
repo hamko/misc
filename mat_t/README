@@ -1,0 +1,12 @@
+linear_comb, product, trans
+これらの受け皿の行列は「ハコがある」ことが前提である。
+つまり、
+    tmp = robolib_matrix_alloc(0, 0);
+なりにしておけばよい。これさえすれば内部で頑張ってallocしてくれる。
+
+roblib_matrix_alloc
+robolib_matrix_new_unit
+これらはallocする関数。ハコがない行列をハコがある行列にする
+これらの受け皿の行列は「ハコがない」ことが前提。
+    mat_t tmp = robolib_matrix_alloc(3, 3);
+とか。

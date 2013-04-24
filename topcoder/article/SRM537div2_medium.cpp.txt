@@ -1,0 +1,90 @@
+-どうしろと
+-個数を数える問題
+--全パターンを探すか、上手い同一視を見つけるか、DPか
+--約数とか上手くうにょうにょすれば、頭良くできるのか？？
+-とりあえず、探索空間が非負整数ではなく、整数だとしたら、これは単にgcd(A, B) % gcd(X, Y)をみるだけで終わり。
+--問題は、非負整数であるところ。
+-i:0..(A/gcd(A,B)), j:0..(B/gcd(A,B))として、A*j+B*iを考える
+--これは全てmod A*Bで互いに異なる
+--よって、上の数字のうち最大は　(A/gcd(A,B)-1)*B+(B/gcd(A,B)-1)*Aであり、それ以上のgcd(A,B)の倍数は必ず非負整数の線型結合で表すことが出来る。
+-その最大値は必ず有限確定に存在するので、十分大きな係数ではA,Bからは自然数/gcd(A,B)の集合が生成され、X,Yからは自然数/gcd(X,Y)が生成される。
+--つまり、gcd(A,B)/gcd(X,Y)が必要。
+-したがって、A,BとX,Yから生成される初めの方の集合の包含関係だけを調べれば良い。
+-また、Yが何でも良い、Xだけで全て事足りる場合は、初めに弾いておけば良い
+--そうでない場合、必ず、A, BのうちXで割り切れない数が存在する。
+--その割り切れない数より大きい数字をX,Yで生成することは出来ない。
+--そのため、nを少し限定することができる。
+-実装
+--集合の包含関係に関しては、プライオリティキューを用いて判別しました。
+--もう少し実装軽くなんないのこれ…
+--setとか使うと楽になるのか…？
+~
+ #include <string>
+ #include <vector>
+ #include <queue>
+ using namespace std;
+ #define MIN(a,b) ((a)<(b)?(a):(b))
+ 
+ class KingXNewCurrency {
+ public:
+   int howMany(int A, int B, int X);
+ };
+ 
+ int gcd(int a, int b)
+ {
+     if (!b)
+         return a;
+     return gcd(b, a % b);
+ }
+ 
+ int KingXNewCurrency::howMany(int A, int B, int X) {
+     if (!(gcd(A, B) % X))
+         return -1;
+     int result = 0;
+ 
+     int n = 200;
+     n = MIN(n, A % X ? A : 200);
+     n = MIN(n, B % X ? B : 200);
+ 
+     for (int i = 1; i < n; i++) {
+         if (gcd(A, B) % gcd(X, i)) 
+             continue;
+ 
+         priority_queue <int> ref;
+         for (int j = 0; j < A / gcd(A, B); j++) 
+             for (int h = 0; h < B / gcd(A, B); h++) 
+                 ref.push(A * h + B * j);
+         
+         priority_queue <int> qu;
+         for (int j = 0; j < X / gcd(X, i); j++) 
+             for (int h = 0; h < i / gcd(X, i); h++) 
+                 qu.push(X * h + i * j);
+         for (int j = X * i / gcd(X, i); j < (A / gcd(A, B) - 1) * B + (B / gcd(A, B) - 1) * A; j += gcd(X, i))
+             qu.push(j);
+ 
+         int qutop = qu.top();
+         int contflag = 0;
+         while (!qu.empty() && !ref.empty()) {
+             if (!(ref.top() % X) || !(ref.top() % i)) {
+                 ref.pop();
+                 continue;
+             }
+             if (qutop < ref.top()) {
+                 ref.pop();
+                 continue;
+             }
+             if (qu.top() == ref.top()) {
+                 qu.pop(); ref.pop(); 
+             } else if (qu.top() > ref.top()) {
+                 qu.pop();
+             } else {
+                 contflag = 1;
+                 break;
+             }
+         }
+         if (!contflag)
+             result++;
+     }
+ 
+     return result;
+ }

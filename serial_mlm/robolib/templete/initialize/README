@@ -1,0 +1,11 @@
+robolib10を2008_boardで使うためのサンプルコード
+
+- 2008_board_libraryをチェックアウトしてくる
+- H8直下のMakefileをこのディレクトリに置いてあるMakefileで置き換える
+- init_robolib()をmainから呼び出す。
+- call_function_list()をcontrolから呼び出す。
+- 必要に応じてhdwdef.[ch], params.hを書き換える。
+- robolib/templete/subdir.mk内のI_EXTERNALを
+    -I$(ROBOLIB_PATH)/../2008_board_library -I$(ROBOLIB_PATH)/../2008_board_library/hal_devices
+  に書き換える(推奨)
+

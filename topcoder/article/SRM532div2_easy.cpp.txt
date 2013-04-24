@@ -1,0 +1,21 @@
+-タイピングゲーム
+ #include <vector>
+ using namespace std;
+ 
+ class DengklekTryingToSleep {
+ public:
+   int minDucks(vector <int> ducks);
+ };
+ 
+ int DengklekTryingToSleep::minDucks(vector <int> duck) {
+     int min = 1000;
+     for (int i = 0; i < duck.size(); i++) 
+         if (min > duck[i])
+             min = duck[i];
+     int max = 0;
+     for (int i = 0; i < duck.size(); i++) 
+         if (max < duck[i])
+             max = duck[i];
+ 
+     return -duck.size() + (max - min + 1);
+ }

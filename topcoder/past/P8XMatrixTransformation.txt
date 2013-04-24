@@ -1,0 +1,98 @@
+PROBLEM STATEMENT
+NOTE: This problem statement contains images that may not display properly if viewed outside of the applet.
+
+You are given two vector <string>s original and target, which are two rectangular matrices with the same dimensions. Each character in the matrices will be either '0' or '1'. You want to transform original into target. You are only allowed to use one type of operations: Pick either a single row or a single column, and permute all its characters arbitrarily. You may use as many operations as you want to, one after another.
+
+Is it possible to transform original into target by using the allowed operations only? Return "YES" if it's possible, "NO" otherwise (quotes for clarity).
+
+DEFINITION
+Class:P8XMatrixTransformation
+Method:solve
+Parameters:vector <string>, vector <string>
+Returns:string
+Method signature:string solve(vector <string> original, vector <string> target)
+
+
+NOTES
+-Permuting the characters means rearranging them into a new order.
+
+
+CONSTRAINTS
+-original will contain between 1 and 50 elements, inclusive.
+-Each element of original will contain between 1 and 50 characters, inclusive.
+-All the elements of original will contain the same number of characters.
+-Each character in each element of original will be either '0' or '1'.
+-target will contain exactly R elements, where R is the number of elements in original.
+-Each element of target will contain exactly C characters, where C is the number of characters in original[0].
+-Each character in each element of target will be either '0' or '1'.
+
+
+EXAMPLES
+
+0)
+{"01"
+,"11"}
+{"11"
+,"10"}
+
+Returns: "YES"
+
+For example, you can apply the following operations:
+
+That is, you can first permute the first row and then the second column in the way shown above.
+
+1)
+{"0111"
+,"0011"}
+{"1011"
+,"1100"}
+
+Returns: "YES"
+
+
+
+2)
+{"0"}
+{"1"}
+
+Returns: "NO"
+
+
+
+3)
+{"1111"
+,"1111"
+,"0000"
+,"0000"}
+{"1111"
+,"1111"
+,"0000"
+,"0000"}
+
+Returns: "YES"
+
+
+
+4)
+{"0110"
+,"1001"
+,"0110"}
+{"1111"
+,"0110"
+,"0000"}
+
+Returns: "YES"
+
+
+
+5)
+{"0000"
+,"1111"
+,"0000"}
+{"1111"
+,"0000"
+,"1111"}
+
+Returns: "NO"
+
+

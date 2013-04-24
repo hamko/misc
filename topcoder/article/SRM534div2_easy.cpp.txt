@@ -1,0 +1,37 @@
+-英語力の問題
+ #include <string>
+ #include <vector>
+ using namespace std;
+ 
+ class EllysDirectoryListing {
+ public:
+   vector <string> getFiles(vector <string> files);
+ };
+ 
+ vector <string> EllysDirectoryListing::getFiles(vector <string> files) {
+     int i;
+     int n = files.size();
+     string tmp;
+     
+     if ((files[n-1] == "." && files[n-2] == "..") || 
+         (files[n-1] == ".." && files[n-2] == ".") ) 
+         return files;
+     for (i = 0; i < n; i++)
+         if (files[i] == "." || files[i] == "..")
+             break;
+     tmp = files[i];
+     files[i] = files[n-1];
+     files[n-1] = tmp;
+ 
+     if ((files[n-1] == "." && files[n-2] == "..") || 
+         (files[n-1] == ".." && files[n-2] == ".") ) 
+         return files;
+     for (i = 0; i < n; i++)
+         if (files[i] == "." || files[i] == "..")
+             break;
+     tmp = files[i];
+     files[i] = files[n-2];
+     files[n-2] = tmp;
+ 
+     return files;
+ }

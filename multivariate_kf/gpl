@@ -1,0 +1,4 @@
+set terminal png
+set output "karman_img.png"
+plot "a" u 1:2, "" u 3:2, "" u 4:5 
+pause -1

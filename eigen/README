@@ -1,0 +1,21 @@
+* How to install
+http://eigen.tuxfamily.org/index.php?title=Main_Page~
+Get the latest Eigen.~
+
+ cd ~/Download/
+ tar xvf eigen-eigen-***
+ cd eigen-eigen-***
+ mkdir build
+ cd build
+ cmake ..
+ make 
+ sudo make install
+
+* Sample
+
+ svn export https://robotich.ath.cx/svn/tmp/wakatabe/eigen/
+ cd eigen
+ g++ -I/usr/local/include/eigen3/ hallo.cpp 
+
+* だれか
+armadilloと何がどう違うのか教えてください．

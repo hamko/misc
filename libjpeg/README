@@ -1,0 +1,2 @@
+g++ JpegFileIO.cpp
+./a.out pre.jpeg post.jpeg

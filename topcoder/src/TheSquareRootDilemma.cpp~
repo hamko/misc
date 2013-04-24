@@ -1,0 +1,121 @@
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <stack>
+#include <queue>
+#include <climits>
+#include <cmath>
+#include <cstdio>
+#include <cstdlib>
+#include <cfloat>
+#include <map>
+#include <utility>
+#include <set>
+#include <iostream>
+#include <memory>
+#include <functional>
+#include <sstream>
+#include <complex>
+using namespace std;
+static const double EPS = 1e-5;
+#define EQ(a,b) (abs((a)-(b))<EPS)
+
+#define pb push_back
+#define rep(i,n) for(int i = 0; i < n; i++)
+#define re return
+#define all(x) (x).begin(), (x).end()
+#define mp make_pair
+
+typedef long long ll;
+typedef long double ld;
+typedef vector<int> vi;
+typedef vector<vector<int> > vvi;
+typedef pair<int, int> ii;
+typedef vector<string> vs;
+
+class TheSquareRootDilemma {
+public:
+    vi p;
+    int makenum(int num, vector<int> v, int N, int M, vector<int> index) {
+        int tmp = 1;
+        for (int i = 0; i < index.size(); i++) 
+            if (index[i])
+                tmp *= p[v[i]];
+        cout << tmp << endl;
+        for (int i = 0; i < v.size(); i++) {
+            cout << v[i] << " ";
+        }
+        cout << endl;
+        if (!(tmp <= N && num * num / tmp <= M))
+            return 0;
+
+        if (index.size() == v.size()) {
+            cout << "*" << endl;
+            return 1;
+        } else {
+            vector<int> index0 = index; index0.push_back(0);
+            vector<int> index1 = index; index1.push_back(1);
+            return makenum(num, v, N, M, index0) + makenum(num, v, N, M, index1);
+        }
+    }
+    int countPairs(int N, int M) {
+        int a[77778];
+        fill(a, a + 77778, 1);
+        a[0] = a[1] = 0;
+        for (int i = 2; i <= 77777; i++) 
+            if (a[i])
+                for (int j = i + i; j <= 77777; j += i) 
+                    a[j] = 0;
+
+        p.clear();
+        for (int i = 0; i <= 77777; i++) {
+            if (a[i])
+                p.push_back(i);
+        }
+
+        vvi plist(77778);
+        for (int i = 1; i <= 77777; i++) {
+            int tmp = i;
+            while (tmp != 1) {
+                for (int j = 0; j < p.size(); j++) {
+                    if (!(tmp % p[j])) {
+                        tmp /= p[j];
+                        plist[i].push_back(j);
+                        plist[i].push_back(j);
+                        break; 
+                    }
+                }
+            }
+        }
+        
+        int result = 0;
+        for (int i = 1; i <= 3; i++) {
+            vector<int> index;
+            result += makenum(i, plist[i], N, M, index);
+        }
+
+        return 0;
+    }
+
+    
+// BEGIN CUT HERE
+	public:
+	void run_test(int Case) { if ((Case == -1) || (Case == 0)) test_case_0(); if ((Case == -1) || (Case == 1)) test_case_1(); if ((Case == -1) || (Case == 2)) test_case_2(); if ((Case == -1) || (Case == 3)) test_case_3(); }
+	private:
+	template <typename T> string print_array(const vector<T> &V) { ostringstream os; os << "{ "; for (typename vector<T>::const_iterator iter = V.begin(); iter != V.end(); ++iter) os << '\"' << *iter << "\","; os << " }"; return os.str(); }
+	void verify_case(int Case, const int &Expected, const int &Received) { cerr << "Test Case #" << Case << "..."; if (Expected == Received) cerr << "PASSED" << endl; else { cerr << "FAILED" << endl; cerr << "\tExpected: \"" << Expected << '\"' << endl; cerr << "\tReceived: \"" << Received << '\"' << endl; } }
+	void test_case_0() { int Arg0 = 2; int Arg1 = 2; int Arg2 = 2; verify_case(0, Arg2, countPairs(Arg0, Arg1)); }
+	void test_case_1() { int Arg0 = 10; int Arg1 = 1; int Arg2 = 3; verify_case(1, Arg2, countPairs(Arg0, Arg1)); }
+	void test_case_2() { int Arg0 = 3; int Arg1 = 8; int Arg2 = 5; verify_case(2, Arg2, countPairs(Arg0, Arg1)); }
+	void test_case_3() { int Arg0 = 100; int Arg1 = 100; int Arg2 = 310; verify_case(3, Arg2, countPairs(Arg0, Arg1)); }
+
+// END CUT HERE
+
+};
+
+// BEGIN CUT HERE
+int main() {
+    TheSquareRootDilemma ___test;
+    ___test.run_test(-1);
+}
+// END CUT HERE

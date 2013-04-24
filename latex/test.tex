@@ -1,0 +1,158 @@
+\title{人工知能課題8}
+\author{機械情報工学科3年 120292 若田部亮}
+\date{\today}
+
+\documentclass{jarticle}
+\begin{document}
+
+\maketitle
+
+\section{概要}
+この資料は幾何の自動証明に用いられるWuの定理のプログラム課題の説明，及びレポートである．
+今回，数式処理プログラムを使用することなく，多項式の四則演算及び剰余の計算は全て自分で実装した． 
+
+\section{プログラム説明}
+それぞれのファイルの役割を記述する．
+\begin{itemize}
+    \item monopoly.cpp 単項式の実装
+    \item poly.cpp 多項式の定義
+    \item polyinfrastructure.cpp 多項式の環境の定義
+    \item wumethod.cpp 三角化及びWuの手続きの実装
+    \item main.cpp Wuの手続きに入力するための幾何問題を記述
+\end{itemize}
+
+実行方法は
+{\small
+\begin{verbatim}
+make
+./a.out
+\end{verbatim}
+}
+による．
+
+\section{実行結果}
+出力結果を以下に貼り付ける．
+{\small
+\begin{verbatim}
+/************************* WuMethod ***************************/
+/*** Wu 1 ***/
+Vars: x y 
+Hyp: y-x -1.5 -1.5 = 0
+Hyp: x\^2  + 2 y = 0
+Conc: 4 y = 0
+Tri: y-x -1.5 -1.5 = 0
+Tri: -y + y\^2 + 2.25 2.25 = 0
+failed for unexpected reminder at the end.
+4 y
+Tri: y-x -1.5 -1.5 = 0
+Tri: x\^2  + 2 x  + 3 3 = 0
+failed for unexpected reminder at the end.
+4 x  + 6 6
+failed triangulation.
+Tri: x\^2  + 2 y = 0
+Tri: -x -1.5 -1.5-0.5 x\^2  = 0
+failed for unexpected reminder at the end.
+4 x  + 6 6
+FALSE
+/*** Wu 2 ***/
+Vars: x y 
+Hyp: 3 x y\^2 = 0
+Hyp: 2 x\^2 y = 0
+Conc: 4 y = 0
+failed triangulation.
+failed triangulation.
+failed triangulation.
+failed triangulation.
+FALSE
+/*** Wu 3 ***/
+Vars: x y 
+Hyp: 3 x y = 0
+Hyp: 2 x\^2 y = 0
+Conc: 4 y = 0
+failed for 0 poly in tripoly.
+failed for 0 poly in tripoly.
+failed triangulation.
+failed triangulation.
+FALSE
+/*** Wu 4 ***/
+Vars: x y 
+Hyp: x\^2  + 2 y = 0
+Hyp: 3 x  = 0
+Conc: 4 y = 0
+failed triangulation.
+Tri: x\^2  + 2 y = 0
+Tri: 3 x  = 0
+TRUE
+/*** Wu 5 ***/
+Vars: x y 
+Hyp: x  + y  + z = 0
+Hyp: x  + y  = 0
+Conc: 4 z = 0
+Tri: x  + y  + z = 0
+Tri: -z = 0
+TRUE
+/*** Wu 7-1 ***/
+Vars: a b 
+Hyp: e-2 a  = 0
+Hyp: 2 a -b -d  = 0
+Conc: -2 a b  + b\^2  + 2 a d -d\^2  = 0
+Tri: e-2 a  = 0
+Tri: -b -d  + e = 0
+TRUE
+/*** Wu 7-2 ***/
+Vars: a b 
+Hyp: e-2 a  = 0
+Hyp: d -b  = 0
+Conc: -2 a b  + b\^2  + 2 a d -d\^2  = 0
+Tri: e-2 a  = 0
+Tri: d -b  = 0
+TRUE
+\end{verbatim}
+}
+
+実際にはここに書かれているものよりも上に出力があるが，これは多項式演算のテスト関数であるため，課題には無関係である．
+この出力のVarsは証明に際して有効な独立変数の列挙であり，Hypは前提条件を示し，Concが示したい対象を表し，Triが三角化された前提条件となっている．
+TRUEまたはFALSEが真偽となるが，FALSEは正確には偽ではなく，「わからない」ことを意味している．
+
+Wu 7-1は高校受験数学掲示板から探してきた幾何の問題を解いた．
+
+http://www.inter-edu.com/forum/read.php?908,359105
+
+\fbox{
+Mは線分ABの中点、AB//BD、CM＝DM⇒AC＝BCを証明せよ。 
+}
+
+この問題に対して，点Aを原点, 点B方向をx軸とする．点A = (0, 0), 点M = (a, 0), 点B = (e, 0), 点C = (b, c), 点D = (d, c)と置いて，CM = DMの条件と加えて書き下すと，
+前提条件と証明すべき式を列挙すると，\\
+\\
+中点条件: $Hyp_1: e = 2 a$\\
+距離一致条件: $Hyp_2: = (a - b)^2 - (a - d)^2 = (2 a - b - d) (d - b)$\\
+証明すべき式: $b^2 + c^2 = (e - d)^2 + c^2$\\
+\\
+今，距離一致条件が因数分解可能な形となっている．因数分解可能な場合は予め因数分解をして，その条件を２つに分解し，その両方で証明できなければならない．従って，この問題を解くためには，以下の２つの問題を両方解く必要がある．\\
+\\
+問題1\\
+\\
+中点条件: $Hyp_1: e = 2 a$\\
+距離一致条件: $Hyp_2: = 2 a - b - d$\\
+証明すべき式: $b^2 + c^2 = (e - d)^2 + c^2$\\
+\\
+問題2\\
+\\
+中点条件: $Hyp_1: e = 2 a$\\
+距離一致条件: $Hyp_2: = d - b$\\
+証明すべき式: $b^2 + c^2 = (e - d)^2 + c^2$\\
+\\
+出力のWu 7-1が上の問題1に相当し，Wu 7-2が問題2に相当している．そしてこの結果，両方でTRUEであるため，本問題は真であることがわかる．
+
+\section{感想}
+今回Wuの定理を実装するにあたって資料が極めて少なく，一般に報告されているWuの定理の性能をはるかに下回るものしか作ることが出来なかった．
+Wuの定理のReminderなどの記法に戸惑い，理解に相当苦しんだが，何とか雰囲気から理解した．
+しかし，この課題を提出した今でも，多項式の三角化に関する知識は不十分である．
+多項式の三角化に関する資料はグレブナー基底のものを除いて，一切見つからなかった．
+そのため今回の課題では，パーミュテーションで前提条件の関数を並べて，貪欲に前提条件同士を割っていった結果，うまく三角化されてくれたらそれを使い，そうでなければFALSEを返す，という乱暴な処理を行なってしまっている．
+
+今回の課題のコード数を数えてみたところ，全てあわせて2668行，Wuの定理に関わる部分に限ると342行とかなり多項式演算クラスに時間が取られてしまった．
+おとなしく数式処理ソフトにパイプを繋いでいれば，と後悔するばかりである．
+
+\end{document}

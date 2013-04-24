@@ -1,0 +1,42 @@
+-[[島田]]君と[[赤崎]]さんと、うにょうにょ言ってた奴をやってみた。
+--やっぱTopCoderは上手くやれば実装軽くなるよね。
+-整数AとBの、最大公約数Gと最小公倍数Lが与えられたとき、A+Bの最小値を返す。
+--L<1e+12, G<1e+12
+-G*L=A*B
+--(L/G)=(A/G)*(B/G)
+-AとBは交換対称
+--(A/G)<=(B/G)を前提して良い
+-sqrt(L/G)以下1以上を(A/G)の候補として、以下のことをチェックすれば良い。
+--(L/G)は(A/G)は0は割りきれる
+--(A/G)と(B/G)は互いに素である
+-互いに素の条件は、ユークリッドの互除法によりgcdが1であることを確認する。
+-最悪計算回数はN(1..sqrt(L/G))=N(sqrt(L))=1e+6回。
+--ユークリッドの互除法はむちゃくちゃ計算量がいいので、ほとんど気にしなくてよい。
+--Lが1e+12に近い素数で、Gが1の時一番計算量がかかるが、それでも5msはかからない。
+-と思ったら、非良心的なことに、A, Bが存在しないケースも与えられるらしいので、LはGで割りきれるかをチェックする。
+ #include <cmath>
+ using namespace std;
+ 
+ class FoxAndGCDLCM {
+ public:
+   long long get(long long G, long long L);
+ };
+ 
+ long long gcd(long long a, long long b)
+ {
+     if (!b)
+         return a;
+     return gcd(b, a % b);
+ }
+ 
+ long long FoxAndGCDLCM::get(long long G, long long L) {
+     if (L % G)
+         return -1;
+ 
+     long long X = (L / G);
+     for (long long i = (long long)sqrt(L / G); i > 0; i--) 
+         if (!(X % i) && gcd(i, X / i) == 1) 
+             return (i + X / i) * G;
+ 
+     return -1;
+ }

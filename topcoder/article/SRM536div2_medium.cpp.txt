@@ -1,0 +1,40 @@
+-最小値問題
+-全探索出来るか？
+--O(thrownum^dicenum)、つまり50の50乗となり、大変頭が悪い。
+-とりあえず何か同一視が可能かを見ると、一回で振ったときに出る目の順番は入れ替えてよい。
+-さらに、各サイコロの中から一番大きいものをとり、それを取り除き、という操作をし続けることで、対象の最小値が得られる
+-ということで、ソートした上で、その各列のうち最大値を行に対して足せば良い。
+ #include <string>
+ #include <vector>
+ using namespace std;
+ 
+ class RollingDiceDivTwo {
+ public:
+   int minimumFaces(vector <string> rolls);
+ };
+ 
+ void swap(char *a, char *b)
+ {
+     char c = *a;
+     *a = *b;
+     *b = c;
+ }
+ 
+ int RollingDiceDivTwo::minimumFaces(vector <string> rolls) {
+     for (int i = 0; i < rolls.size(); i++) 
+         for (int j = 0; j < rolls[i].length() - 1; j++)
+             for (int h = 0; h < rolls[i].length() - j - 1; h++) 
+                 if (rolls[i][h] > rolls[i][h+1])
+                     swap(&rolls[i][h], &rolls[i][h+1]);
+ 
+     int sum = 0;
+     for (int i = 0; i < rolls[0].length(); i++) {
+         int m = 0;
+         for (int j = 0; j < rolls.size(); j++) 
+             if (m < rolls[j][i] - '0')
+                 m = rolls[j][i] - '0';
+         sum += m;
+     }
+ 
+     return sum;
+ }

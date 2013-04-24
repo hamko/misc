@@ -1,0 +1,11 @@
+/*!
+\page untlansplanted まだ移植されていない機能
+以下のファイルは、意図的に排除したものを除き、旧robotech_library(旅人やカフラーや用いられたもの)に含まれていたが、現在ヘッダが用意されていないファイルである。
+
+- debug/record.c
+- device/line_sensor.c
+- map/dual_regression.c
+- map/line_calc.c
+- map/regression.c
+
+*/

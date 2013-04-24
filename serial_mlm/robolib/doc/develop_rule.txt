@@ -1,0 +1,59 @@
+/*!
+\page develop_rule 開発上のルール
+  技術継承の促進のため、開発した技術はライブラリにマージすることが推奨されます。
+
+  その上での基本となるルールを暫定ですが以下に。
+
+  \section includeguard インクルードガード
+    基本ですがヘッダにはインクルードガードをつけましょう。
+
+    \verbatim
+#ifndef __INCLUDED_FILENAME_H__
+#define __INCLUDED_FILENAME_H__
+
+<body>
+
+#endif\endverbatim
+
+    といった具合です。
+
+
+
+  \section installoption インストールオプション
+    ライブラリには多種多様な機能が用意されるため、その一部はユーザーにとって不要なものとなることがあります。
+
+    ライブラリではinstall_option.hにマクロを記述することで必要な機能だけをコンパイルできるようにしています。
+    ソースファイルには、
+
+    \verbatim
+#include "install_option.h"
+#ifdef __INSTALL_MODULENAME__
+
+<body>
+
+#endif\endverbatim
+
+    のように記述し、install_option.hに \#define __INSTALL_MODULENAME__ が記述されていないとコンパイルされないようにします。
+
+    また、ヘッダファイルには
+
+    \verbatim
+#include "install_option.h"
+#ifndef __INSTALL_MODULENAME__
+#error <modulename> is not installed
+#endif\endverbatim
+
+    と記述することで、必要なのにコンパイルしていない機能がないかどうかがわかるようにします。
+
+    また、doxygenで生成されるドキュメントがこのオプションの単位でまとめられるように、ファイルの先頭では
+    \verbatim
+/*!
+  \file    ファイル名
+  \ingroup modulename\endverbatim
+    のようにし、install_option.hでは
+    \verbatim
+//! \defgroup modulename
+//#define __INSTALL_MODULENAME__\endverbatim
+    のようにしておきます。また、依存関係の記述のために、Doxyfileに\dependというコマンドが定義されています。
+
+*/

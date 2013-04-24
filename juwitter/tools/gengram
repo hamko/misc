@@ -1,0 +1,3 @@
+./yomi2voca-utf.pl $1.yomi > $1.voca
+./mkdfa.pl $1
+./generate $1

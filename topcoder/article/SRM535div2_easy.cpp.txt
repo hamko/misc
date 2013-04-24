@@ -1,0 +1,27 @@
+-境界条件ゲーム
+-一次方程式を解きましょう
+--不能の時は空の集合を返しましょう。
+ #include <vector>
+ using namespace std;
+ 
+ class FoxAndIntegers {
+ public:
+   vector <int> get(int AminusB, int BminusC, int AplusB, int BplusC);
+ };
+ 
+ vector <int> FoxAndIntegers::get(int AminusB, int BminusC, int AplusB, int BplusC) {
+     vector <int> result;
+     
+     int a = (AminusB+AplusB)/2;
+     if (a * 2 != (AminusB+AplusB))
+         return result;
+     int b = AplusB-a;
+     if (-BminusC + b != BplusC - b)
+         return result;
+ 
+     result.push_back(a);
+     result.push_back(b);
+     result.push_back(BplusC - b);
+ 
+     return result;
+ }

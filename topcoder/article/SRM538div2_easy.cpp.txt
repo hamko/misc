@@ -1,0 +1,17 @@
+-英語の問題。
+-rootの数もへったくれも、探索空間が高々2個しかないし、何がしたいのか良く分からない。
+ #include <vector>
+ using namespace std;
+ 
+ class BinaryPolynomialDivTwo {
+ public:
+   int countRoots(vector <int> a);
+ };
+ 
+ int BinaryPolynomialDivTwo::countRoots(vector <int> a) {
+     int sum = 0;
+     for (int i = 0; i < a.size(); i++)
+         sum += a[i];
+ 
+     return !(a[0] % 2) + !(sum % 2);
+ }

@@ -1,0 +1,42 @@
+-文字列処理で実装が無駄に面倒くさい系問題
+-8文字 かつ 母音2文字 かつ同じ母音2文字
+--→8文字 かつ 母音の総和が2文字 かつ ある母音が2回出る
+--と同値変形して実装。　
+ #include <string>
+ using namespace std;
+ 
+ class KingXNewBaby {
+ public:
+   string isValid(string name);
+ };
+ 
+ string KingXNewBaby::isValid(string name) {
+     char vo[5] = {}; 
+     
+     if (name.size() != 8)
+         return "NO";
+ 
+     for (int i = 0; i < 8; i++) 
+         if (name[i] == 'a')
+             vo[0]++;
+         else if (name[i] == 'i')
+             vo[1]++;
+         else if (name[i] == 'u')
+             vo[2]++;
+         else if (name[i] == 'e')
+             vo[3]++;
+         else if (name[i] == 'o')
+             vo[4]++;
+ 
+     int sum = 0;
+     for (int i = 0; i < 5; i++) 
+         sum += vo[i];
+     if (sum != 2)
+         return "NO";
+ 
+     int i;
+     for (i = 0; i < 5; i++)
+         if (vo[i] == 2)
+             break;
+     return i == 5 ? "NO" : "YES";
+ }

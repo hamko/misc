@@ -1,0 +1,78 @@
+PROBLEM STATEMENT
+King Dengklek is the perfect king of Kingdom of Ducks, where slimes and ducks live together in peace and harmony.
+
+After several years of waiting, King Dengklek and the queen finally had a baby. Now he is looking for a name for the newborn baby. According to the private rule of Kingdom of Ducks, the name of each member of the royal family must be such that:
+
+
+It must consist of exactly eight letters. All letters must be lowercase ('a'-'z').
+It must have exactly two vowels and six consonants. (Vowels are the letters 'a', 'e', 'i', 'o', and 'u'; the rest are consonants.)
+The two vowels must be equal.
+
+
+For example, "dengklek" is a valid name because it consists of exactly eight letters: six consonants and two identical vowels, 'e'.
+
+You are given a String name. Please help the kingdom determine whether name is valid. Return "YES" if it is a valid name for King Dengklek's newborn baby, or "NO" otherwise.
+
+DEFINITION
+Class:KingXNewBaby
+Method:isValid
+Parameters:string
+Returns:string
+Method signature:string isValid(string name)
+
+
+CONSTRAINTS
+-name will contain between 1 and 50 characters, inclusive.
+-Each character of name will be one of 'a'-'z'.
+
+
+EXAMPLES
+
+0)
+"dengklek"
+
+Returns: "YES"
+
+
+
+1)
+"gofushar"
+
+Returns: "NO"
+
+It has more than two vowels.
+
+2)
+"dolphinigle"
+
+Returns: "NO"
+
+It has more than eight letters.
+
+3)
+"mystictc"
+
+Returns: "NO"
+
+It has only one vowel.
+
+4)
+"rngringo"
+
+Returns: "NO"
+
+It has exactly two vowels, but they are not equal.
+
+5)
+"misof"
+
+Returns: "NO"
+
+It has less than eight letters.
+
+6)
+"metelsky"
+
+Returns: "YES"
+
+

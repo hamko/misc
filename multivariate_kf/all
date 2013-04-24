@@ -1,0 +1,6 @@
+#!/bin/sh
+
+make
+./a.out > a
+gnuplot gpl
+

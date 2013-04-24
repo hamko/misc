@@ -1,0 +1,28 @@
+-stringの関数を知っていますか問題
+--stringクラスのfindメソッドは知っていましょう。
+ #include <string>
+ using namespace std;
+ 
+ class PikachuEasy {
+ public:
+   string check(string word);
+ };
+ 
+ string PikachuEasy::check(string word) {
+     int n = 0;
+     while (1) {
+         if (word.find("pi", n) != string::npos)
+             n += 2;
+         else if (word.find("ka", n) != string::npos)
+             n += 2;
+         else if (word.find("chu", n) != string::npos)
+             n += 3;
+         else 
+             return "NO";
+ 
+         if (n >= word.length())
+             return "YES";
+     }
+ 
+     return "NO_ERR";
+ }

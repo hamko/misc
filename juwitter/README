@@ -1,0 +1,7 @@
+install julius, xml2, libtwitcurl.
+
+edit config.hpp
+, where you can get consumer*** at https://dev.twitter.com/apps/new
+
+$ make
+$ ./julius-simple
