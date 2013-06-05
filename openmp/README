@@ -1,0 +1,1 @@
+/usr/local/include/eigen3/ openmp.cpp stopwatch_util.cpp -lm -lhamkoutil
