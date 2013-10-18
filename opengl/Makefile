@@ -4,14 +4,14 @@ CC=g++
 RM=rm -f
 
 CFLAGS=-Wall
-LDFLAGS=-lglut -lGL -lGLU -ljpeg -lm -lpthread
+LDFLAGS=-L/usr/local/lib -lglut -lGL -lGLU -ljpeg -lm -lpthread -lhamkoutil
 
-TARGET = display_callback keyboard_callback teapot robot_arm planet tex_teapot image texbind point pthread
+TARGET = display_callback keyboard_callback teapot robot_arm planet basic tex_teapot image texbind point pthread
 
 all: $(TARGET)
 
 .c.o:
-	${CC} -c ${CFLAGS} $<
+	${CC} -c ${CFLAGS} $< ${LDFLAGS}
 
 display_callback: display_callback.o
 	${CC} -o $@ $^ ${LDFLAGS}
@@ -31,6 +31,9 @@ robot_arm: robot_arm.o
 planet: planet.o
 	${CC} -o $@ $^ ${LDFLAGS}
 
+basic: basic.o
+	${CC} -o $@ $^ ${LDFLAGS}
+	
 image: image.o readjpeg.o readjpeg.h
 	${CC} -o $@ $^ ${LDFLAGS}
 

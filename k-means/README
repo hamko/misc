@@ -1,0 +1,8 @@
+cmake .
+make
+./a.out > a
+cat a | grep "0:" > 0
+cat a | grep "1:" > 1
+cat a | grep "2:" > 2
+echo 'p "0" u 2:3; rep "1" u 2:3; rep "2" u 2:3' | gnuplot --persist
+
