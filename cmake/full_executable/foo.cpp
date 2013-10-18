@@ -3,5 +3,5 @@ using namespace std;
 
 void foo(void) 
 {
-    cout << "test" << endl;
+    cout << "foo" << endl;
 }

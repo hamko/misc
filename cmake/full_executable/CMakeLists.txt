@@ -14,6 +14,6 @@ include_directories(/usr/local/include ${PROJECT_SOURCE_DIR})
 # -L
 link_directories(/usr/local/lib ${PROJECT_SOURCE_DIR})
 # -o とソースファイル指定
-add_executable(tutorial tutorial.cxx foo.cxx)
+add_executable(a.out tutorial.cpp foo.cpp)
 # -l
-target_link_libraries(tutorial c m) #libcとかlibmとか
+target_link_libraries(a.out hamkoutil c m) #libcとかlibmとか
