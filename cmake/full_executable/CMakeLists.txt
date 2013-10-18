@@ -6,7 +6,7 @@ project (tutorial_project CXX)
 message(STATUS "cmake has begun at ${PROJECT_SOURCE_DIR}")
 
 # フラグ
-SET(CMAKE_CXX_FLAGS "-Wall -O2")
+SET(CMAKE_CXX_FLAGS "--std=c++11 -Wall -O2")
 # -D
 add_definitions(-DFOO)
 # -I
