@@ -1,4 +1,10 @@
 * How to install
+just type, 
+
+ sudo aptitude install eigen3-dev
+
+or
+
 http://eigen.tuxfamily.org/index.php?title=Main_Page~
 Get the latest Eigen.~
 
@@ -12,10 +18,5 @@ Get the latest Eigen.~
  sudo make install
 
 * Sample
-
- svn export https://robotich.ath.cx/svn/tmp/wakatabe/eigen/
  cd eigen
- g++ -I/usr/local/include/eigen3/ hallo.cpp 
-
-* だれか
-armadilloと何がどう違うのか教えてください．
+ g++ -I/usr/local/eigen3/ hallo.cpp 
