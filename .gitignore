@@ -1,0 +1,8 @@
+*~
+*.swp
+*.o
+*a.out
+*CMakeCache.txt
+*CMakeFiles/
+*cmake_install.cmake
+
