@@ -15,7 +15,7 @@ initial_theta = 0;
 # Machine Parameter
 m=3;              # [kg]
 M=6;              # [kg]
-l=1.6;            # CoP [m]
+l=1.6;            # CoP [m] (NOTE: This will also be identified by experiment)
 J=m*(l**2)/3;     # inertia moment [kg m^2] 
 
 # Visco between machine and stick [kg m^2/s] (0.2-2?)
