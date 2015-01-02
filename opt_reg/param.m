@@ -51,10 +51,16 @@ g=9.8066;
     b=[ 0; (J+m*(l**2))/s; 0; -m*l/s ];
 
 
-#### Calc. Controller Parameter
+#### Controller
+# Linear Quadratic Controller
     [K, P, E] = lqr(A, b, Q, R);
     K;
     E;
+# Ackermann's Pole Placement Method
+#    Mc = [b A*b A*A*b A*A*A*b];
+#    P=conv(conv(conv([1 +3], [1 +3]), [1 +3]), [1 +3]); # -3 -3 -3 -3
+#    K = [0 0 0 1]*inv(Mc)*(P(1)*A*A*A*A+P(2)*A*A*A+P(3)*A*A+P(4)*A+P(5)*eye(4));
+#    K
 
 # Parameter to implement (transfer mat: sensor data->SI unit, ex. if robot encoder unit is 1mm, fill unit = [0.001 x x x])
 # gDuty = -(below[1] * gAngle + below[2] * gOmega ...)
