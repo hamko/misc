@@ -12,7 +12,7 @@ R = 0.01;
 ce = 1;
 
 # Simulator 
-n = 300; # Run Time
+n = 100; # Run Time
 initial_theta = 0;
 #initial_theta = pi*3/4;
 
@@ -53,12 +53,12 @@ g=9.8066;
 
 #### Calc. Controller Parameter
     [K, P, E] = lqr(A, b, Q, R);
-    K
-    E
+    K;
+    E;
 
-# Parameter to implement (transfer mat: sensor data->SI unit, ex. robot encoder unit is 1mm, fill unit = [0.001 x x x])
+# Parameter to implement (transfer mat: sensor data->SI unit, ex. if robot encoder unit is 1mm, fill unit = [0.001 x x x])
 # gDuty = -(below[1] * gAngle + below[2] * gOmega ...)
     Uu = diag([k]); # duty 1.0 is k
     Ux = diag([1 1 1 1]); # 'x' of the robot is as below
-    Kr = inv(Uu)*K*Ux 
+    Kr = inv(Uu)*K*Ux;
 

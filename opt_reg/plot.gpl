@@ -1,0 +1,5 @@
+plot "a" u 1 title "sum"
+replot "a" u 2 title "x"
+replot "a" u 3 title "xdot"
+replot "a" u 4 title "theta"
+replot "a" u 5 title "thetadot"

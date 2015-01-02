@@ -16,11 +16,10 @@ function y = u(x, t)
     # calc. feedback force
     y = -K*(x-r);
     # NOTE: Imitating robot controller, the following line can copy to REAL ROBOT!
-    # in real the later part will be raw data
+    # NOTE: in real the later part will be raw data
     duty = -Kr * (inv(Ux)*x-inv(Ux)*r); 
 
-#    printf("%.2f %.2f %.2f %.2f %.2f %.2f\n", y, duty, -(x(1)-r)*K(1), -x(2)*K(2), -x(3)*K(3), -x(4)*K(4));
-    printf("%.2f %.2f\n", y, duty);
+    printf("%.2f %.2f %.2f %.2f %.2f\n", y, -(x(1)-r(1))*K(1), -x(2)*K(2), -x(3)*K(3), -x(4)*K(4));
 endfunction
 
 # x xdot theta thetadot
@@ -42,7 +41,7 @@ endfunction
 
 
 #Simulator
-    t = linspace(0, 0.06*n, n);
+    t = linspace(0, 0.05*n, n);
     x0 = [0; 0; initial_theta; 0];
     xx1 = lsode("eom", x0, t);
 
@@ -59,6 +58,5 @@ endfunction
         hold on; plot([x1,x2],[y1,y2]);
         hold on; scatter(x2, y2, 0.1);
         hold on; plot([x2,x3],[y2,y3], "r");
-
-        pause(0.04);
+        pause(0.01);
     endfor

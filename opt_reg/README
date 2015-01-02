@@ -1,0 +1,10 @@
+#simple run
+octave run.m
+
+#check feedback parameters
+#make sure to uncomment out K, E, Kr in param.m
+octave param.m 
+
+#plotting
+octave -p run.m > a
+gnuplot --persist plot.gpl
