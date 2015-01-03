@@ -70,7 +70,7 @@ g=9.8066;
     [K, P, E] = lqr(A, b, Q, R); # for Position Control
     K;
     E;
-    [Kv, Pv, Ev] = lqr(Av, bv, Qv, Rv); # for Velocity Control (K(1)=0 is also fine!)
+    [Kv, Pv, Ev] = lqr(Av, bv, Qv, Rv); # for Velocity Control
     Kv;
     Ev;
 # Ackermann's Pole Placement Method
