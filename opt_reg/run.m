@@ -1,25 +1,22 @@
 param; # load machine parameter
 
 function y = u(x, t)
-    global k K Kr Ux;
-    # Objective Point
-    r=[0; 0; 0; 0]; 
-#    r(1)=3
-    if (t < 0.06*100)
-        r(1)=3;
-    elseif (t < 0.06*200)
-        r(1)=0;
-    elseif (t < 0.06*300)
-        r(1)=-3;
+    global k K Kv Kr Ux is_pos_control is_easy_vel_control;
+
+    # Position Controller
+    if (is_pos_control == 1) 
+        r=[3; 0; 0; 0]; # Objective Point
+        if (is_easy_vel_control) K(1)=0; endif  # for easy Velocity Control
+        y = -K*(x-r); # calc. feedback force
+        duty = -Kr * (inv(Ux)*x-inv(Ux)*r); # in real the later part will be raw data
+        printf("%.2f %.2f %.2f %.2f %.2f\n", y, -(x(1)-r(1))*K(1), -x(2)*K(2), -x(3)*K(3), -x(4)*K(4));
+    else
+        # Velocity Controller
+        xv = x(2:4);
+        rv=[1; 0; 0];
+        y = -Kv*(xv-rv);
+        printf("%.2f %.2f %.2f %.2f\n", y, -(xv(1)-rv(1))*Kv(1), -xv(2)*Kv(2), -xv(3)*Kv(3));
     endif
-
-    # calc. feedback force
-    y = -K*(x-r);
-    # NOTE: Imitating robot controller, the following line can copy to REAL ROBOT!
-    # NOTE: in real the later part will be raw data
-    duty = -Kr * (inv(Ux)*x-inv(Ux)*r); 
-
-    printf("%.2f %.2f %.2f %.2f %.2f\n", y, -(x(1)-r(1))*K(1), -x(2)*K(2), -x(3)*K(3), -x(4)*K(4));
 endfunction
 
 # x xdot theta thetadot

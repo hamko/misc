@@ -1,4 +1,4 @@
-global m g M l B C J k K Kr Ux ce; 
+global m g M l B C J k K Kv Kr Ux ce is_easy_vel_control is_pos_control; 
 
 # Controller Parameter
 #### E: -0.77, -2.4
@@ -7,6 +7,8 @@ global m g M l B C J k K Kr Ux ce;
 #### E: -2.0, -3.1
 Q = diag([1e2,1,1e2,1]); # x xdot theta thetadot
 R = 0.01;
+Qv = diag([1,1e2,1]); # x xdot theta thetadot
+Rv = 0.01;
 
 # Control Enable
 ce = 1;
@@ -15,6 +17,9 @@ ce = 1;
 n = 100; # Run Time
 initial_theta = 0;
 #initial_theta = pi*3/4;
+
+is_pos_control = 1;         # if you want velocity control, set 0
+is_easy_vel_control = 0;    # if you use easy_vel_control, make sure that is_pos_control = 1
 
 # Machine Parameter
 m=3;              # [kg]
@@ -42,6 +47,7 @@ g=9.8066;
 
 #### Linear Model
     s=J*(m+M)+M*m*l*l;
+    # for Position Control
     A=[
     0, 1, 0, 0;
     0, -B*(J+m*l*l)/s, -(m**2)*(l**2)*g/s, C*m*l/s;
@@ -49,13 +55,24 @@ g=9.8066;
     0, B*m*l/s, (m+M)*m*l*g/s, -C*(m+M)/s;
     ];
     b=[ 0; (J+m*(l**2))/s; 0; -m*l/s ];
+    # for Velocity Control
+    Av=[
+    -B*(J+m*l*l)/s, -(m**2)*(l**2)*g/s, C*m*l/s;
+    0, 0, 1;
+    B*m*l/s, (m+M)*m*l*g/s, -C*(m+M)/s;
+    ];
+    bv=[ (J+m*(l**2))/s; 0; -m*l/s ];
+
 
 
 #### Controller
 # Linear Quadratic Controller
-    [K, P, E] = lqr(A, b, Q, R);
+    [K, P, E] = lqr(A, b, Q, R); # for Position Control
     K;
     E;
+    [Kv, Pv, Ev] = lqr(Av, bv, Qv, Rv); # for Velocity Control (K(1)=0 is also fine!)
+    Kv;
+    Ev;
 # Ackermann's Pole Placement Method
 #    Mc = [b A*b A*A*b A*A*A*b];
 #    P=conv(conv(conv([1 +3], [1 +3]), [1 +3]), [1 +3]); # -3 -3 -3 -3
