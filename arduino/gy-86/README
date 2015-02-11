@@ -5,3 +5,5 @@ This program enables gy-86 module to estimate the posture as follow using arduin
     |
     |
 --------
+
+倒立状態から、ジャイロが正の回転方向と横方向の加速度センサが正の方向が一致しているように。
