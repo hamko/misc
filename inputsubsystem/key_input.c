@@ -4,31 +4,61 @@
 #include <unistd.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <sys/time.h>
 #include <fcntl.h>
 #include <errno.h>
 
+int fd;
+
+void get(int& value, int& code) 
+{
+    fd_set set;
+    struct timeval timeout;
+    /* Initialize the file descriptor set. */
+    FD_ZERO (&set);
+    FD_SET (fd, &set);
+
+    /* Initialize the timeout data structure. */
+    timeout.tv_sec = 0;
+    timeout.tv_usec = 0;
+
+    int available = TEMP_FAILURE_RETRY (select (FD_SETSIZE, &set, NULL, NULL, &timeout));
+    if (available == -1) {
+        perror("select");
+        value = -1;
+        return;
+    }
+    if (available == 0) {
+        value = -1;
+        return;
+    }
+
+    // Read
+    struct input_event event;
+
+    int a = read(fd, &event, sizeof(event));
+    if (a < 0) {
+        perror("read");
+        value = -1;
+        return;
+    }
+    // Refer
+    if (event.type == EV_KEY) { // EV_KEY: Keyboard, EV_REL: Mouse movement, EV_ABS: joystick/touch panel
+        value = event.value;
+        code = event.code;
+    }
+}
+
+
 int main(void)
 {
-    //      int fd = open("/dev/input/event0", O_RDONLY); // blocking
-    int fd = open("/dev/input/event2", O_NONBLOCK); // non-blocking
+    fd = open("/dev/input/event2", O_RDWR); // non-blocking
 
     while (1) {
-        // Read
-        struct input_event event;
-
-        int a = read(fd, &event, sizeof(event));
-//        printf("%d\n", a);
-        if (a < 0 && errno == EAGAIN) {
-            // No Input
-        } else if (a < 0) {
-            fprintf(stderr, "read error\n");
-            return 1;
-        } else {
-            // Refer
-            if (event.type == EV_KEY) // EV_KEY: Keyboard, EV_REL: Mouse movement, EV_ABS: joystick/touch panel
-                if (event.value == 1)  // 1: pushed, 0: released, 2: machinegun
-                    printf("%d pushed\n", event.code); // code: info to detect!
-        }
+        int v, c;
+        get(v, c);
+        if (v != -1)
+            printf("%d %d\n", v, c);
     }
 
 }
