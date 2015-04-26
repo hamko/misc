@@ -13,16 +13,11 @@ int fd;
 void get(int& value, int& code) 
 {
     fd_set set;
-    struct timeval timeout;
     /* Initialize the file descriptor set. */
     FD_ZERO (&set);
     FD_SET (fd, &set);
 
-    /* Initialize the timeout data structure. */
-    timeout.tv_sec = 0;
-    timeout.tv_usec = 0;
-
-    int available = TEMP_FAILURE_RETRY (select (FD_SETSIZE, &set, NULL, NULL, &timeout));
+    int available = TEMP_FAILURE_RETRY (select (FD_SETSIZE, &set, NULL, NULL, NULL));
     if (available == -1) {
         perror("select");
         value = -1;
@@ -59,6 +54,7 @@ int main(void)
         get(v, c);
         if (v != -1)
             printf("%d %d\n", v, c);
+        fflush(stdout);
     }
 
 }
