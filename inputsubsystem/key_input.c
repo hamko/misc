@@ -54,7 +54,6 @@ int main(void)
         get(v, c);
         if (v != -1)
             printf("%d %d\n", v, c);
-        fflush(stdout);
     }
 
 }
