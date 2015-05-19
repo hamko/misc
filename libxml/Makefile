@@ -1,6 +1,6 @@
 CC = g++
 
-OBJS = cur2map2.o
+OBJS = simple.o
 HEADS = 
 CFLAGS = -g -Wall `xml2-config --cflags`
 LFLAGS = `xml2-config --libs`
