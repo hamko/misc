@@ -1,14 +1,16 @@
 CC = g++
 
-OBJS = simple.o
 HEADS = 
 CFLAGS = -g -Wall `xml2-config --cflags`
-LFLAGS = `xml2-config --libs`
+LFLAGS = `xml2-config --libs` -lcurl
 
-all: a.out
+all: simple curl_xml
 
-a.out: $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LFLAGS)
+simple: simple.o
+	$(CC) $(CFLAGS) -o $@ $^ $(LFLAGS)
+
+curl_xml: curl_xml.o
+	$(CC) $(CFLAGS) -o $@ $^ $(LFLAGS)
 
 .SUFFIXES: .c .o .cpp
 .c.o:
