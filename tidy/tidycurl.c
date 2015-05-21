@@ -42,6 +42,20 @@ uint write_cb(char *in, uint size, uint nmemb, TidyBuffer *out)
     return(r);
 }
 
+double comma_atof(char* bp)
+{
+    char nocommaprice[32] = {};
+    char* comma = strchr(bp, ',');
+    if (comma) {
+        strncpy(nocommaprice, bp, (size_t)comma-(size_t)bp);
+        strncpy(nocommaprice+((size_t)comma-(size_t)bp), comma+1, strlen(bp)-((size_t)comma-(size_t)bp)-1);
+    } else {
+        strcpy(nocommaprice, bp);
+    }
+
+    return atof(nocommaprice);
+}
+
 /* Traverse the document tree */ 
 void dumpNode(TidyDoc doc, TidyNode tnod, int indent )
 {
@@ -49,28 +63,74 @@ void dumpNode(TidyDoc doc, TidyNode tnod, int indent )
     for ( child = tidyGetChild(tnod); child; child = tidyGetNext(child) )
     {
         ctmbstr name = tidyNodeGetName( child );
-        if ( name )
+        if ( name ) /* if it has a name, then it's an HTML tag ... */ 
         {
-            /* if it has a name, then it's an HTML tag ... */ 
             TidyAttr attr;
-            printf( "%*.*s%s ", indent, indent, "<", name);
-            /* walk the attribute list */ 
+            // タグ名
+            int i;
+            for (i = 0; i < indent; i++) printf(" ");
+            printf("%s Tag (", name);
+            // 属性名
             for ( attr=tidyAttrFirst(child); attr; attr=tidyAttrNext(attr) ) {
-                printf(tidyAttrName(attr));
-                tidyAttrValue(attr)?printf("=\"%s\" ",
-                        tidyAttrValue(attr)):printf(" ");
+                printf("%s", tidyAttrName(attr));
+                tidyAttrValue(attr)?printf("=\"%s\" ", tidyAttrValue(attr)):printf(" ");
             }
-            printf( ">\n");
+            printf(")\n");
         }
         else {
             /* if it doesn't have a name, then it's probably text, cdata, etc... */ 
             TidyBuffer buf;
             tidyBufInit(&buf);
             tidyNodeGetText(doc, child, &buf);
-            printf("%*.*s\n", indent, indent, buf.bp?(char *)buf.bp:"");
+            int i;
+            for (i = 0; i < indent; i++) printf(" ");
+            printf("%s\n", buf.bp?(char *)buf.bp:"");
             tidyBufFree(&buf);
         }
         dumpNode( doc, child, indent + 4 ); /* recursive */ 
+    }
+}
+
+/* Traverse the document tree */ 
+void extractStockInfo(TidyDoc doc, TidyNode tnod, int indent )
+{
+    TidyNode child;
+    for ( child = tidyGetChild(tnod); child; child = tidyGetNext(child) )
+    {
+        ctmbstr name = tidyNodeGetName( child );
+        if ( name ) // HTML tag 
+        {
+            TidyAttr attr;
+            // タグ名
+            int i;
+            for (i = 0; i < indent; i++) printf(" ");
+            printf("%s Tag (", name);
+            // 属性名
+            for ( attr=tidyAttrFirst(child); attr; attr=tidyAttrNext(attr) ) {
+                printf("%s", tidyAttrName(attr));
+                tidyAttrValue(attr)?printf("=\"%s\" ", tidyAttrValue(attr)):printf(" ");
+                if (name && !strcmp(name, "td") && !strcmp(tidyAttrName(attr), "class") && !strcmp(tidyAttrValue(attr), "stoksPrice")) {
+                    printf("Hit!!!");
+                    child = tidyGetChild(child);
+                    TidyBuffer buf;
+                    tidyBufInit(&buf);
+                    tidyNodeGetText(doc, child, &buf);
+                    printf("price is %s\n", buf.bp?(char *)buf.bp:""); // Price
+                    printf("price is %f\n", comma_atof(buf.bp)); // Price
+                }
+            }
+            printf(")");
+            printf("\n");
+        } else { /* text, cdata, etc... */ 
+            TidyBuffer buf;
+            tidyBufInit(&buf);
+            tidyNodeGetText(doc, child, &buf);
+            int i;
+            for (i = 0; i < indent; i++) printf(" ");
+            printf("%s\n", buf.bp?(char *)buf.bp:"");
+            tidyBufFree(&buf);
+        }
+        extractStockInfo( doc, child, indent + 4 ); /* recursive */ 
     }
 }
 
@@ -107,7 +167,8 @@ int main(int argc, char **argv )
                 if ( err >= 0 ) {
                     err = tidyRunDiagnostics(tdoc); /* load tidy error buffer */ 
                     if ( err >= 0 ) {
-                        dumpNode( tdoc, tidyGetRoot(tdoc), 0 ); /* walk the tree */ 
+//                        dumpNode( tdoc, tidyGetRoot(tdoc), 0 ); /* walk the tree */ 
+                        extractStockInfo( tdoc, tidyGetRoot(tdoc), 0 ); /* walk the tree */ 
                         fprintf(stderr, "%s\n", tidy_errbuf.bp); /* show errors */ 
                     }
                 }
