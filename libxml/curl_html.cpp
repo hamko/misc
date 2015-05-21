@@ -3,6 +3,7 @@
 #include <curl/curl.h>
 #include <libxml/xpath.h>
 #include <libxml/xmlreader.h>
+#include <libxml/HTMLparser.h>
 
 using namespace std;
 
@@ -57,10 +58,13 @@ int main()
 
     cout << chunk << endl;
 
+    xmlDoc* doc=htmlParseDoc((xmlChar*)chunk.c_str(), (const char*)"utf-8");
+    /*
     xmlTextReader* reader = xmlReaderForDoc((xmlChar*)chunk.c_str(), NULL, NULL, 1);
     xmlTextReaderRead(reader);
     xmlTextReaderExpand(reader);
     xmlDocPtr doc = xmlTextReaderCurrentDoc(reader);
+    */
     xmlNode* root_element = xmlDocGetRootElement(doc);
     print_element_names(root_element); // parse
     xmlFreeDoc(doc);
