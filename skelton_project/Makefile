@@ -13,13 +13,13 @@ PROD = ./a.out
 all: $(PROD)
 
 $(PROD): $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) -o $@ $^ $(LFLAGS)
 
 .SUFFIXES: .c .cpp .o
 .c.o:
-	$(CC) $(CFLAGS) -c $< $(LFLAGS)
+	$(CC) $(CFLAGS) -c $<
 .cpp.o:
-	$(CC) $(CFLAGS) -c $< $(LFLAGS)
+	$(CC) $(CFLAGS) -c $<
 
 $(OBJS): $(HEADS)
 

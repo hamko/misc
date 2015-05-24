@@ -109,8 +109,8 @@ void extractStockInfo(TidyDoc doc, TidyNode tnod, int indent )
             for ( attr=tidyAttrFirst(child); attr; attr=tidyAttrNext(attr) ) {
                 printf("%s", tidyAttrName(attr));
                 tidyAttrValue(attr)?printf("=\"%s\" ", tidyAttrValue(attr)):printf(" ");
+                // Stock Price
                 if (name && !strcmp(name, "td") && !strcmp(tidyAttrName(attr), "class") && !strcmp(tidyAttrValue(attr), "stoksPrice")) {
-                    printf("Hit!!!");
                     child = tidyGetChild(child);
                     TidyBuffer buf;
                     tidyBufInit(&buf);
