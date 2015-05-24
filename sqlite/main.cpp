@@ -38,9 +38,11 @@ int main(int argc, char** argv)
     sprintf( insert_record[2], insert_sql, 2, "Nacky", "Hukuoka" );
 
     // データ追加
+    sqlite3_exec(db, "BEGIN", NULL, NULL, NULL);
     int i;
     for( i = 0; i < 3; i++ )
         rc = sqlite3_exec(db, insert_record[i], 0, 0, &zErrMsg);
+    sqlite3_exec(db, "COMMIT", NULL, NULL, NULL);
 
     // "sample"テーブルから"worker"を抽出して列挙
     rc = sqlite3_exec(db, "SELECT worker FROM sample", callback, 0, &zErrMsg);
