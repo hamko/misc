@@ -84,7 +84,9 @@ void extractRealtimeStockInfo(TidyDoc doc, TidyNode tnod, int indent )
             for ( attr=tidyAttrFirst(child); attr; attr=tidyAttrNext(attr) ) {
                 printf("%s", tidyAttrName(attr));
                 tidyAttrValue(attr)?printf("=\"%s\" ", tidyAttrValue(attr)):printf(" ");
+                //********************************ここから**********************************
                 // Stock Price
+                // <td class="stoksPrice">の検索．name=td，attr=class, value=stoksPriceに相当
                 if (name && !strcmp(name, "td") && !strcmp(tidyAttrName(attr), "class") && !strcmp(tidyAttrValue(attr), "stoksPrice")) {
                     child = tidyGetChild(child);
                     TidyBuffer buf;
@@ -92,6 +94,7 @@ void extractRealtimeStockInfo(TidyDoc doc, TidyNode tnod, int indent )
                     tidyNodeGetText(doc, child, &buf);
                     f_price = comma_atof(buf.bp); // Price
                 }
+                //****************************ここまでが編集対象****************************
             }
             printf(")");
             printf("\n");
