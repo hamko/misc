@@ -1,31 +1,5 @@
-/***************************************************************************
- *                                  _   _ ____  _
- *  Project                     ___| | | |  _ \| |
- *                             / __| | | | |_) | |
- *                            | (__| |_| |  _ <| |___
- *                             \___|\___/|_| \_\_____|
- *
- * Copyright (C) 1998 - 2011, Daniel Stenberg, <daniel@haxx.se>, et al.
- *
- * This software is licensed as described in the file COPYING, which
- * you should have received as part of this distribution. The terms
- * are also available at http://curl.haxx.se/docs/copyright.html.
- *
- * You may opt to use, copy, modify, merge, publish, distribute and/or sell
- * copies of the Software, and permit persons to whom the Software is
- * furnished to do so, under the terms of the COPYING file.
- *
- * This software is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY
- * KIND, either express or implied.
- *
- ***************************************************************************/ 
-/* Download a document and use libtidy to parse the HTML.
- * Written by Jeff Pohlmeyer
- *
- * LibTidy => http://tidy.sourceforge.net
- *
+/* 
  * gcc -Wall -I/usr/local/include tidycurl.c -lcurl -ltidy -o tidycurl
- *
  */ 
 
 #include <stdio.h>
@@ -91,6 +65,7 @@ void dumpNode(TidyDoc doc, TidyNode tnod, int indent )
     }
 }
 
+double f_price;
 /* Traverse the document tree */ 
 void extractRealtimeStockInfo(TidyDoc doc, TidyNode tnod, int indent )
 {
@@ -115,8 +90,7 @@ void extractRealtimeStockInfo(TidyDoc doc, TidyNode tnod, int indent )
                     TidyBuffer buf;
                     tidyBufInit(&buf);
                     tidyNodeGetText(doc, child, &buf);
-                    printf("price is %s\n", buf.bp?(char *)buf.bp:""); // Price
-                    printf("price is %f\n", comma_atof(buf.bp)); // Price
+                    f_price = comma_atof(buf.bp); // Price
                 }
             }
             printf(")");
@@ -178,6 +152,11 @@ int main(int argc, char **argv )
     }
     else
         fprintf(stderr, "%s\n", curl_errbuf);
+
+
+    printf("----------------\n");
+    printf("price: %f\n", f_price);
+    printf("----------------\n");
 
     /* clean-up */ 
     curl_easy_cleanup(curl);
