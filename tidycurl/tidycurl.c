@@ -85,17 +85,25 @@ void extractRealtimeStockInfo(TidyDoc doc, TidyNode tnod, int indent )
                 printf("%s", tidyAttrName(attr));
                 tidyAttrValue(attr)?printf("=\"%s\" ", tidyAttrValue(attr)):printf(" ");
                 //********************************ここから**********************************
-                // Stock Price
+                // Stock Price ここには属性(class)が存在するもののみ検索可能
                 // <td class="stoksPrice">の検索．name=td，attr=class, value=stoksPriceに相当
                 if (name && !strcmp(name, "td") && !strcmp(tidyAttrName(attr), "class") && !strcmp(tidyAttrValue(attr), "stoksPrice")) {
-                    child = tidyGetChild(child);
+                    TidyNode childchild = tidyGetChild(child);
                     TidyBuffer buf;
                     tidyBufInit(&buf);
-                    tidyNodeGetText(doc, child, &buf);
+                    tidyNodeGetText(doc, childchild, &buf);
                     f_price = comma_atof(buf.bp); // Price
                 }
                 //****************************ここまでが編集対象****************************
             }
+                //********************************ここから**********************************
+                // Stock Price ここには属性(class)が存在するもののみ検索可能
+                // <td class="stoksPrice">の検索．name=td，attr=class, value=stoksPriceに相当
+                if (name && !strcmp(name, "td")) {
+                    printf("*");
+                }
+                //****************************ここまでが編集対象****************************
+
             printf(")");
             printf("\n");
         } else { /* text, cdata, etc... */ 
