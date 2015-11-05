@@ -3,8 +3,8 @@ UNAME = $(shell uname)
 AR_HOME = ../../..
 
 CPPFLAGS = -I$(AR_HOME)/include
-CFLAGS = -fpascal-strings -O -I/usr/X11R6/include -DUSE_EYETOY -I/usr/src/linux-headers-3.2.0-35-generic-pae/include -I/usr/src/linux-headers-3.2.0-35-generic-pae/arch/x86/include
-CXXFLAGS = -O -I/usr/X11R6/include -DUSE_EYETOY -I/usr/src/linux-headers-3.2.0-35-generic-pae/include -I/usr/src/linux-headers-3.2.0-35-generic-pae/arch/x86/include
+CFLAGS = -fpascal-strings -O -I/usr/X11R6/include -DUSE_EYETOY -I/usr/src/linux-headers-3.13.0-66-generic/include -I/usr/src/linux-headers-3.13.0-66-generic/arch/x86/include
+CXXFLAGS = -O -I/usr/X11R6/include -DUSE_EYETOY -I/usr/src/linux-headers-3.13.0-66-generic/include -I/usr/src/linux-headers-3.13.0-66-generic/arch/x86/include
 LDFLAGS = -L$(AR_HOME)/lib -L/usr/X11R6/lib
 LIBS = -lglut -lGLU -lGL -lXi -lXmu -lX11 -lm -ljpeg
 AR = ar

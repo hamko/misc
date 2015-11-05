@@ -7,7 +7,7 @@ LIB_DIR = ../..
 #  compiler
 #
 CC= cc
-CFLAG= -O -I/usr/X11R6/include -DUSE_EYETOY -I/usr/src/linux-headers-3.2.0-35-generic-pae/include -I/usr/src/linux-headers-3.2.0-35-generic-pae/arch/x86/include -I$(INC_DIR)
+CFLAG= -O -I/usr/X11R6/include -DUSE_EYETOY -I/usr/src/linux-headers-3.13.0-66-generic/include -I/usr/src/linux-headers-3.13.0-66-generic/arch/x86/include -I$(INC_DIR)
 #
 # For making the library
 #
@@ -22,7 +22,7 @@ INCLUDE= ${INC_DIR}/AR/video.h
 #   compilation control
 #
 # LIBOBJS= ${LIB}(video.o) ${LIB}(ccvt_i386.o)
-LIBOBJS= ${LIB}(ccvt_i386.o) ${LIB}(video.o)
+LIBOBJS= ${LIB}(ccvt_c.o) ${LIB}(video.o)
 
 
 all:		${LIBOBJS}

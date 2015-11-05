@@ -12,8 +12,8 @@ VRML_CPPFLAGS =
 VRML_LDFLAGS = -L$(VRML_HOME)/lib
 
 CPPFLAGS = $(AR_CPPFLAGS) $(VRML_CPPFLAGS)
-CFLAGS = -O -I/usr/X11R6/include -DUSE_EYETOY -I/usr/src/linux-headers-3.2.0-35-generic-pae/include -I/usr/src/linux-headers-3.2.0-35-generic-pae/arch/x86/include
-CXXFLAGS = -O -I/usr/X11R6/include -DUSE_EYETOY -I/usr/src/linux-headers-3.2.0-35-generic-pae/include -I/usr/src/linux-headers-3.2.0-35-generic-pae/arch/x86/include
+CFLAGS = -O -I/usr/X11R6/include -DUSE_EYETOY -I/usr/src/linux-headers-3.13.0-66-generic/include -I/usr/src/linux-headers-3.13.0-66-generic/arch/x86/include
+CXXFLAGS = -O -I/usr/X11R6/include -DUSE_EYETOY -I/usr/src/linux-headers-3.13.0-66-generic/include -I/usr/src/linux-headers-3.13.0-66-generic/arch/x86/include
 LDFLAGS = $(AR_LDFLAGS) $(VRML_LDFLAGS) -L/usr/X11R6/lib
 LIBS = -lARvrml -lARgsub_lite -lARvideo -lAR \
     -lopenvrml -lopenvrml-gl -lstdc++ -ljpeg -lpng -lz -lm \
