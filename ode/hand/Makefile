@@ -1,5 +1,5 @@
 PRODUCT = a.out 
-OBJS = omni.o
+OBJS = hand.o
 
 all: $(PRODUCT)
 
