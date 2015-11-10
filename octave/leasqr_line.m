@@ -5,29 +5,22 @@ function [a, b] = leasqr_line(varargin) % dir=1: upper limit, dir=0: lower limit
         global g_linecoeff; g_linecoeff = 10;
     end
     mx = varargin{1}; my_in = varargin{2}; dir = varargin{3};
-%    global mx = mx_in;
-%    global vy_tobe = my_in;
     global g_vy_tobe; g_vy_tobe = my_in;
     global g_dir; g_dir = dir;
 
     %Inital Values
-    vp0 = [0; 0]; # だいぶエクストリームな初期値（0.98,0.44とかが本当の値）
+    vp0 = [0; 0];
 
     %NLS
     opt = optimset('Display', 'iter');
     [vyhat vp] = leasqr(mx, zeros(size(mx)), vp0, @myfun );
     a = vp(1);
     b = vp(2);
-    disp('========== RESULTS ==========');
-    vp
-    vyhat
 
-    plot(mx, g_vy_tobe);
-    hold on;
-    plot(mx, vp(1)*mx+vp(2))
-    hold off;
-
-    g_dir
+%    plot(mx, g_vy_tobe);
+%    hold on;
+%    plot(mx, vp(1)*mx+vp(2))
+%    hold off;
 end
 
 %Set Function
