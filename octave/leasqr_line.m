@@ -9,7 +9,7 @@ function [a, b] = leasqr_line(varargin) % dir=1: upper limit, dir=0: lower limit
     global g_dir; g_dir = dir;
 
     %Inital Values
-    vp0 = [0; 0];
+    vp0 = polyfit(mx, my_in, 1);
 
     %NLS
     opt = optimset('Display', 'iter');
@@ -30,7 +30,7 @@ function vY = myfun(mX, vP)
     vY = a*mX + b - g_vy_tobe;
     if (g_dir == 0) 
         vY(vY>0)=g_linecoeff*vY(vY>0); #下
-    elseif
+    else
         vY(vY<0)=g_linecoeff*vY(vY<0); #上
     end
 end
