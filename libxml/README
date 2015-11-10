@@ -1,1 +1,6 @@
-tree1.cは公式のexample, このexampleだけ分かり易かった
+make
+
+./simple test # OK
+./simple noend # 正しいxmlでないのでだめ（閉じていない）, HTMLをパースするときはどうするんだろうね．
+
+./curl_xml # 株情報だとダメ．どうすればいいのだろう．

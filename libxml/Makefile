@@ -1,14 +1,19 @@
 CC = g++
 
-OBJS = cur2map2.o
 HEADS = 
 CFLAGS = -g -Wall `xml2-config --cflags`
-LFLAGS = `xml2-config --libs`
+LFLAGS = `xml2-config --libs` -lcurl
 
-all: a.out
+all: simple curl_xml curl_html
 
-a.out: $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LFLAGS)
+simple: simple.o
+	$(CC) $(CFLAGS) -o $@ $^ $(LFLAGS)
+
+curl_xml: curl_xml.o
+	$(CC) $(CFLAGS) -o $@ $^ $(LFLAGS)
+
+curl_html: curl_html.o
+	$(CC) $(CFLAGS) -o $@ $^ $(LFLAGS)
 
 .SUFFIXES: .c .o .cpp
 .c.o:

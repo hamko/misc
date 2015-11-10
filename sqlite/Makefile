@@ -6,7 +6,7 @@ OBJS = $(CSRCS:.c=.o) $(CXXSRCS:.cpp=.o)
 HEADS = $(shell ls *.h 2> /dev/null) $(shell ls *.hpp 2> /dev/null)
 
 CFLAGS = -g -Wall
-LFLAGS = -lm
+LFLAGS = -lsqlite3
 
 PROD = ./a.out
 

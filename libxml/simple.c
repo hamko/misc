@@ -27,6 +27,7 @@
  * Prints the names of the all the xml elements
  * that are siblings or children of a given xml node.
  */
+int count = 0;
 static void
 print_element_names(xmlNode * a_node)
 {
@@ -34,10 +35,22 @@ print_element_names(xmlNode * a_node)
 
     for (cur_node = a_node; cur_node; cur_node = cur_node->next) {
         if (cur_node->type == XML_ELEMENT_NODE) {
-            printf("node type: Element, name: %s\n", cur_node->name);
+            for (int i = 0; i < count; i++) printf("    ");
+            printf("node type: Element, name: %s, property: %s\n", cur_node->name, xmlGetProp(cur_node, (const xmlChar*)"type"));
+        }
+        if (cur_node->type == XML_TEXT_NODE) {
+            for (int i = 0; i < count; i++) printf("    ");
+            printf("node type: Text, name: %s, content: %s\n", cur_node->name, cur_node->content);
+        }
+        if (cur_node->type == XML_ATTRIBUTE_NODE) {
+            for (int i = 0; i < count; i++) printf("    ");
+            printf("node type: Attribute, name: %s, content: %s\n", cur_node->name, cur_node->content);
         }
 
+
+        count++;
         print_element_names(cur_node->children);
+        count--;
     }
 }
 
