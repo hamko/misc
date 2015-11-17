@@ -37,8 +37,9 @@ end
 %NLS
 min_vysq = 1e8;
 search_dir=[1,0;-1,0;0,1;0,-1];
-for i = [1:50]
-    vp_cand = vp + search_dir(mod(i, 4)+1, :) / 10;
+resolution = 20; % allow 100/resolution %
+for i = [1:(resolution*size(search_dir, 1))]
+    vp_cand = vp + search_dir(mod(i, 4)+1, :) / resolution;
     vy = myfun(mx, vp_cand);
     if (min_vysq > vy*vy')
         min_vysq = vy*vy';
