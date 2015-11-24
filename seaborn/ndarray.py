@@ -1,5 +1,6 @@
 import numpy as np
 
+'''
 def getIndex(indice, data_num):
     index = 0
     for i in range(len(data_num)):
@@ -18,6 +19,7 @@ def at(ndarr, indice):
     
     return ndarr.reshape(ndarr.size)[getIndex(indice, data_num)];
 
+'''
 ndarr = np.array([[1., 2., 3.], [4., 5., 6.], [7., 8., 9.]])
-print at(ndarr, [1,1,1]) # 5
+print ndarr(tuple([1,1,1])) # 5
 
