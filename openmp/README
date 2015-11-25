@@ -1,2 +1,2 @@
-g++ openmp.cpp stopwatch_util.cpp -lm -lhamkoutil
+g++ -fopenmp openmp.cpp stopwatch_util.cpp -lm -lhamkoutil
 
