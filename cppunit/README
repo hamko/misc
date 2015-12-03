@@ -1,0 +1,9 @@
+// -sources
+// --test (Here)
+
+// In the real project, to avoid multiple main function,
+#ifndef TEST
+int main(void)
+{
+}
+#endif 

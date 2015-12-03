@@ -1,0 +1,31 @@
+load("diag");
+
+H01:matrix( [1, 0, 0, 1], 
+            [0, 1, 0, 1],
+            [0, 0, 1, 1],
+            [0, 0, 0, 1]);
+H01:matrix( [0, -1, 0, 1], 
+            [1, 0, 0, 1],
+            [0, 0, 1, 1],
+            [0, 0, 0, 1]);
+
+H10:H01^^(-1);
+H10.[1,1,1,1];
+A1:diag([2, 1/2, 1]);
+A1_bar:diag([A1, 0]);
+A0_bar:transpose(H10).A1_bar.H10;
+
+xv:[x,y,z,1];
+transpose(xv).A1_bar.xv;
+transpose(xv).A0_bar.xv;
+transpose(xv).A1_bar.xv, x=1/sqrt(2), y=0, z=0;
+radcan(%);
+transpose(xv).A0_bar.xv, x=1/sqrt(2)+1, y=1, z=1;
+radcan(%);
+transpose(xv).A0_bar.xv, x=1, y=1/sqrt(2)+1, z=1;
+radcan(%);
+
+load(draw);
+draw3d([implicit(transpose(xv).A0_bar.xv=1,x,-2,2,y,-2,2,z,-2,2)]);
+
+readline(?\*standard\-input\*);
