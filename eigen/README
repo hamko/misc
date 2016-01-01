@@ -19,4 +19,4 @@ Get the latest Eigen.~
 
 * Sample
  cd eigen
- g++ -I/usr/include/eigen3 hallo.cpp
+ g++ -std=c++0x -I/usr/include/eigen3 hallo.cpp
