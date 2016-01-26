@@ -1,6 +1,11 @@
 #pragma once
 #include <string>
+#include <fstream>
+#include <vector>
+#include <iostream>
+#include <sstream>
 #include <map>
+#include <cstdio> 
 
 class ArgsReaderCSV {
   std::map<std::string, std::map<std::string, std::string> > m_args;
@@ -9,6 +14,10 @@ public:
   ArgsReaderCSV(const std::string args_csv)
   {
     std::ifstream fin(args_csv);
+    if (!fin) {
+      std::cerr << "No such file: " << args_csv << endl;
+      exit(1);
+    }
     std::string line;
     int row = 0;
     std::vector<std::string> fields;

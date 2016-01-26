@@ -92,9 +92,20 @@ void func34(void)
   cout << "-------------" << endl;
 }
 
+void random_lu(void)
+{
+  int r = 6000;
+  int c = 300;
+  MatrixXd m = MatrixXd::Random(r, c);
+
+  Eigen::FullPivLU<MatrixXd> lu(m);
+  MatrixXd P; P = lu.permutationP();
+  MatrixXd Q; Q = lu.permutationQ();
+}
 int main(int argc, char** argv)
 {
-  func34();
+//  func34();
   //  func43();
+  random_lu();
   return 0;
 }
