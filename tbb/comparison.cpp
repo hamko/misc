@@ -42,7 +42,7 @@ int main()
 
     // TBB
     start = tick_count::now();
-    parallel_for( blocked_range<int>(0, task_num), Parallel(ccc), tbb::auto_partitioner());
+    parallel_for( blocked_range<int>(0, task_num), Parallel(ccc));
     cout << endl;
     finish = tick_count::now();
     cout << "tbb=" << (finish - start).seconds() << endl;
@@ -56,8 +56,7 @@ int main()
                     cout << sum << " ";
                     ccc[i] = sum;
                 }
-            }
-            , tbb::auto_partitioner());
+            });
     cout << endl;
     finish = tick_count::now();
     cout << "tbb with lambda=" << (finish - start).seconds() << endl;
