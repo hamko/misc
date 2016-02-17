@@ -17,7 +17,7 @@ const int rep = 10000000;
 class Parallel
 {
     private:
-        int *v;
+        long long *v;
 
     public:
         void operator() (const blocked_range<int>& range) const 
@@ -25,16 +25,17 @@ class Parallel
             for (int i = range.begin(); i < range.end(); i++) {
                 long long sum = 0; for (int j = 0; j < rep; j++) { sum += j; }
                 cout << sum << " ";
+                v[i] = sum;
             }
         }
 
-        Parallel(int buf[task_num]) : v(buf) {};
+        Parallel(long long buf[task_num]) : v(buf) {};
 };
 
 
 int main()
 {
-    int ccc[task_num];
+    long long ccc[task_num];
 
     tick_count start, finish;
 
@@ -65,6 +66,7 @@ int main()
     for (int i = 0; i < task_num; i++) {
         sum = 0; for (j = 0; j < rep; j++) { sum += j; }
         cout << sum << " ";
+        ccc[i] = sum;
     }
     cout << endl;
     finish = tick_count::now();
