@@ -1,0 +1,38 @@
+lspci | grep -i nvidia # nvidia刺さってること確認。初めはデュアルGPUとかしないで、単一をおすすめ
+
+#runファイルダウンロード、debはヤバいから避けること
+
+lsmod | grep nouveau # 何も表示されていてはいけない
+# 表示されていたら /etc/modprobe.d/blacklist-nouveau.conf で 
+ blacklist nouveau
+ options nouveau modeset=0
+# その後
+ sudo update-initramfs -u
+lsmod | grep nouveau # 何も表示されていてはいけない
+
+sudo /etc/default/grubで、"splash"を"text"に変える
+sudo update-grub
+sudo update-grub2
+
+sudo init 6 # 再起動すると、CUIになる
+
+lsmod | grep nouveau # 何も表示されていてはいけない
+sudo sh ./cuda-7.5...
+
+sudo /etc/default/grubで、"text"を"splash"に変える
+sudo update-grub
+sudo update-grub2
+
+
+
+sudo aptitude install GL系
+libGL.soは/usr/local/libGL.so.1はあるのにsoにリンクがはられていないのでln -s .so.1 .so
+cd /usr/local/cuda-7.5/samples/; make -j8
+cd 5_Simulation/smokeParticles/
+./smokeParticles
+
+
+プロジェクトを新しく作るときは
+cp -rf /usr/local/cuda-7.5/samples/0_Simple/template ~/tmp/
+cd ~/tmp/template/
+vi Makefile # 一部相対パスになっているのと、謎のmkdir, cpを消す
