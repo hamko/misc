@@ -16,10 +16,13 @@
 */
 
 // includes, system
+#include <iostream>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
+
+using namespace std;
 
 // includes CUDA
 #include <cuda_runtime.h>
@@ -93,19 +96,14 @@ runTest(int argc, char **argv)
     unsigned int num_threads = 32;
     unsigned int mem_size = sizeof(float) * num_threads;
 
-    // allocate host memory
+    // allocate and initalize host memory
     float *h_idata = (float *) malloc(mem_size);
+    for (unsigned int i = 0; i < num_threads; ++i) h_idata[i] = (float) i;
+    for (size_t i = 0; i < num_threads; i++) cout << h_idata[i] << " "; cout << endl;
 
-    // initalize the memory
-    for (unsigned int i = 0; i < num_threads; ++i)
-    {
-        h_idata[i] = (float) i;
-    }
-
-    // allocate device memory
+    // allocate and copy device memory
     float *d_idata;
     checkCudaErrors(cudaMalloc((void **) &d_idata, mem_size));
-    // copy host memory to device
     checkCudaErrors(cudaMemcpy(d_idata, h_idata, mem_size,
                                cudaMemcpyHostToDevice));
 
@@ -113,42 +111,26 @@ runTest(int argc, char **argv)
     float *d_odata;
     checkCudaErrors(cudaMalloc((void **) &d_odata, mem_size));
 
-    // setup execution parameters
+    // setup and execute
     dim3  grid(1, 1, 1);
     dim3  threads(num_threads, 1, 1);
-
-    // execute the kernel
     testKernel<<< grid, threads, mem_size >>>(d_idata, d_odata);
-
-    // check if kernel execution generated and error
     getLastCudaError("Kernel execution failed");
 
-    // allocate mem for the result on host side
+    // allocate and copy the result from device to host
     float *h_odata = (float *) malloc(mem_size);
-    // copy result from device to host
     checkCudaErrors(cudaMemcpy(h_odata, d_odata, sizeof(float) * num_threads,
                                cudaMemcpyDeviceToHost));
+    for (size_t i = 0; i < num_threads; i++) cout << h_odata[i] << " "; cout << endl;
 
     sdkStopTimer(&timer);
     printf("Processing time: %f (ms)\n", sdkGetTimerValue(&timer));
     sdkDeleteTimer(&timer);
 
-    // compute reference solution
+    // compute reference solution and check
     float *reference = (float *) malloc(mem_size);
-    computeGold(reference, h_idata, num_threads);
-
-    // check result
-    if (checkCmdLineFlag(argc, (const char **) argv, "regression"))
-    {
-        // write file for regression test
-        sdkWriteFile("./data/regression.dat", h_odata, num_threads, 0.0f, false);
-    }
-    else
-    {
-        // custom output handling when no regression test running
-        // in this case check if the result is equivalent to the expected solution
-        bTestResult = compareData(reference, h_odata, num_threads, 0.0f, 0.0f);
-    }
+    computeGold(reference, h_idata, num_threads); // Matrix-Matrix product
+    bTestResult = compareData(reference, h_odata, num_threads, 0.0f, 0.0f);
 
     // cleanup memory
     free(h_idata);
