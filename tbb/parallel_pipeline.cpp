@@ -182,5 +182,6 @@ int main() {
     pipeline.clear();
 
     init.terminate();
+
     return 0;
 }
