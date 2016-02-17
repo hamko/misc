@@ -62,6 +62,20 @@ int main()
     finish = tick_count::now();
     cout << "tbb with lambda=" << (finish - start).seconds() << endl;
 
+    // TBB with Lambda Simple
+    start = tick_count::now();
+    parallel_for(0, task_num, 
+            [&](size_t i) {
+                long long sum = 0; for (int j = 0; j < rep; j++) { sum += j; }
+                ccc[i] = sum;
+                cout << sum << " ";
+            }
+            , tbb::auto_partitioner());
+    cout << endl;
+    finish = tick_count::now();
+    cout << "tbb with lambda simple=" << (finish - start).seconds() << endl;
+
+
     // Serial
     start = tick_count::now();
     for (int i = 0; i < task_num; i++) {
