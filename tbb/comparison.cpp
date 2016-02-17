@@ -12,7 +12,7 @@ using namespace std;
 using namespace tbb;
 
 const int task_num = 100;
-const int rep = 10000000;
+const int rep = 100000000;
 
 class Parallel
 {
@@ -35,18 +35,32 @@ class Parallel
 
 int main()
 {
+    task_scheduler_init init;
     long long ccc[task_num];
 
     tick_count start, finish;
 
     // TBB
     start = tick_count::now();
-    task_scheduler_init init;
     parallel_for( blocked_range<int>(0, task_num), Parallel(ccc), tbb::auto_partitioner());
     cout << endl;
-    init.terminate();
     finish = tick_count::now();
     cout << "tbb=" << (finish - start).seconds() << endl;
+
+    // TBB with Lambda
+    start = tick_count::now();
+    parallel_for( blocked_range<int>(0, task_num), 
+            [&](const blocked_range<int>& range) {
+                for (int i = range.begin(); i < range.end(); i++) {
+                    long long sum = 0; for (int j = 0; j < rep; j++) { sum += j; }
+                    cout << sum << " ";
+                    ccc[i] = sum;
+                }
+            }
+            , tbb::auto_partitioner());
+    cout << endl;
+    finish = tick_count::now();
+    cout << "tbb with lambda=" << (finish - start).seconds() << endl;
 
     // Serial
     start = tick_count::now();
@@ -73,5 +87,6 @@ int main()
     cout << "openmp=" << (finish - start).seconds() << endl;
 
 
+    init.terminate();
     return 0;
 }
