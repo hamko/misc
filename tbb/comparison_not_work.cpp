@@ -14,11 +14,20 @@ using namespace tbb;
 
 const int x = 100;
 #ifdef NOT_WORK
-const int rep = 100000;
+const int rep = 1000000;
 #else
-const int rep = 10000000;
+const int rep = 100000000;
 #endif
 unsigned int seed = 0;
+
+int func(int j)
+{
+#ifdef NOT_WORK
+    return rand_r(&seed); 
+#else
+    return j * j * j;
+#endif
+}
 
 class Parallel
 {
@@ -31,11 +40,7 @@ class Parallel
             for (int i = range.begin(); i < range.end(); i++) {
                 int sum = 0; 
                 for (int j = 0; j < rep; j++) 
-#ifdef NOT_WORK
-                    sum += rand_r(&seed); 
-#else
-                    sum += j;
-#endif
+                    sum += func(j);
                 v[i] = sum;
             }
         }
@@ -64,11 +69,7 @@ int main()
     for (int i = 0; i < x; i++) {
         int sum = 0; 
         for (int j = 0; j < rep; j++) 
-#ifdef NOT_WORK
-            sum += rand_r(&seed); 
-#else
-            sum += j;
-#endif
+            sum += func(j);
         ccc[i] = sum;
     }
     finish = tick_count::now();
@@ -81,11 +82,7 @@ int main()
     for (int i = 0; i < x; i++) {
         sum = 0; 
         for (j = 0; j < rep; j++) 
-#ifdef NOT_WORK
-            sum += rand_r(&seed); 
-#else
-            sum += j;
-#endif
+            sum += func(j);
         ccc[i] = sum;
     }
     finish = tick_count::now();
