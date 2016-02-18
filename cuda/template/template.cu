@@ -86,6 +86,12 @@ runTest(int argc, char **argv)
 
     printf("%s Starting...\n\n", argv[0]);
 
+    int ver;
+    cudaDriverGetVersion(&ver);
+    cout << ver << "Driver" << endl;
+    cudaRuntimeGetVersion(&ver);
+    cout << ver << "Runtime" << endl;
+
     // use command-line specified CUDA device, otherwise use device with highest Gflops/s
     int devID = findCudaDevice(argc, (const char **)argv);
 
