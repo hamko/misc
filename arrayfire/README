@@ -1,0 +1,1 @@
+g++ getDeviceInfo.cpp -I /usr/local/cuda-5.0/include/ -I /usr/local/ArrayFire/include/ -L /usr/local/ArrayFire/lib64/ -laf
