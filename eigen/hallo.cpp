@@ -1,7 +1,7 @@
 #include <iostream>
 #include <Eigen/Dense>
 
-using Eigen::MatrixXd;
+using namespace Eigen;
 
 int main(void)
 {
@@ -12,4 +12,8 @@ int main(void)
     m(0, 1) = 4;
 
     std::cout << m << std::endl;
+
+    Matrix2d a;
+    a << 1, 1, 1, 2;
+    std::cout << a << std::endl;
 }

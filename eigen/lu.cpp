@@ -1,6 +1,8 @@
 #include <iostream>
+#include <Eigen/Dense>
 
 using namespace std;
+using namespace Eigen;
 // 線形独立な列を抽出するプログラム
 int main(int argc, char** argv)
 {
