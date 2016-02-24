@@ -26,4 +26,9 @@ int main(void)
 
   return 0;
 
+    std::cout << m << std::endl;
+
+    Matrix2d a;
+    a << 1, 1, 1, 2;
+    std::cout << a << std::endl;
 }
