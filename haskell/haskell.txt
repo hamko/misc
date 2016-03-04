@@ -1,0 +1,112 @@
+1+2 -- コメント。--の前後には半角スペースを入れること。
+3*5
+2^10
+7 `mod` 2 -- %演算子はない。中置関数modを使う。
+True && False
+False || True
+2 == 2
+2 /= 3
+:l doubleMe.hs -- 1変数関数定義
+doubleMe 2
+:l doubleUs.hs -- 2変数関数定義
+doubleUs 2 3
+:l doubleSmallNumber.hs -- if文はelseが必須
+
+let x = [0, 1, 2] -- let x = 1は、スクリプト内でのx = 1に等価。タイプ後に表示されない。
+x
+let doubleMeInteractive x = x * x -- letを使うとインタラクティブに関数定義出来る
+doubleMeInteractive 3
+
+x ++ x -- 連結演算子。左辺が長いと時間がかかる
+"do" ++ "gs"
+['d', 'o'] ++ ['g', 's'] -- 文字列は文字のリスト
+'d' : "ogs" -- cons演算子。先頭に要素を追加。時間がかからない。
+"dogs" !! 3 -- ランダムアクセス演算子
+let list_of_list = [[1, 2], [3, 4, 5]] -- リストのリスト。長さは違ってもいいが、型は一致していないとダメ
+list_of_list !! 0
+[3, 2, 1] > [3, 2] -- リストは辞書順比較
+
+head [0, 1, 2, 3]
+tail [0, 1, 2, 3]
+init [0, 1, 2, 3]
+last [0, 1, 2, 3]
+-- head [] -- 空のリストはダメ
+null [] -- 空ならTrue
+length [0, 1, 2]
+reverse [0, 1, 2]
+take 3 [5, 4, 3, 2, 1] -- 始めから3つ
+drop 3 [5, 4, 3, 2, 1] -- 始めから3つを除いたリスト
+maximum [5, 4, 3, 2, 1]
+minimum [5, 4, 3, 2, 1]
+sum [5, 4, 3, 2, 1] -- Sigma
+product [5, 4, 3, 2, 1] -- Pi
+4 `elem` [5, 4, 3, 2, 1] -- 要素が含まれているか。
+
+[1..20]
+-- [3,2..-20] -- 最後がマイナスの時は..-とつなげてはならない
+[3,2..　-20]
+[0,0.1..1] -- 浮動小数点のレンジは誤差が出るので注意
+-- infinite_list = [1..] -- 無限リストだが、表示させようとするとフリーズするので注意
+let infinite_list = [1..] -- 無限リスト
+take 24 infinite_list
+take 24 (cycle [1, 2, 3]) -- リストの無限繰り返し
+take 24 (repeat 1) -- 要素の無限繰り返し
+
+[x | x <- [0..10], x `mod` 2 == 1]  -- <-はジェネレータ、その他はフィルタという
+-- [x | x `mod` 2 == 1 ,x <- [0..10]] -- ジェネレータで変数定義しているので、逆にしてはならない
+[al ++ num | al <- ["ab", "bc", "ca"], num <- ["0", "1", "2"]] -- 二変数でも全組み合わせを表示してくれる
+let mylength xs = sum [1 | _<-xs]
+
+(2, "two") -- タプル
+[(1, "one"), (2, "two")]
+-- [(1, "one"), (2, 2)] -- 型は混在しちゃだめ
+-- [(1, "one"), (2, "two", 2.0)] -- 長さは混在しちゃだめ
+fst (2, "two") -- 第一要素
+snd (2, "two") -- 第二要素
+zip [1, 2, 3] ["one", "two", "three"]
+
+[(a, b, c) | a <- [1..100], b <- [1..a], c <- [1..b], a * a == b * b + c * c]
+
+-- 型を調べるコマンド
+:t 'a'
+:t 100
+:t True
+:t [1, 2]
+:t (1, 2)
+:t (*)
+:t maximum
+-- maximum :: Ord a => [a] -> a
+-- maximum「とは(::)」、「比較可能な型(Ord)」aに対して、aのリストからaへの写像である。
+
+-- 型は型クラスに属している
+-- 型の例: Integer(多倍長), Int(long long), Float, Double, Bool, Char
+-- 型クラスの例: Eq(同一性検証可能性), Ord(順序比較可能性), Show(show xによってxをString型に変換可能), Read, Enum(レンジ可能性), Bounded, Num, Floating, 
+
+-- Num型クラスは、Int, Integer, Float, Doubleの型を有する
+-- つまり、どれでもある2などは多相定数化している
+2 :: Int
+2 :: Integer
+2 :: Float
+2 :: Double
+
+:t sin
+sin 0.5
+-- sinはFloating型クラスからの変換
+let integerA = 2 :: Integer
+-- sin integerA -- NG Integer型は入れられない
+-- sin fromIntegral(integerA) -- NG TODO これなんでだめなの？
+-- integerA + 0.2 -- NG IntegerとFloatは足せない
+fromIntegral(integerA) + 0.2
+
+:l factorial.hs -- 再帰的パターンマッチ
+factorial 4
+-- :l NG_charName.hs -- パターンマッチは網羅しなければならない
+:l addVector.hs -- タプルのパターンマッチは便利
+addVector (1, 3) (2, 5)
+
+:l tell.hs -- リストのパターンマッチ。括弧でくくらないといけない。(x:[])や(x:y:_)など。
+tell [1, 2, 3]
+tell [1, 2]
+tell [1]
+
+firstletter "test" -- asパターン(@)：マッチしたものそのものと、マッチ後の数値を同時に使う
