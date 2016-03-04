@@ -42,6 +42,13 @@ public:
     }
   }
 
+  void add(string key, string field_name, string value) {
+    m_args[key][field_name] = value;
+  }
+
+  void save(string filename) {
+  }
+
   std::string getArg(std::string key, std::string field_name) { return m_args[key][field_name]; } // TODO assert, if key is not found?
 
   void printArgs(void)
