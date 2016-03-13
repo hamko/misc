@@ -2,6 +2,8 @@
 3*5
 2^10
 7 `mod` 2 -- %演算子はない。中置関数modを使う。
+7 / 2 -- /演算子は分数型Fractional！
+7 `div` 2 -- Intの割り算はdiv中置関数を使う
 True && False
 False || True
 2 == 2
@@ -11,6 +13,22 @@ doubleMe 2
 :l doubleUs.hs -- 2変数関数定義
 doubleUs 2 3
 :l doubleSmallNumber.hs -- if文はelseが必須
+
+-- 関数の順番
+intToDigit 2
+-- intToDigit 2+4 -- こっちはダメ！演算子より関数のほうが評価が早い。
+intToDigit (2+4) -- こっちはダメ！演算子より関数のほうが評価が早い。
+
+-- printfデバッグ
+import Debug.Trace
+let l = 5
+traceShow (l) $ trace ("#l") $ l >= 5
+trace (show l ++ "#l") $ l >= 5
+
+
+-- String -> Int, Int -> String
+show 1 
+read "1" :: Int
 
 let x = [0, 1, 2] -- let x = 1は、スクリプト内でのx = 1に等価。タイプ後に表示されない。
 x
@@ -397,6 +415,7 @@ F.foldr (*) 1 [1, 2, 3]
 F.foldr (||) False (Just True)
 
 -- モナド
+-- メリット：文脈を伝搬できる、do文で逐次処理的に処理可能
 -- ファンクタ値 = 文脈付き値
 -- ファンクター             「ファンクタ値f aと関数a->bがあった時、f bはどう得られるか？」 fmap
 -- アプリカティブファンクタ 「ファンクタ値f aとファンクタに包まれた関数f (a->b)があった時、f bはどう得られるか？」 <*>, <$> -> 二変数関数・普通の関数に文脈付き値を食わせる方法
