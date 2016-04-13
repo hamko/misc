@@ -1,0 +1,461 @@
+1+2 -- コメント。--の前後には半角スペースを入れること。
+3*5
+2^10
+7 `mod` 2 -- %演算子はない。中置関数modを使う。
+7 / 2 -- /演算子は分数型Fractional！
+7 `div` 2 -- Intの割り算はdiv中置関数を使う
+True && False
+False || True
+2 == 2
+2 /= 3
+:l doubleMe.hs -- 1変数関数定義
+doubleMe 2
+:l doubleUs.hs -- 2変数関数定義
+doubleUs 2 3
+:l doubleSmallNumber.hs -- if文はelseが必須
+
+-- 関数の順番
+intToDigit 2
+-- intToDigit 2+4 -- こっちはダメ！演算子より関数のほうが評価が早い。
+intToDigit (2+4) -- こっちはダメ！演算子より関数のほうが評価が早い。
+
+-- printfデバッグ
+import Debug.Trace
+let l = 5
+traceShow (l) $ trace ("#l") $ l >= 5
+trace (show l ++ "#l") $ l >= 5
+
+
+-- String -> Int, Int -> String
+show 1 
+read "1" :: Int
+
+let x = [0, 1, 2] -- let x = 1は、スクリプト内でのx = 1に等価。タイプ後に表示されない。
+x
+let doubleMeInteractive x = x * x -- letを使うとインタラクティブに関数定義出来る
+doubleMeInteractive 3
+
+x ++ x -- 連結演算子。左辺が長いと時間がかかる
+"do" ++ "gs"
+['d', 'o'] ++ ['g', 's'] -- 文字列は文字のリスト
+'d' : "ogs" -- cons演算子。先頭に要素を追加。時間がかからない。
+1 : [2, 3, 4]
+"dogs" !! 3 -- ランダムアクセス演算子
+let list_of_list = [[1, 2], [3, 4, 5]] -- リストのリスト。長さは違ってもいいが、型は一致していないとダメ
+list_of_list !! 0
+[3, 2, 1] > [3, 2] -- リストは辞書順比較
+
+head [0, 1, 2, 3]
+tail [0, 1, 2, 3]
+init [0, 1, 2, 3]
+last [0, 1, 2, 3]
+-- head [] -- 空のリストはダメ
+null [] -- 空ならTrue
+length [0, 1, 2]
+reverse [0, 1, 2]
+take 3 [5, 4, 3, 2, 1] -- 始めから3つ
+drop 3 [5, 4, 3, 2, 1] -- 始めから3つを除いたリスト
+maximum [5, 4, 3, 2, 1]
+minimum [5, 4, 3, 2, 1]
+sum [5, 4, 3, 2, 1] -- Sigma
+product [5, 4, 3, 2, 1] -- Pi
+4 `elem` [5, 4, 3, 2, 1] -- 要素が含まれているか。
+
+[1..20]
+-- [3,2..-20] -- 最後がマイナスの時は..-とつなげてはならない
+[3,2..　-20]
+[0,0.1..1] -- 浮動小数点のレンジは誤差が出るので注意
+-- infinite_list = [1..] -- 無限リストだが、表示させようとするとフリーズするので注意
+let infinite_list = [1..] -- 無限リスト
+take 24 infinite_list
+take 24 (cycle [1, 2, 3]) -- リストの無限繰り返し
+take 24 (repeat 1) -- 要素の無限繰り返し
+
+[x | x <- [0..10], x `mod` 2 == 1]  -- <-はジェネレータ、その他はフィルタという
+-- [x | x `mod` 2 == 1 ,x <- [0..10]] -- ジェネレータで変数定義しているので、逆にしてはならない
+[al ++ num | al <- ["ab", "bc", "ca"], num <- ["0", "1", "2"]] -- 二変数でも全組み合わせを表示してくれる
+let mylength xs = sum [1 | _<-xs]
+
+(2, "two") -- タプル
+[(1, "one"), (2, "two")]
+-- [(1, "one"), (2, 2)] -- 型は混在しちゃだめ
+-- [(1, "one"), (2, "two", 2.0)] -- 長さは混在しちゃだめ
+fst (2, "two") -- 第一要素
+snd (2, "two") -- 第二要素
+zip [1, 2, 3] ["one", "two", "three"]
+
+[(a, b, c) | a <- [1..100], b <- [1..a], c <- [1..b], a * a == b * b + c * c]
+
+-- 型を調べるコマンド
+:t 'a'
+:t 100
+:t True
+:t [1, 2]
+:t (1, 2)
+:t (*)
+:t maximum
+-- maximum :: Ord a => [a] -> a
+-- maximum「とは(::)」、「比較可能な型(Ord)」aに対して、aのリストからaへの写像である。
+
+-- 型は型クラスに属している
+-- 型の例: Integer(多倍長), Int(long long), Float, Double, Bool, Char
+-- 型クラスの例: Eq(同一性検証可能性), Ord(順序比較可能性), Show(show xによってxをString型に変換可能), Read, Enum(レンジ可能性), Bounded, Num, Floating, 
+
+-- Num型クラスは、Int, Integer, Float, Doubleの型を有する
+-- つまり、どれでもある2などは多相定数化している
+2 :: Int
+2 :: Integer
+2 :: Float
+2 :: Double
+
+:t sin
+sin 0.5
+-- sinはFloating型クラスからの変換
+let integerA = 2 :: Integer
+-- sin integerA -- NG Integer型は入れられない
+-- sin fromIntegral(integerA) -- NG TODO これなんでだめなの？
+-- integerA + 0.2 -- NG IntegerとFloatは足せない
+fromIntegral(integerA) + 0.2
+
+:l factorial.hs -- 再帰的パターンマッチ
+factorial 4
+-- :l NG_charName.hs -- パターンマッチは網羅しなければならない
+:l addVector.hs -- タプルのパターンマッチは便利
+addVector (1, 3) (2, 5)
+
+-- リストのcons演算子によるパターンマッチ
+let x:xs = [1..5] 
+x -- 1
+xs -- [2..5]
+
+-- リストのパターンマッチ。関数内だと括弧でくくらないといけない。(x:[])や(x:y:_)など。
+:l tell.hs
+tell [1, 2, 3]
+tell [1, 2]
+tell [1]
+
+-- asパターン(@)：マッチしたものそのものと、マッチ後の数値を同時に使う
+:l firstletter
+firstletter "test" 
+
+-- 引数の場合分けはガード|を使うと便利
+-- あとhaskellでは、その時点では未定義の変数や関数を使って、後でwhereで定義してもOK
+:l declareNum
+declareNum 0.5
+declareNum 1.5
+declareNum 3
+
+-- let bindingで、局所的な変数束縛となる。束縛は定義に近い。
+[i|i <- [1..10], let isq = i * i, isq < 50]
+
+-- let binding in expressionで、式となる。bindingの区切りは;。パターンマッチも使える
+-- whare節は式ではない点で全く異なる。ガードは大域的だが、letは局所的なのでガードをまたいでは使えない。
+let (a, b) = (1, 2); c = 9 in a * b + c
+
+-- caseはifの読みやすい？版
+:l declareNum
+declareNum 0.5
+
+-- 中置関数のセクション
+(/10) 2
+2 / 10
+2 - 1
+(subtract 1) 2 -- マイナスだけ特別にsubstractを使わないとダメ(-1はマイナス1という数字だから)
+
+-- 二変数関数の引数の順序をひっくり返す
+zip [1..5] "abcde"
+flip zip [1..5] "abcde"
+
+-- 関数のリストへの適用
+map (+3) [1..3]
+filter (<5) (filter even [1..100])
+
+-- ラムダ式
+map (\x -> x + 3) [1..3]
+(\x y-> x * y + 1) 2 3
+
+-- 畳み込み
+-- 右畳み込みは無限リストに適用可能だが、左は無理！なんで？
+-- foldl1, foldr1などは、一番初めを初期値とみなす。
+foldl (     (:)) [] "abcde"
+foldl (flip (:)) [] "abcde"
+foldr (     (:)) [] "abcde"
+foldr (flip (:)) [] "abcde"
+foldl (*) 1 [1, 2, 3, 4]
+foldl (+) 0 [1, 2, 3, 4]
+
+--scanl (     (:)) [] "abcde" 動かない。なんで？
+scanl (flip (:)) [] "abcde"
+--scanr (     (:)) [] "abcde" 動かない。なんで？
+scanr (flip (:)) [] "abcde"
+scanl (*) 1 [1, 2, 3, 4]
+scanl (+) 0 [1, 2, 3, 4]
+
+-- $は関数適用演算子
+-- 関数を取って固定引数に適用する関数 or 括弧を減らす目的で使う
+-- $ 9 は、\f -> f 9と同じ。
+map ($ 3) [(4+), (10*), sqrt]
+sum $ filter (>10) $ map (*2) [2..10]
+
+-- 関数合成
+sin . tan $ 3
+(sin . tan) 3
+map (negate . sum . tail) [[1..5],[3..6],[1..7]]
+
+
+-- 関数定義で両辺の最後が一致していれば、引数を省略可能（ポイントフリースタイル）
+-- これを実現するために、関数適用演算子と合成関数が使える
+fn 500
+
+-- importを使うことで、便利な関数が使えるようになる
+numUniques [1, 1, 2]
+
+-- GHCi上でimportしたい場合は :m 
+:m + Data.List Data.Map
+group . sort . words $ "I am I"
+any (>4) [1, 5]
+all (>4) [1, 5]
+foldl' (+) 0 [1, 2, 3] -- 正格な畳込み。Data.List内。
+find (>4) [1, 5]
+find (>6) [1, 5] -- findはMaybe aを返すので、Nothingが返る
+
+let phoneBook = Data.Map.fromList $ [("betty", "00-0101"), ("bonnie", "00-2030")]
+Data.Map.lookup "betty" phoneBook 
+Data.Map.insert "grace" "10-0000" phoneBook
+Data.Map.size phoneBook
+
+:m + Data.Char
+ord 'a'
+chr 97
+intToDigit 10 -- 0から15まで
+digitToInt 'a' -- '0'から'15'までと、'a'から'f'、'A'から'F'が利用可能
+string2digits "124-3344"
+
+-- TODO モジュールの作り方を飛ばした。
+
+-- data（「データ宣言」）の使い方。
+-- 「データ型」と「値コンストラクタの定義」（型のはじめは必ず大文字）
+:l Shapes
+Circle (Point 1 1) 3
+area (Circle (Point 1 1) 3)
+-- area Circle (Point 1 1) 3 -- エラー
+
+-- データ型のレコードによる定義
+:l Car
+let ford = Car {company = "Ford", model = "Mustang", year = 1967} -- レコードを使っている場合はこのようにコンストラクトできる。
+company ford
+model ford
+year ford
+tellCar $ Car {company = "Ford", model = "Mustang", year = 1967}
+
+-- 型を引数にとるデータ宣言は、「型コンストラクタ」と呼ばれ、「型引数」を取ることができる。（型コンストラクタのはじめは大文字、型引数は1文字の小文字で表現）
+-- 型引数を取ることを、「多相化」という。
+-- データ宣言には、data (Ord k) => Map kといった型クラス制約はつけてはならない！なぜなら、どうせ関数で宣言をつける羽目になるから。
+data MyMaybe a = MyNothing | MyJust a
+Just 10 -- Haskellは10をNumだと推論する
+Just 10 :: Maybe Double -- 型を制限することができる
+
+-- 「型シノニム」はただの可読性のためのエイリアス
+type MyString = [Char]
+type IntMap v = Map Int v 
+--型シノニムの多相化も、ポイントフリースタイルが使える。
+type IntMap = Map Int 
+
+-- 再帰的データ構造 TODO やってない
+
+-- 「型クラス」は、classで定義される
+-- 型クラスは、型クラス制約をつけて、サブクラスとすることができる。
+-- 自動導出しない場合、instance Eq TrafficLight where ... と定義を自分で書く必要がある。
+-- 特に、Showの手動導出はわかりやすい表示のために重要。
+
+-- Num型クラスが定義している関数と、Numに属する型のリスト
+:info Num
+
+-- Functor型クラス = 全体に移せるものであり、箱のようなもの。
+-- やりたいこと：「a->bの変換方法はわかってる。箱fにはaが入る（aが入っている箱はf a）。じゃあ、aが入った箱f aを、既知の変換を使ってf bを得る方法は？」=fmap
+-- ファンクタは、リストからはリストが、MaybeからはMaybeが、木からは木が生まれるという、型の恒等性を持つ。
+-- fmap :: (a -> b) -> f a -> f b
+-- 日本語訳：「ある型aから別の型bへの関数」と「ある型aに適用されたファンクター値」を取り、「別の型bに適用されたファンクター値」を返す
+-- ここで、例えば[0..3]は「Numに適用されたファンクター値」である。リスト[]はファンクターfである。
+-- map :: (a -> b) -> [a] -> [b]
+
+-- 種類
+-- *は具体型を表す
+-- Functor型クラスに属させたい型は、* -> *になっていなければならない。
+:k Maybe
+:k Maybe Int
+
+-- IO
+-- 副作用を持ち、「IOアクションが結果を生成する」
+-- ()は空のタプルで、ダミーで返している。
+:t putStrLn
+-- putStrLn :: String -> IO () -- 文字列を受け取って、空タプルを返すIOアクションであることがわかる。
+:t getLine
+-- getLine :: IO String -- Stringを返すIOアクションであることがわかる。
+ 
+-- do構文
+-- 糊付けされた一つのIOアクションにする文法
+-- 最終的な型はdo構文の最後の出力に合う。
+-- IOアクションは<-を使って束縛する必要がある。
+-- letは純粋な値を束縛するのに使う。
+:l hello
+main
+:t main
+
+-- return
+-- 「仕事は行わず、ただ何かを結果として提示するIOアクション」
+--普通の手続き型言語のように、そこでプログラムが終わったりはしない！
+test <- return 2
+test -- 2
+
+-- when (if-elseでelseのときに毎回空タプルを返すのは面倒), sequence TODO
+
+-- getContentsは遅延IOなので、束縛時に全部をロードしたりはしない。 TODO
+
+-- ファイル読み込みの例外braketを飛ばした TODO
+
+-- ランダム
+:m + System.Random
+-- random mkStdGen 11 -- エラー！どんなrandomな値がほしいかがわからないので、型を限定しないといけない。
+random (mkStdGen 11) :: (Int, StdGen)
+take 5 $ randoms (mkStdGen 11)  :: [Int] -- 無限長の生成
+randomR (1, 6)  (mkStdGen 11) :: (Int, StdGen) -- 範囲付き
+take 5 $ randomRs (1, 6) (mkStdGen 11) :: [Int]
+
+-- getStdGenはIOアクション
+:t getStdGen --getStdGen :: IO StdGen
+
+-- bytestringは飛ばした TODO
+
+-- アプリカティブファンクタ
+-- IOはファンクタ
+-- IOは、「外の世界に出かけて行って何か値を入れて帰ってきてくれる箱」と解釈できる。
+-- IOのファンクタは、「元のIOと同じことをしつつ、その結果に指定した関数を適用してまた箱に戻して返す」動作が期待される
+-- 例はTODO
+
+-- 関数はファンクタ
+-- a -> bは(->) a bと書ける。関数のファンクタは、関数合成である。
+-- ここで重要なのは、箱の比喩が効かなくなってきている！
+-- 例はTODO
+
+-- 二変数関数を使うと、ファンクタに関数が入る
+let a = fmap (*) [1, 2, 3, 4]
+:t a
+fmap (\f -> f 9) a
+fmap ($9) a
+
+-- fmap :: (a -> b) -> f a -> f b
+-- これは、fmap :: (a -> b) -> (f a -> f b)でもある。
+-- 日本語訳すると、「a->bの変換から、aの入った箱->bの入った箱の変換を作る」ともなる。
+
+-- ファンクタ則＝一般的なファンクタの定義
+-- 1. 単位元。恒等写像id = \x -> xで、ファンクタ値を写しても値が変わらない
+-- 2. 結合法則。写像f, gについて、f.gでファンクタ値を写したものが、gでファンクタ値を写したファンクタ値をfで写したものが一致する。
+
+-- アプリカティブファンクタ
+-- アプリカティブファンクタは、ファンクタに入った関数を、ファンクタ値に適用できる！
+-- 今までの普通のファンクタは、普通の関数を、ファンクタ値に適用できた。
+-- pureは、ただアプリカティブ値に包むだけの関数。
+-- <*> :: f (a -> b) -> f a -> f b, ファンクタに包まれた関数を取り出して、ただ適用するだけの関数。
+-- <$>はfmapと等価な演算子
+-- すごいのは、1. 普通の関数をアプリカティブに適用できる 2. しかも多変数関数に適用できる
+:m + Control.Applicative 
+(++) <$> Just "Ham" <*> Just "ko"
+[(+), (*)] <*> [1, 2] <*> [3, 4]
+
+-- liftA2
+-- 型は(a -> b -> c) -> (f a -> f b -> f c)。つまり、「普通の二変数関数を、アプリカティブ値を取る二変数関数に昇格させる」という意味！
+-- しかも実装は、liftA2 f a b = f <$> a <*> bであり、まさに上でやっていたこととおなじ。
+liftA2 (+) [1, 2, 3] [2, 3, 4]
+
+-- リストの非決定性計算（どれが答えかわからないorどれも答えになれそう）という特徴を、リスト内包表記よりよく表せている。
+[ x*y | x <- [2, 5, 10], y <- [8, 10, 11]]
+(*) <$> [2, 5, 10] <*> [8, 10, 11]
+
+-- IOもアプリカティブファンクタ
+:l applicative_io
+myAction
+
+-- sequenceAを使うと再帰的で便利らしい TODO
+
+-- newtype
+-- 高速な型の別名・順番入れ替えが可能・data宣言より遅延がうまく働くなどのメリットがある。
+
+-- モノイド
+-- 1) 単位元のmemptyの存在: mempty `mappend` x = x
+-- 2) 単位元のmemptyの存在: x `mappend` mempty = x
+-- 3) 結合法則: (x `mappend y) `mappend` z = x `mappend` (y `mappend` z)
+-- mappendは演算子、memptyが単位元、mconcatは単位元と演算子によるリスト右畳み込み。
+:m + Data.Monoid
+-- リスト
+mempty :: [Int]
+[1, 2, 3] `mappend` [3, 4]
+mconcat [[1], [2, 3]]
+-- 掛け算
+getProduct $ mempty
+getProduct $ Product 2 `mappend` Product 3
+getProduct $ mconcat . map Product $ [2, 5, 7]
+-- 足し算
+getSum $ mempty
+getSum $ Sum 2 `mappend` Sum 3
+getSum $ mconcat . map Sum $ [2, 5, 7]
+-- Any (There exists)
+getAny $ mempty
+getAny $ Any False `mappend` Any False
+getAny $ mconcat . map Any $ [False, False, True]
+-- All (For All)
+getAll $ mempty
+getAll $ All False `mappend` All False
+getAll $ mconcat . map All $ [False, False, True]
+
+-- 一般化畳み込み
+import qualified Data.Foldable as F
+foldr (*) 1 [1, 2, 3]
+F.foldr (*) 1 [1, 2, 3]
+F.foldr (||) False (Just True)
+
+-- モナド
+-- メリット：文脈を伝搬できる、do文で逐次処理的に処理可能
+-- ファンクタ値 = 文脈付き値
+-- ファンクター             「ファンクタ値f aと関数a->bがあった時、f bはどう得られるか？」 fmap
+-- アプリカティブファンクタ 「ファンクタ値f aとファンクタに包まれた関数f (a->b)があった時、f bはどう得られるか？」 <*>, <$> -> 二変数関数・普通の関数に文脈付き値を食わせる方法
+-- モナド                   「モナド値m aと普通の値から文脈付き値への関数fがあった時、どう文脈付きで関数適用f(a)できるのか？」 >>= -> 普通値から文脈付き値への関数に、文脈付き値を食わせる方法
+-- モナドは必ずアプリカティブファンクタで、アプリカティブファンクタは必ずファンクタ。
+-- pure, returnが対応していて、両方「普通の値を文脈付き値に包むための最小方法」
+-- ファンクタ則：(1) 恒等写像id(引数をそのまま返す関数)に対して、fmap id = id かつ、(2) fmap (f . g) = fmap f . fmap g
+-- アプリカティブ則: (1) pure id <*> v = v (2) pure (.) u <*> v <*> w = u <*> (v <*> w) (3) pure f <*> pure x = pure (f x) (4) u <*> pure y = pure ($ y) <*> u （3が一番重要）
+-- モナド則: (1) 左恒等性 return x >>= f = f x (2) 右恒等性 m >>= return = m (3) 結合法則 (m >>= f) >>= g = (m >>= (\x -> f x >>= g)) これはf <=< (g <=< h) = (f <=< g) <=< hとも書ける。
+import Control.Monad
+[3, 4, 5] >>= \x -> [x, -x]
+-- do記法における束縛は、モナドの糖衣構文。それぞれのラムダでの引数が、do構文における変数束縛の正体である。
+[1, 2] >>= \n -> ['a','b'] >>= \ch -> return (n, ch)
+:l doMonad
+doMonad
+-- 引数を無視して規定のモナドを適用
+-- m >> n = (m >>= \_ -> n)
+[1, 2, 3] >> [1, 2] -- [1,2,1,2,1,2]
+Nothing >> Just 3
+Just 3 >> Nothing
+Just 1 >> Just 3
+-- Nothingをモナドの左辺値にすると、その後は無関係にNothingになる。したがって、計算可能性を伝えることができる。
+Nothing >> return "test"
+Just () >> return "test"
+-- 加法的モナドはモノイドなモナド
+-- guardは、条件式が失敗ならモナドプラス型の空リスト、成功ならモナドプラス型の空タプルを返す。空リストは、Maybe ()のNothing
+guard (1 == 2) :: Maybe () -- Nothing
+guard (1 == 1) :: Maybe () -- Just ()
+-- guard (1 == 2) >> return "test" -- なんでエラー？
+-- guard (1 == 1) >> return "test" -- なんでエラー？
+guard (1 == 2) >> return "test" :: [String] -- guardがどんなモナドなのかは指定しないといけない
+guard (1 == 1) >> return "test" :: [String]
+guard (1 == 2) >> return "test" :: Maybe String
+guard (1 == 1) >> return "test" :: Maybe String
+-- リスト内包表記のフィルタは、guardの糖衣構文。
+[1..50] >>= (\x -> guard ('7' `elem` show x) >> return x) >>= (\x -> [x, -x]) >>= (\x -> guard(x `mod` 3 == 0) >> return x)
+:l guardList
+guardList
+-- モナド関数は合成できる。
+let f x = [x, -x]
+let g x = [x, 2 * x, 3 * x]
+let h = f <=< g
+h 3
