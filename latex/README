@@ -1,4 +1,4 @@
-sudo aptitude install okumura-clsfiles otf-ipafont ptex-bin cmap-adobe-japan1 xdvik-ja
+sudo apt-get install okumura-clsfiles otf-ipafont ptex-bin cmap-adobe-japan1 xdvik-ja
 
 sudo vi /etc/texmf/vfontmap.d/20xdvik-ja.map
 

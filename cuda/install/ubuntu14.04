@@ -25,7 +25,7 @@ sudo update-grub2
 
 
 
-sudo aptitude install GL系
+sudo apt-get install GL系
 libGL.soは/usr/local/libGL.so.1はあるのにsoにリンクがはられていないのでln -s .so.1 .so
 cd /usr/local/cuda-7.5/samples/; make -j8
 cd 5_Simulation/smokeParticles/
