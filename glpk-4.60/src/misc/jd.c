@@ -22,7 +22,14 @@
 ***********************************************************************/
 
 #include <stddef.h>
-#include "jd.h"
+#define jday _glp_jday
+int jday(int d, int m, int y);
+/* convert calendar date to Julian day number */
+
+#define jdate _glp_jdate
+int jdate(int j, int *d, int *m, int *y);
+/* convert Julian day number to calendar date */
+
 
 /***********************************************************************
 *  NAME
