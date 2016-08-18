@@ -2,6 +2,11 @@
 #include <stdio.h>
 #include <glpk.h>
 
+// コンパイル方法
+//
+// gcc -o sample glpk-mip-sample.c -lglpk -lm
+// ./sample
+
 /*
 Maximize
  obj: x1 + 2 x2 + 3 x3 + x4
