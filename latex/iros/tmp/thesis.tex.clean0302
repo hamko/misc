@@ -1,0 +1,296 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%2345678901234567890123456789012345678901234567890123456789012345678901234567890
+%        1         2         3         4         5         6         7         8
+
+\documentclass[letterpaper, 10 pt, conference]{IEEEtran}  % Comment this line out if you need a4paper
+
+%\documentclass[a4paper, 10pt, conference]{ieeeconf}      % Use this line for a4 paper
+
+\input{jdummy.def}
+
+\IEEEoverridecommandlockouts                              % This command is only needed if 
+                                                          % you want to use the \thanks command
+
+%\overrideIEEEmargins                                      % Needed to meet printer requirements.
+
+% See the \addtolength command later in the file to balance the column lengths
+% on the last page of the document
+
+% The following packages can be found on http:\\www.ctan.org
+\usepackage{graphics} % for pdf, bitmapped graphics files
+\usepackage{epsfig} % for postscript graphics files
+\usepackage{mathptmx} % assumes new font selection scheme installed
+\usepackage{times} % assumes new font selection scheme installed
+\usepackage{amsmath} % assumes amsmath package installed
+\usepackage{amssymb}  % assumes amsmath package installed
+\usepackage{robomech} 
+\usepackage{cite}
+
+\title{\LARGE \bf
+Precise Spatiotemporal Tactile-Motor Patterns \\ 
+in Dexterous Manipulation Extracted using Sensing Glove
+}
+
+\author{Ryo Wakatabe, Yasunori Yamada, Takashi Sagisaka, Yoshiyuki Ohmura and Yasuo Kuniyoshi% <-this % stops a space
+%\thanks{*This work was not supported by any organization}% <-this % stops a space
+    \thanks{R. Wakatabe, Y. Yamada, T. Sagisaka, Y. Ohmura is Y. Kuniyoshi are with the department of Mechano-Informatics, The University of Tokyo, 7-3-1 Hongo, Bunkyo, Tokyo.  {\tt\small \{wakatabe, y-yamada, sagisaka, ohmura, kuniyosh\}@isi.imi.i.u-tokyo.ac.jp}}%
+}
+
+
+\begin{document}
+
+
+
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{abstract}
+Physiological studies have revealed detailed coordination between motors on the fingers for precision grip and tactile information. Recently, development of sensing glove allows us to measure dexterous. However, previous analyses on human manipulation is limited because the number of tactile sensors is few. Moreover, no study have investigated variance of state-space over trials, which is regarded as important for human motion and robot control. In this paper, we proposed a method to extract precise tactile-motor patterns localized spatiotemporally in human dexterous manipulation using a tactile-motor sensing glove with high spatiotemporal resolutions. As a result, we extracted precise tactile-motor patterns spatiotemprally located in human hand manipulation, which cannot be distinguished by prior methods. Moreover, we preliminarily suggest that when difficulty of manipulations increases humans add such new tactile-patterns to human hand controller to stabilize manipulations.
+
+\end{abstract}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+% を以って，人の計測が
+%One characteristic of human dexterous manipulation compared to robotic one is the ability to manipulate objects dynamically. To construct robot hands for dexterous manipulation, what and when tactile points and motors are precisely used is important.
+%We hypothesized that human hands precisely manipulate neither anytime nor anywhere but spatiotemporally localized. Extracting such localized control enables robots to perform roughly in easy domain and severely in hard one.
+
+% よもやまばなし
+% 人の手の運動はダイナミックですごい．でも制御を解析的に求めるのは無理．一方，人はできているので，その接触運動を参考すれば制御できるかもしれない．こういうあぷろーちは大事．
+% キーワード 高い接触運動スキル，グラスプだけに留まらない，重要な接触運動の時空間分布，人計測のロボットへの応用
+The human hands have tactile sensors and motors with incrediblly high resolutions and dynamically performs manipulation with whole-hand, called "dexterous manpulation". However, there have not been a design methodology for robotic hand performing such manipulation because the differential equation of the system dynamics is very hard to analytically solved. Therefore we can assume that extracting human strategy of dexterous manipulation leads remarkable robotic hand which can not only grasp but manipulate dynamically.
+
+
+% 従来の接触運動の関係
+Physiological studies have revealed tactile-motor coordination in precision grips. After the human hand detects a slipage, it あってる？increases grip force in proportion to firing rate of tactile sensory nerves\cite{SensorimotorControlOfManipulationJohansson}. Anti-slip control base on the experimental result enables robotic hand to grip with minimum necessary force ここまでいる？一意に自明か，つながり分かりやすくもう少し明確に,滑らない制御が最小把持力につながってる without prior knowledge about gripping objects\cite{slipandgrip}. While observation of human hand can give an informational guideline to design of robot hand, physiological studies examined no tactile control of whole hand manipulation because physiological method has technical and ethical difficulty in measuring whole hand.
+
+% データグローブで手全体が取れるようになった．
+Recently, development of sensing gloves and systems allows us to measure whole hand. Using a sensing glove with 15 tactile sensors, whole hand manipulation have been characterized as a sequence of 7 pre-defined graspings which are categorized tactile information\cite{Faria}. Also, Using 5 tactile groups, Dynamic time warping analysis of a sequence of grasping patterns categorized by pre-defined 32 grasping patterns enables recognition of human manipulation\cite{Kondo}. However, previous analyses on human manipulation is limited 改善の予知があるとかならいい，言葉が曖昧，無くてもいい声明がある，空間の細かい特徴付けができていない，ooの観点ではbecauseが欲しい． because the number of tactile sensors is approximately only 10. Moreover, no study have investigated tactile-motor variance over trials. 何が問題なの下で説明することのハズ
+
+% 制御の分散に着目することの重要性
+% On the other hand, several researchers analyzes human motion focusing on variance of state. 
+% 一方，他の人の運動解析では，state-spaceのダーツいろいろやっている グローバルダイナミクス的さむしん しかし，手に対してやってるのない
+Researchers on human motion and robot control have focused on spatial and temporal variance of state-space. Uncontrolled manifold analysis can select cordinating variables in human motion based on spatial variance of variables over trial\cite{nonaka2013motor}. On the other hand, when human and robot perform dynamic whole-body actions (role-and-rise task, for expamle), states-space with small variance sparsely located along the time axis can be a critical condition to succeed in human motion and robot control\cite{kuniyoshi2007emergence}. However, human hand has not been analyzed from the point of view of variance of state-space.
+
+% だから分解能高いデータグローブで分散に着目して解析したよ．
+% これは今までの粗い解析では捉えられない接触運動調整を抽出
+% 人間の局所化された接触運動制御の示唆を初期的に与えた
+In this paper, we analysed dexterous manipulation using data glove with high spatiotemopral resolutions focusing on tactile-motor precision. We make two contributions. First, using precise tactile-motor patterns, we distinguished two manipulations of rotating cylinders with different center of gravity, which are with the identical regrasping procedures. Such difference is not distinguishable with previous analyses for human dexterous manipulation. Second, our results suggest that precise tactile-motor patterns are spatiotemporally localized in human dexterous manipulations although we conducted experiment on single subject. 
+
+% Such patterns, which can be a constraint of human manipulation using data glove, is a useful guideline to design remarkablly dexterous robot hands. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Materials and Methods}
+% 今回使用した実験手順を抽象化して、どのような 状況で使える手法なのか、何がわかるようになる手法なのか、なぜそのような手 法が必要なのか、従来手法とどう違うのか、という観点で書く必要がある。 たとえば、precise tactile pointsというのは、動作に周期性を仮定していると 思うけど、それはIIIの最初に明記すべき。 IIIが提案なので、この節で完結するように、ロジックを記述する必要がある。
+% ここ順番がめちゃくちゃ
+%It is important for a robot designer to know which tactile points and motors plays crucial role to a dexterous manipulation. One of the ways to extract such tactile points and motors is to measure human dexterous manipulation and analyze its structures. 
+
+%In order to record natural human dexterous manipulation, we require sensing glove with 3 following features: able to measure tactile points and motors simultaneously, thin enough not to inhibit human manipulation and enough to copy human tactile inputs. 
+
+%We hypothesized such tactile points and motors that activates with both spatial and temporal precision because they can be a strong constraint of dexterous manipulation. We considered there are two precision, spatial one and temporal one. First, spatial precision which is defined by repeatability of activation gives us a constraint on what tactile points and motors should be used constantly in a specific dexterous manipulation. Second, temporal precision indicating a variance of activated timing presents a constraint on when tactile points and motors should activate. 
+
+%Using the indicators, repeatability and time variance, we analysed three structures of manipulations: the identical regrasping procedure, spatial distribution of precise tactile points and motors and temporal distribution of them. Regrasping procedure is defined as sequence of movements of fingers. We predicted that precision of tactile points and motors in manipulations were different even when the manipulations had the identical regrasping procedure. In order to make sure the difference among patterns of precise tactile points and motors was derived not by different regrasping procedure but by tactile-motor dynamics. Note that previous research based on clusterizing and grasp taxonomy can not discriminate these two manipulation. 
+
+%If a certain tactile point is shared by a little different two manipulations, it can be fundamental tactile point for the manipulations in common. On the other hand, it is
+
+\subsection{Tactile-Motor Sensing Glove}
+%大村先生の運動計測は何を引けばいいのか？
+We employed tactile-motor sensing glove which has hand motion capture system and physiologically sound dense tactile sensing glove\cite{SagisakaONOK12}. Hand motion capture system is implemented with inertia sensors on the back of the hand in order not to inhibit human manipulation (\figref{fig:glove}(b)). Hand motion capture system has 18 inertia sensors (222 fps). Tactile sensing glove has spatial and temporal resolutions comparative to be comparable to human hand (\figref{fig:glove}(a)). The spatial resolution is based on physiological evidence, two-point discrimination of the hand\cite{weinstein1968intensive}. The glove has approximately 1000 pressure sensors, the number of which depends on size of subject's hand, at 1000 fps. This glove also minimize the inhibitation by being made thin.
+
+\begin{figure}[t!]
+ \centering
+  \includegraphics[width=0.40\textwidth]{figure/method/tactile-motion-capture-system.eps}
+ \caption{Appearance of tactile sensing glove and hand motion capture system.}
+ \label{fig:glove}
+\end{figure}
+
+
+\subsection{Precise Tactile Points and Motors}
+% 具体的な抽出方法
+We extracted precise tactile points and motors by high repeatability and low time variance over trials (\figref{fig:way-to-extract}). The procedure to extract precise tactile points and motors is as follows: (1) First, we segmented tactile-motion time series of manipulation by tactile event, e.g., initial contact between first finger and a manipulating object. (2) Second, we normalized length of segmented time series to phase in the section from 0 to 1 in order to make comparable over trials. (3) Third, we extracted active tactile points and motors and its timing for each manipulation segment. We regarded tactile point with certain pressure in the segment as active tactile point. Timing of active tactle point is defined as the first contact timing of the tactile point in the segment. Also, we extracted an active motors with only one extreme of the angle. We dismissed motors with two of more extremes. Timing of active motor is defined as the timing of the extreme. (4) Finally, we extracted precise tactile points and motors from active ones when repeatability was higher and time variance was lower than a certain threshold. For each tactile point or motor, repeatability was calculated by ratio of trials in which it was active. Likewise, time variance was calculated by variance of timing of active tactile points and motors. We set repeatability threshold as 90\% and time variance threshold as 0.15 in normalized segment arbitararily.
+
+% 空間分布
+In order to investigate spatial tactile distribution, we visualized precise tactile points by plotting it on a 3D model of the hand, which was scanned by 3D scanner. We compared the distribution of precise tactile points and motors by counting the shared and not-shared number of them. Also, to compare the distribution of precise motors, we counted the number of shared number of them.
+
+% 時間分布
+We employed "mean active rate" as the index to indicate the instantaneous number of active precise tactile points for temporal distribution of precise tactile points. Mean active rate is defined as the count of active precise tactile points in an interval of duration T divided by T. We set T 9\% of the total length of normalized segmented time series.
+
+% 時間分布（ある時間区間におけるover trial）
+We investigated what and in what section in manipulation the precise tactile points and motors increase. We defined section of manipulation by local minimums of the average of mean active rate of all tactile points over trials because such timing indicates the beginning of touch. To calculate temporal distribution of precise tactile points of manipulation, we computed the average of mean active rate over trials at each phase. Moreover, we observed spatial distribution of precise tactile points in a specific section by visualizing repeatability of the precise tactile points only in each section on a 3D model of the hand. 
+
+
+% 抽出方法
+\begin{figure}[t!]
+ \centering
+  \includegraphics[width=.49\textwidth]{figure/method/extraction-of-tacmot.eps}
+  \caption{Tactile points and motors which are extracted and not extracted.}
+ \label{fig:way-to-extract}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Manipulation Experiment}
+% TODO 実験のコンセプトを書く？
+\subsection{Experimental Setup}
+% 回転動作を選んだ．TODO なぜ選んだのか？
+We conducted a single-subject experiment to measure and analyse dexterous manipulation. We employed rotating dexterous manipulation as a example of human dexterous manipulation. The rotating manipulation is a task in which a subject are required to rotate a cylinder object in one direction using whole hand. Also, it is difficult to know the crucial tactile points and motors beforehand because this task includes regrasping procedure. This experiment is conducted under ethical approval and informed consent of the subject.
+
+% 実験セットアップ
+In this work, the subject performed rotating manipulations of cylinder objects with centered center of gravity (manipulation C) and non-centered center of gravity (manipulation NC) using the data glove (\figref{fig:cylinder}, \tabref{tab:specification-of-robot}). The subject was told to just rotate the object on the table in one direction without any instruction of rotating velocity and regrasping procedure. We counted his rotation and instructed to stop when he rotated 18 times. To record natural manipulations, the subject was blind to what object he would manipulate. We dismissed the recorded data of rotations at the beginning of the three times to focus on analyzing stable manipulations.
+
+\begin{figure}[t!]
+ \centering
+ \includegraphics[width=0.3\textwidth]{figure/method/cylinder-property.eps}
+ \caption{Manipulated cylinders.} 
+ \label{fig:cylinder}
+\end{figure}
+
+\begin{table}[t!]
+ \centering
+ \caption{Specification of the cylinders.}
+      \begin{tabular}{|r||l|l|} \hline
+               & Manipulation C & Manipulation NC \\ \hline \hline
+              Weight & 455 g & 322 g \\ \hline
+              Height & 110 mm & 110 mm \\ \hline
+              Height of center of gravity & 57 mm & 23 mm \\ \hline
+              Diameter & 72 mm & 72 mm \\ \hline
+            \end{tabular}
+    \label{tab:specification-of-robot}
+\end{table}
+
+
+% 実験風景
+\begin{figure}[t!]
+  \centering
+  \includegraphics[width=0.45\textwidth]{figure/method/experiment-overview.eps}
+  \caption{Overview of in-hand manipulation measurement. (A) Overview of experiment. (B) Reconstructed hand state using tactile sensing glove and motion capture system.}
+ \label{fig:experiment-overview}
+\end{figure}
+
+
+\subsection{Identical Finger-Gaiting in Dexterous Manipulation}
+
+We observed the identical regrasping procedure in both manipulation C and NC (\figref{fig:snapshot}). Observed regrasping procedure is as follows:
+\begin{itemize}
+    \item[A.] Put the first finger and the fingers from third to fifth on the object
+    \item[B.] Put the second finger to the object immediatele after rotating the object
+    \item[C.] Release and stretch the fingers from third to fifth.
+    \item[D.] Regrasp the object with all fingers
+    \item[E.] Bend the first finger and put it to the object
+\end{itemize}
+
+% 操作のスナップショット
+\begin{figure*}[t!]
+  \centering
+  \includegraphics[width=0.98\textwidth]{figure/method/snapshot-m1.eps}
+  \caption{Snapshots of rotating manipulation. The pictures of A-E represent the corresponding regrasping procedure.}
+ \label{fig:snapshot}
+\end{figure*}
+
+\begin{figure*}[t!]
+% 図: 抽出された接触運動
+ \centering
+  \includegraphics[width=.98\textwidth]{figure/experiment/m-db-ext.eps}
+  \caption{Representative raster plots and mean active rate of precise and non-precise tactile points from manipulation C and NC. Red points indicate precise tactile points. Gray points indicate non-precise tactile points. Blue solid line represents mean active rate of precise tactile points. Blue dashed line represents mean active rate of all tactile points.}
+ \label{fig:m-db-ext}
+\end{figure*}
+
+\subsection{Result}
+To characterize precision of manipulation, we counted the number of precise tactile points and motors. In this experiment, the number of precise tactile points was 99 in manipulation C and 186 in manipulation NC. Similarly, the number of precise motors was 2 in manipulation C and 12 in manipulation NC (\figref{fig:comp-tac}B, \figref{fig:comp-mot}).
+
+% 図: 運動の比較
+\begin{figure}[t!]
+ \centering
+  \includegraphics[width=.48\textwidth]{figure/experiment/mot-comp-with-cap.eps} %{figure/final/motor-time-distribution-trial-1_2.eps} 
+ \caption{Temporal distribution of precise motors from manipulations of C and NC.}
+ \label{fig:comp-mot}
+\end{figure}
+
+We observed that distribution of precise tactile points and motors was spatially localized. The precise tactile points are localized in the fingers from first to fourth and palm near the palm (\figref{fig:tac-dist}). The precise motors are also localized at motors on the first finger in manipulation C and on the fingers except for second finger is manipulation NC (\figref{fig:comp-mot}). 
+
+\begin{figure}[t!]
+ \centering
+  \includegraphics[width=.48\textwidth]{figure/experiment/tac-distribution.eps}
+  \caption{Spatial distribution of precise tactile points from manipulations C and NC. (A) Spatial distribution of manipulation C. (B) Spatial distribution of manipulation NC.}
+ \label{fig:tac-dist}
+\end{figure}
+
+We also observed that distribution of precise tactile points and motors was temporally localized. We found that the precise tactile points are localized in 3 time intervals in a segment of manipulation NC and 2 time intervals in one of manipulation C, which lacks for the precise tactile points in the latter half time interval compared to manipulation NC.
+
+To capture the spatial relationship, we analysed share of the precise tactile points and motors between manipulation C and NC. The precise tactile points extracted from manipulation C shared 70\% (69 points) of these from manipulation NC (\figref{fig:comp-tac}B). The number of the precise tactile points only from NC is 117 points, which is 11.5\% of the total. Also, all the precise motors from manipulation C are extracted from manipulation NC.
+
+% 図: 接触運動の包含関係
+\begin{figure}[!t]
+ \centering
+  \includegraphics[width=0.48\textwidth]{figure/experiment/comp-tac-with-cap.eps}
+  \caption{Relationship between precise and motors of manipulation C and manipulation NC. (A) Spatial distribution of precise tactile points from manipulation C and NC. Light red points represent precise tactile points from manipulations both C and NC, blue points from only from manipulation C, dark red from only from manipulation NC. (B) A Venn diagram of precise tactile points from manipulations C and NC.}
+ \label{fig:comp-tac}
+\end{figure}
+
+Compareing the averages of mean active rate over trials, we investigated when the precise tactile points and motors increase. We found there was three sections defined by local minimum of the non-precise tactile points. Moreover, the precise tactile points from manipulation NC was found in the third section althogh these from manipulation C was not found (see blue sections in \figref{fig:temporal-tactile-points-with-variance}AB). 
+
+We conducted datailed analysis on spatial distribution of the precise tactile points in each section. As a result, we found two spatial difference: First, the difference in the third section is derived by tactile points in the third finger and fourth finger (\figref{fig:temporal-tactile-points-with-variance}EH). Second, the difference in the second section mainly arise from tactile points in the pulp of the second finger(\figref{fig:temporal-tactile-points-with-variance}DG). 
+
+
+
+
+% 分散付きの空間比較
+% TODO figure not yet
+\begin{figure*}[t!]
+ \centering
+  \includegraphics[width=.98\textwidth]{figure/experiment/temporal-tactile-points-with-variance.eps}
+%  \includegraphics[width=.48\textwidth]{figure/experiment/temporal-tactile-points-with-variance.eps}
+  \caption{Spatio-temporal distribution of precise tactile points at each section. (A and B) The average over trials of the mean active rate of the tactile points in manipulation C and NC. Red solid line and envelop indicate the average and variance of the mean active rate of precise tactile points over trials. Black solid line and envelop indicate the average and variance of the mean active rate of all tactile points over trials. (C-E) Spatial distribution of precise tactile points extracted from manipulation C at each section. (F-H) Spatial distribution of precise tactile points extracted from manipulation NC at each section.}
+ \label{fig:temporal-tactile-points-with-variance}
+\end{figure*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusion and Discussion}
+% 概要
+% TODO ここには研究でやったことを書くのであって，背景とかを書くところではない？
+% graspの遷移だけでは説明のできない現象
+%What and when tactile points and motors are precisely used in human dexterous manipulations is important for understanding of manipulations and robot design. 
+In this work, we analysed human dexterous manipulation by extracting precise tactile-motor patterns localized spatiotemporally using a tactile-motor sensing glove with high spatiotemporal resolutions. As a result, we found precise tactile-motor patterns was spatiotemporally localized in the manipulations which hawith identical regrasping procedures. This suggests that humans adjust tactile-motor control by adding or trimming such patterns depending on manipulating objects. 
+
+% 重要だと言われていたが，その方法は確立していない．
+% dexterous manipulationに新たな光
+Although control for dextrous manipulation with robot hand is an important open problem, its uniform way is not established\cite{bicchi2000hands}. Using our proposed method, we specifically presented whan and what tactile points and motor is precisely manipulated by human dexterous manipulation. Our result contribute to robotics in the way this may enable robot designers to give a constraint of spatiotemporal tactile-motor state of controller for dexterous manipulation.
+
+% 難易度
+The difference of spatiotemporal tactile-motor patterns can be derived by the difficulty of the tasks. The center of gravity of the cylinder used in manipulation NC is closer to the edge of supprting hand polygon than manipulation C. This means manipulation NC is more difficult to stable than manipulation C. The addition of the tactile-motor patterns can be explain in the way that manipulation NC requires more tactile-motor controls to stabilize the manipulation. 
+
+% 今後（網羅的調査，ダイナミックなマニピュレーションの拘束条件としてロボットの構成）
+In future work, we will conduct covering experiment in order to extract precise tactile-motor patterns from specific dexterous manipulations. We believe that such patterns, which are a constraint of human manipulation using data glove, can be a useful guideline to design remarkablly dexterous robot hands. 
+
+\addtolength{\textheight}{-12cm}   % This command serves to balance the column lengths
+                                  % on the last page of the document manually. It shortens
+                                  % the textheight of the last page by a suitable amount.
+                                  % This command does not take effect until the next page
+                                  % so it should come on the page before the last. Make
+                                  % sure that you do not shorten the textheight too much.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section*{ACKNOWLEDGMENT}
+%We particularly thank Takashi Sagisaka to his incredible sensing glove. We are grateful to Yasunori Yamada to many discussion on the method and his advice on this paper. We thank Yoshiyuki Ohmura to his valuable comments on the maniscript. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\begin{thebibliography}{99}
+%\bibitem{c1} G. O. Young, Synthetic structure of industrial plastics (Book style with paper title and editor), 	in Plastics, 2nd ed. vol. 3, J. Peters, Ed.  New York: McGraw-Hill, 1964, pp. 1564.
+%\end{thebibliography}
+
+\bibliographystyle{IEEEtranS}
+%\bibliographystyle{junsrt}
+\bibliography{bibTeX/thesis}
+
+
+
+\end{document}

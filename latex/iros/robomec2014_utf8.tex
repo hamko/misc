@@ -1,0 +1,556 @@
+\documentclass[10pt,a4paper]{jsarticle}
+\usepackage{robomech}
+\usepackage[dvips]{graphicx}
+\usepackage{tabularx,amsmath,amssymb}
+\usepackage{txfonts,bm}
+%
+\title{筋骨格ロボットによる走行実現のための筋賦活パタン制御}
+\engtitle{Muscle Activation Pattern Control for Running of Musculoskeletal Robot}
+\author{○西川 鋭 (東京大学)\hspace{2zw}正\hspace{1zw}新山 龍馬 (東京大学)\hspace{2zw}正\hspace{1zw}國吉 康夫 (東京大学)}
+\engauthor{%
+*Satoshi NISHIKAWA, The University of Tokyo, nisikawa@isi.imi.i.u-tokyo.ac.jp\\
+ Ryuma NIIYAMA,  The University of Tokyo, niiyama@isi.imi.i.u-tokyo.ac.jp\\
+ Yasuo KUNIYOSHI, The University of Tokyo, kuniyosh@isi.imi.i.u-tokyo.ac.jp}
+%
+\abstract{%
+%
+%Human can move skillfully with ease. In order to figure out this
+%principle, using human-like robot is considered reasonable. We focus on
+%musculoskeletal system with involvement of elastic elements as
+%human-like characteristics. In this paper, focused motion is running because it is fundamental motion of dynamic locomotion. 
+%In this paper, we propose “Muscle Activation Pattern Control”, which is based on human competition running so that musculoskeletal biped robot runs. 
+%In order to validate this method, we use kinetics simulator. 
+%In the result, we succeed in autonomous acquisition of pattern by robot. 
+%Generated running is dynamic and its velocity is over 3m/s. 
+Despite the considerable complexity of the human musculoskeletal
+system, human beings are capable to move with great dexterity and ease
+even under instable conditions as during running. 
+In order to understand the control mechanisms underlying the generation
+of such skill-full behaviors, we propose to study running, a highly
+dynamic motion, using an anthropomorphic bipedal robot. 
+To do so, we propose a method called Muscle Activation Pattern Control
+based on physiological observations of athlete runners that we apply
+in a simulation of our running robot. 
+Using this method, we show that the robot can autonomously acquire
+patterns of running motion over 3m/s.  
+}
+%
+\keyword{Artificial Musculoskeletal System, Pneumatic Artificial Muscle,
+Bipedal Robot, Biomechanics, Running Motion}
+%
+
+\begin{document}
+\setlength{\baselineskip}{4.685truemm}% 52 line
+\maketitle
+\thispagestyle{empty}
+
+\section{研究背景と目的}
+
+ダイナミックな運動の基本
+である走行を実現するロボットは多く開発されている
+\cite{Takenaka2009:Real_Time_Motion_Generation_and_Control_for_Biped_Robot}
+．
+これらの多くは
+電磁モータによる目標軌道追従制御
+で安定走行を実現している．
+一方，ヒトは筋骨格系の身体を持ち，
+非線形性，拮抗制御，２関節筋といった目標軌道追従制御を
+行いにくい
+性質があるにも関わらず巧みな運動ができる．
+こうした運動実現に
+はヒトの身体の特性である弾性要素を含んだ筋骨格系が重要な要素であると考えられる．
+バイオメカニクスにおいてはこうした身体の特性を活かす知見が多く得ら
+れており，これらを踏まえた制御法をロボットに適用することによりヒトに近い運動が得られると
+考えられる．
+
+以上のことから，ロボットでのヒトに近い走行実現のためにヒトの競技走を規範とした制御法を提
+案することを本研究の目的とする．方法としては，動力学シミュレータ上でヒト
+と身体特性が近い筋骨格ロボット\cite{Niiyama2008:Pneumatic_Biped_with_an_Artificial_Musculoskeletal_System}の改良型を用いる．
+
+\vspace{-1mm}
+\section{筋賦活パタン制御}
+\vspace{-1mm}
+\subsection{制御の背景}
+
+本研究ではヒトを規範として走行制御を行うことを考えるため，ヒトの走行中の
+筋指令である筋電図に基づいた制御を考える．
+走行において体幹に近い筋が大きな役割を果たすと考えられるため，本研究では
+下腿部を除いて考える．
+%ヒトの筋配置を\figref{fig:human_muscle_layout}に示す．
+ヒトの競技走の筋電図\cite{Baba2000:短距離走の筋活動様式}を
+\figref{fig:muscle_selection}に示す．
+
+
+\figref{fig:muscle_selection}より，
+%遊脚では全ての筋で-150ms辺りを境に筋電値が急激に変
+%化しており，
+筋電値の最大値の50$\%$に線を引くと，遊脚期の中程，接地200ms前か
+ら100ms前の間に全ての筋において筋電値が線を跨いでいるのが分かる．
+このことから遊
+脚は前半，後半で全ての筋電値が同期して切り替わっていると考えられる．
+また，
+筋電値は強弱が明確に分かれており，ON/OFFに近く見える．
+%つまり，ヒトの走行の筋電図から，ダイナミックな運動をするために，
+%筋指令の同期，ON/OFFに近い素早い指令の切り替えが重要であるといえる．
+また，運動生理学の分野で，情報量の削減のために指令を離散的にして運動指令表現の
+単純化をはかることでヒトの運動の軌道と類似した特徴を示すこと
+\cite{Sakaguchi2008:低い時間解像度の運動指令がもたらす手先軌道の性質：運
+動指令表現の単純化仮説}が示されている．このことから動作を時間分割したステップ的な指令の切り替え
+はヒトの制御に近いと考えられる．
+さらに，新山らは筋骨格ロボットを使い，指令を一度に複数の筋に与えるだけの
+制御で動物と類似したジャンプを実現しており
+\cite{Niiyama2007:Mowgli:_A_Bipedal_Jumping_and_Landing_Robot_with_an_Artificial_Musculoskeletal_System}
+，筋骨格系がその機構により生物らしい運動を作り出すことを示している．その
+ため，%細かい制御をするのではなく，
+機構に制御を委ねる部分を残すことで動物の運動に近づけられると考えられる．
+以上より，制御に要求される条件として，運
+動を時間分割し分割したフェーズ毎の指令を決定すること，指令
+を素早くステップ的に切り替えることの2点が挙げられる．
+
+
+%そこで，走行をいくつかのフェーズに分け，それぞれのフェーズにおいて筋賦活
+%パタンを決定し，ステップ的に切り替えることで運動を生成することを考える．
+%運動指令を離散的にすることはなめらかな運動を阻害するように考えられるが，
+%運動生理学の分野で，情報量の削減のために指令を離散的にして運動指令表現の
+%単純化をはかることでヒトの運動の軌道と類似した特徴を示すこと\cite{Sakaguchi2008:低い時間解像度の運動指令がもたらす手先軌道の性質：運動指令表現の単純化仮説}が示されて
+%いる．
+%また，最適制御におけるbang-bang制御ではトルクを離散的に切り替えることで
+%最適な運動を生成するように，工学的にも妥当性があると考えられる．
+
+%\subsection{筋賦活パタン制御の概要}
+
+これらの要求を満たす制御としては柿谷らの提案する筋指令切替パタン\cite{Kakitani2009:筋骨格ロボットを用いた跳躍運動の学習}
+がある．これは，目標姿勢を平衡状態とする筋指令をステップ的に切り替えてフィードフォワー
+ド的に運動を生成する方法である．本研究ではこの手法をベースとするが，この
+手法は単発の運動しか扱っておらず，周期運動である走行にはそのまま適用でき
+ない．
+そのため，走行に適用できるように改良を加えた手法を提案する．
+
+
+\subsection{制御の概要}
+
+提案手法は，基本要素としては，筋賦活パタン，切替タイミングに加えて周期運
+動を，応用要素としては自律化，最適化だけでなくフィードバックを新たに加えた．
+%提案手法の概念図を\figref{fig:concept_of_the_control}に示す．本研究で新
+%たに加えた要素は赤字で表した．
+%\vspace{-3mm}
+%\begin{figure}[htbp]
+% \centering
+% \begin{minipage}[b]{.48\textwidth}
+%  \centering
+%  \includegraphics[width=.7\textwidth]{fig/concept_of_the_control.eps}
+% \end{minipage}%
+% \vspace*{-2mm}
+% \caption{提案手法の概念図}
+% \label{fig:concept_of_the_control}
+% \vspace*{-2mm}
+%\end{figure}
+
+まず，動作を時間分割し，分割したフェーズ毎の指令を決定する．次に，フェーズの
+切り替えのタイミングを考える．周期運動を扱うため，1周期分の運動を
+決定し，繰り返すことで運動を生成する．その際にタイミングはダイナミックな運動にお
+いて重要であると考えられるため，
+そのまま繰り返すだけでは，誤差がある場合や，実世界に拡張する際に外乱に対
+応できない．そのため，センサフィードバックにより1周期毎に運動のタイミン
+グを調節する．
+また，筋賦活パタンと切替タイミングを自律的に獲得，最適化するた
+めに
+運動学習を行うことで人手
+による要素を減らし，汎用性を高める．
+提案手法を図解したものを\figref{fig:muscle_activate_pattern_outline}に示
+す．
+
+\vspace{-2mm}
+
+\subsection{走行に用いた筋賦活パタン制御}
+
+\figref{fig:muscle_selection}に示すヒトの競技走の筋電図からフェーズの分け方，各フェーズの筋賦活の強弱を決定し
+た．
+フェーズ分けはまず，加速を得ることができる接地期と遊脚期に分ける．次に筋
+電図において遊脚期中程に筋電値の最大値の50$\%$の線を跨いでいるため，2つに分
+け，引き付け期，振り下ろし期とした．
+各フェーズにおいて最大値の50$\%$を越えているものを強(high)，それ以外を弱
+(low)とした．
+接地期に足先での出力方向\cite{Oshima2000:Robotic_Analyses_of_Output_Force_Distribution_Developed_by_Human_Limbs}を考えると，体を持ち上げる筋は大殿筋，大腿直筋，
+大腿広筋となっている．筋電図から決定した筋はこれに体を持ち上げる点では負
+の効果があるハムストリングスが加わっ
+ているが，走行においては前に進むことが重要であるため妥当であると考えられ
+る．
+
+各フェーズの切替タイミングは以下のように決定した．
+空気圧筋には応答遅れがあるため，接触センサからの情報を得て切り替えたので
+は間に合わない．そこで，切替タイミングを決定するのに前サイクルの情報と接
+地時間の予測を用いた．接地時間は離地時の垂直速度から自由落下で元の位置ま
+で戻ってくる時間を求めることで予測した．
+鉛直方向速度を$v$，重力加速度を$g$とすると$T_{a}$は式(\ref{102730_5Mar10})のように求められる．
+離地時刻を$t_{liftoff}$，空中時
+間を$T_{a}$，接地時間を$T_{s}$，振り下ろし時間を$\tau$として
+\tabref{table:timing}のように設定した．ただし，$T_{a}$，$T_{s}$は離地検
+知時に更新した．
+
+
+
+\vspace{-2mm}
+\begin{table}[htbp]
+ \caption{Timing of switching}
+ \label{table:timing}
+ \begin{center}
+  \small
+  \begin{tabularx}{85truemm}{cXr}
+   \hline
+   & foot descent & sense liftoff \& $t_{liftoff}+T_a-\tau$\\
+   \hline
+   & thrust & $t_{liftoff}+T_a$\\
+   \hline
+   & recovery swing & $t_{liftoff}+T_a+T_s$\\
+   \hline
+  \end{tabularx}   
+ \end{center}
+\vspace{-5mm}
+\end{table}
+
+\begin{equation}
+T_{a}=2v/g\label{102730_5Mar10}
+\end{equation}
+
+\vspace{-1mm}
+各フェーズの筋指令と切替タイミングを自律的に獲得するために運動学習を行う．
+運動学習法は少ない時間での筋骨格ロボットの跳躍に成功している柿谷らの手法
+\cite{Kakitani2009:筋骨格ロボットを用いた跳躍運動の学習}を採用する．
+この手法はランダム探索により広域に解を探索した後に山登り探索により極値周
+辺の解を探索する手法である．
+本研究においては，筋電図から決定した各フェーズの筋賦活の強弱から弱とした
+ものをゼロに固定，残りをランダム探索する．そうして得たパタンの最良のも
+のから山登り探索することにより走行を実現するパタンを得る．
+
+\vspace{-1mm}
+\section{動力学シミュレータ上での走行要素別実験}
+\vspace{-1mm}
+\subsection{筋骨格ロボットとシミュレーションモデル}
+
+本研究では新山らにより製作された筋骨格ロボット
+\cite{Niiyama2008:Pneumatic_Biped_with_an_Artificial_Musculoskeletal_System}
+の改良型をモデルとする．
+ロボットの筋配置を\figref{fig:robot}に示す．下腿部は受動ばねになっている．
+シミュレーションモデルでは，大殿筋の強化，大腿筋膜張筋として股関節外側
+に受動ばねの
+追加，膝関節可動域の拡大の改良を加えた．
+空気圧人工筋の特性は以下の式(\ref{123934_4Mar10})
+\cite{Schulte1961:Characteristics_of_the_Braided_Fluid_Actuator}に基づい
+て求め，実際に発揮できる力として0.8倍して利用した．
+$F$は筋の張力，$p$は筋の内圧，$\epsilon$は筋の収縮率，$A$，$B$は定数であ
+る．
+筋長-張力関係は\figref{fig:FL_curve}のようになる．
+応答遅れは0.1sに設
+定した．動力学シミュレータはOpenHRP3.0.5\cite{Nakaoka2008:分散コンポーネント型ロボットシミュレータOpenHRP3}を用いた．
+
+\begin{equation}
+ F=p{A(1-\epsilon)^{2}-B}\label{123934_4Mar10}
+\end{equation}
+
+%\begin{math}
+% A=3/4\pi D_{0}^{2}\cot^{2}(\theta_{0})   ,   
+% B=1/4\pi D_{0}^{2}\csc^{2}(\theta_{0})
+%\end{math}
+
+
+%\begin{table}[htbp]
+% \caption{筋データ}
+% \label{table:muscle}
+% \begin{center}
+%  \small
+%  \begin{tabularx}{85truemm}{cXrrr}
+%   \hline
+%   & muscle & diameter[mm] & max length[mm] & number\\
+%   \hline
+%   & 大殿筋 & 6 & 256 & 4\\
+%   %\hline
+%   & 腸腰筋 & 6 & 256 & 2\\
+%   %\hline
+%   & 大腿二頭筋 & 6 & 200 & 2\\
+%   %\hline
+%   & 大腿直筋 & 6 & 200 & 1\\
+%   %\hline
+%   & 大腿広筋 & 6 & 160 & 2\\
+%   %\hline
+%   & 小殿筋 & 10 & 256 & 2\\
+%   %\hline
+%   & 内転筋 & 10 & 180 & 2\\
+%   \hline
+%  \end{tabularx}   
+% \end{center}
+%\vspace{-5mm}
+%\end{table}
+
+%\begin{table}[htbp]
+% \caption{モーメントアーム}
+% \label{table:moment_arm}
+% \begin{center}
+%  \small
+%  \begin{tabularx}{85truemm}{cXrr}
+%   \hline
+%   & muscle & hip[m] & knee[m]\\
+%   \hline
+%   & 大殿筋 & 0.04 & -\\
+%   %\hline
+%   & 腸腰筋 & 0.04 & -\\
+%   %\hline
+%   & 大腿二頭筋 & 0.04 & 0.025\\
+%   %\hline
+%   & 大腿直筋 & 0.025 & 0.025\\
+%   %\hline
+%   & 大腿広筋 & - & 0.025\\
+%   %\hline
+%   & 小殿筋 & 0.05 & -\\
+%   %\hline
+%   & 内転筋 & 0.05 & -\\
+%   \hline
+%  \end{tabularx}   
+% \end{center}
+%\vspace{-5mm}
+%\end{table}
+
+
+
+
+
+
+\subsection{蹴り出し実験}
+
+走行要素別実験の1つ目として蹴り出し実験を行った．蹴り出すタイミングが離地速度に与える効果について調べた．ロボットを高所から落
+とし，接地直後に蹴り出したものから0.01sずつずらして蹴り出し
+たもので実験を行った．蹴り出し時間は0.01sとした.
+結果を\figref{fig:liftoff_velocity}に示す．
+
+
+離地速度は接地期前半に蹴り出した方が大きくなっている．こ
+れは，蹴り出すことにより，脚全体のばねの平衡位置がシフトしたため
+だと考えられる．
+これを\figref{fig:spring_mass}に示す1次元ばね質点系で考える．
+物体の質量を$m$，弾性定数を$k$，物体の座標を$x$，平衡点の座標を$x_1$，自
+然長を0とするとこの系の運動方程式は式(\ref{105054_3Mar10})のように表せる．
+$x_{1}$一定で解くと，時間$t$，$\omega=\sqrt{k/m}$，定数$A$として
+式(\ref{105131_3Mar10})，式(\ref{135720_3Mar10})となる．
+\begin{align}
+ m\ddot{x}=-k(x-x_{1})\label{105054_3Mar10}\\
+ x=Ae^{i\omega t}+x_{1}\label{105131_3Mar10}\\
+ \dot{x}=Ai\omega e^{i\omega t}+x_{1}\label{135720_3Mar10}
+\end{align}
+この系の振る舞いを$(x,\dot{x})$平面上で考えると，中心座標$(x_1,0)$，$x$
+方向半径$A$，$\dot{x}$方向半径$A\omega^{2}$の楕円軌道上を時計まわりに進
+む．
+この系で，蹴り出しに当たるのはばねの平衡点のシフト，つまり$x_{1}$の移動
+である．
+接地期前半に蹴り出した場合，(a)のようにばねのシフトが起こった時に
+中心が違う赤い楕円弧上を移動し，ばねが戻った際に元の楕円よりも半径の大きな破
+線で表した楕円弧上
+を動くため，高い速度が得られる．一方，蹴り出しが遅くなると，
+(b)のよ
+うにばねのシフトが起こると反って中心に近づく側に動いてしまい，速度は何も
+しないよりも遅くなる．
+
+この結果から，接地直後の方が接地後半に
+蹴り出すよりも有効であることが示された．これは接地時刻を予測して
+蹴り出すことの重要性を示唆している．また，
+ヒトが行う接地期後半の引き付け動作の開始が妥当であると推察され
+る．
+
+%ヒトは競技走において接地期後半
+%に脚の引き付けを始めていることが筋電図からわかるが，接地期後半の蹴り出し
+%が有効でないというこの実験の結果から，接地期後半にさらに地面に力を加えよ
+%うとするより次の動作に素早く移ろうとするヒトの動作の先取りが妥当な行動で
+%あることが推察される．
+
+
+
+%\subsection{スウィング実験}
+
+%走行要素別実験の2つ目としてスウィング実験を行った．この実験ではスウィ
+%ング(引き付けと振り下ろし)時の2関節筋の役割について考察した．ロボットの胴体を空
+%中に固定して脚をスウィングさせた．
+\vspace{-3mm}
+\subsection{引き付け実験}
+
+走行要素別実験の2つ目として引き付け実験を行った．この実験では引き付け時
+の2関節筋の役割について考察した．ロボットの胴体を空中に固定して脚を引き
+付けさせた．
+
+\figref{fig:recovery_swing1}に示す膝伸展1関節筋である大腿広筋と腸腰筋を使った引き付け(1関節筋のみの引き付
+け)と\figref{fig:recovery_swing2}に示す2関節筋である大腿直筋と腸腰筋を使った引き付け(2関節筋を含めた引き付
+け)の2通りについて比較した．赤い筋は使用した筋，青い筋
+は使用しなかった筋を示す．
+
+\figref{fig:recovery_swing1_result}，\figref{fig:recovery_swing2_result}
+に示す股関節角速度より，1関節筋のみの引き付けでは膝の
+初期屈曲角が小さいものの方がスウィング速度が速く，2関節筋を含めた引き付
+けでは膝の初期屈曲角が大きいものの方がスウィング速度が速くなった．
+
+これについては\figref{fig:FL_curve}に示す筋長-張力特性から考察した．
+引き付け時の膝にかかる筋を\figref{fig:recovery_swing1_zukai}，\figref{fig:recovery_swing2_zukai}に示す．
+(b)のように膝の屈曲角が大きい時，(a)よりも膝にかかる筋は伸びるため筋張力は高くなる．1関
+節筋のみでは，膝屈曲角が大きい時，膝関節伸展トルクが上昇
+する．そのため，その反作用として股関節伸展トルクが強まるため，スウィング
+速度が遅くなったと考えられる．一方，2関節筋を含めると，(d)のよ
+うに膝屈曲角が大きい時，(c)に比べて膝関節伸展トルクが上昇するだけでなく，股関節屈曲トルクも
+上昇するため，反作用に打ち勝ちスウィング速度が増したと考えられる．
+
+%\vspace{-3mm}
+%\begin{figure}[htbp]
+% \centering
+% \begin{minipage}[b]{.48\textwidth}
+%  \centering
+%  \includegraphics[width=0.5\textwidth]{fig/FL_curve_arrangement.eps}
+% \end{minipage}%
+% \vspace*{-2mm}
+% \caption{筋長-張力関係}
+% \label{fig:FL_curve}
+% \vspace*{-4mm}
+%\end{figure}
+
+
+ヒトは接地後大きく膝を曲げて引き付けるが，これは大腿直筋の力を有効に使うためと考えられる．
+バイオメカニクスにおいて膝の屈曲は脚の慣性モーメントを減少させるた
+めと議論されている\cite{book:Kaneko:バイオメカニクス}が，2関節筋の特性を
+考えても，膝の屈曲は素早いスウィングに有効であることが示された．
+
+%\subsubsection{振り下ろし実験}
+
+
+
+
+
+
+
+\section{筋賦活パタンの学習による走行実験}
+
+走行要素別実験から，筋賦活の強弱のパタンは，膝の屈曲のための引き付け期初
+めのハムストリングス，接地期後半の引き付け動作の腸腰筋を追加して\figref{fig:muscle_high_low}のよ
+うに決定した．くくってあるものは同じ指令を与えるものである．
+
+
+筋賦活パタンの詳細は運動学習により決定した．運動学習は次のように行った．
+評価関数は5sに進んだ距離とした．
+まず，筋賦活の強弱のパタンから強のものと，振り下ろし時間$\tau$の12パラメー
+タをランダム探索して評価値が高くなるパタンを探索した．左右の筋に関しては，
+接地期と非接地期のパタンをあらかじめ与えた．
+次に，ランダム探索の結果のパタンを初期値として，弱の筋，左右の筋も含めた
+22パラメータの山登り探索を行い，走行動作を生成した．山登り探索での探索範
+囲は，筋の内圧については$\pm0.2MPa$，時間については$\pm0.02s$とし，その
+中でランダム探索をした．ランダム探索300回の後に行った山登り探索500回の6
+回分の学
+習曲線を\figref{fig:learning_curve}に，生成された筋賦活パタンを\figref{fig:pattern}に示す．振り下ろし時間は0.059sとなった．
+
+
+
+%生成された走行の様子を\figref{fig:running}に，垂直方向重心移動を
+%\figref{fig:z_CoG}に，前後方向重心速度を\figref{fig:velocity}，1周期の関節角度
+%を\figref{fig:angle}，1周期の関節トルクを\figref{fig:torque}に示す．最
+%高速度が3m/sを越える6歩のダイナミックな走行が実現しているのが分かる．
+%上方に跳ねすぎていること，関節限界に当たって突発的なトルクがかかってしまっ
+%ていることは課題である．
+生成された走行の様子を\figref{fig:running}に示す．\figref{fig:velocity}
+のように最高速度が3m/sを越える6歩の走行が実現した．\figref{fig:angle}に示すように関節角
+度の大きいダイナミックな走行になっている．\figref{fig:z_CoG}のように上方に
+跳ねすぎていること，\figref{fig:torque}からわかるように関節限界に当たっ
+て突発的なトルクがかかってしまっていることは課題である．
+
+
+
+
+
+
+\section{結論と展望}
+
+本研究では，筋骨格ロボットの走行制御法としてヒトの競技走の筋電図に基づい
+た筋賦活パタン制御を提案した．
+走行要素別実験では，ばねの有効利用には蹴り出しタイミングが重要なこと，ヒ
+トの引き付けは2関節筋を活かす姿勢であることを示した．
+走行実験では，
+筋電図に基づく制約を加えた学習で生成した
+筋賦活パタンにより筋骨格ロボットの動力学シミュレータ上でのダイナミック
+な走行が実現した．
+
+本研究の課題としては，走行の安定性の低さ，定常走行しかできないことが挙げ
+られる，また，実世界とシミュレーションの違いも克服する必要がある．
+今後，こうした課題を解決することで
+実機走行を実現，また，他の運動と組み合わせることで，筋骨格ロボッ
+トを筋骨格系の運動の研究の基盤として役立てられることが期待される．
+
+
+
+\begin{footnotesize}
+
+\begin{thebibliography}{10}
+
+\bibitem{Takenaka2009:Real_Time_Motion_Generation_and_Control_for_Biped_Robot}
+Toru Takenaka, Takashi Matsumoto, Takahide Yoshiike, and Shinya Shirokura,
+\newblock ``Real time motion generation and control for biped robot - 2nd
+  report:running gait pattern generation'',
+\newblock In {\em The 2009 IEEE/RSJ International Conference on Intelligent
+  Robots and Systems({IROS} '09)}, pp. 1092--1099, St. Louis, USA, 2009.
+
+\bibitem{Niiyama2008:Pneumatic_Biped_with_an_Artificial_Musculoskeletal_System}
+Ryuma Niiyama and Yasuo Kuniyoshi,
+\newblock ``Pneumatic biped with an artificial musculoskeletal system'',
+\newblock In {\em Proceedings of 4th International Symposium on Adaptive Motion
+  of Animals and Machines (AMAM2008)}, 2008.
+
+\bibitem{Baba2000:短距離走の筋活動様式}
+馬場崇豪, 和田幸洋, 伊藤章,
+\newblock ``短距離走の筋活動様式'',
+\newblock 体育学研究, Vol.~45, No.~2, pp. 186--200, 2000.
+
+\bibitem{Sakaguchi2008:低い時間解像度の運動指令がもたらす手先軌道の性質：運動%
+指令表現の単純化仮説}
+坂口豊, 和田克己,
+\newblock
+  ``低い時間解像度の運動指令がもたらす手先軌道の性質：運動指令表現の単純化仮説'',
+\newblock 電気情報通信学会論文誌, Vol. J91-D, No.~9, pp. 2368--2381, 2008.
+
+\bibitem{Niiyama2007:Mowgli:_A_Bipedal_Jumping_and_Landing_Robot_with_an_Artif%
+icial_Musculoskeletal_System}
+Ryuma Niiyama, Akihiko Nagakubo, and Yasuo Kuniyoshi,
+\newblock ``Mowgli: A bipedal jumping and landing robot with an artificial
+  musculoskeletal system'',
+\newblock In {\em Proceedings of the 2007 IEEE Int. Conf. on Robotics and
+  Automation (ICRA 2007)}, pp. 2546--2551 (ThC5.2), 2007.
+
+\bibitem{Kakitani2009:筋骨格ロボットを用いた跳躍運動の学習}
+柿谷慧, 新山龍馬, 國吉康夫,
+\newblock ``筋骨格ロボットを用いた跳躍運動の学習'',
+\newblock  第14回ロボティクスシンポジア, 2009.
+
+\bibitem{Oshima2000:Robotic_Analyses_of_Output_Force_Distribution_Developed_by%
+_Human_Limbs}
+T.~Oshima, T.~Fujikawa, O.~Kameyama, and M.~Kumamoto,
+\newblock ``Robotic analyses of output force distribution developed by human
+  limbs'',
+\newblock In {\em Proceedings of the 2000 IEEE International Workshop on Robot
+  and Human Interactive Communication}, pp. 229--234, Osaka, Japan, 2000.
+
+\bibitem{Schulte1961:Characteristics_of_the_Braided_Fluid_Actuator}
+Schulte H.F., Adamski D.F., and Pearson J.R,
+\newblock ``Characteristics of the braided fluid actuator'',
+\newblock {\em The University of Michigan Madical School Department of Physical
+  Medicine ad RehabilitationOrthetics Research Project}, 1961.
+
+\bibitem{Nakaoka2008:分散コンポーネント型ロボットシミュレータOpenHRP3}
+中岡慎一郎, 山野辺夏樹, 比留川博久, 山根克, 川角祐一郎,
+\newblock ``分散コンポーネント型ロボットシミュレータ openhrp3'',
+\newblock 日本ロボット学会誌, Vol.~26, No.~5, pp. 399--406, 2008.
+
+\bibitem{book:Kaneko:バイオメカニクス}
+金子公宥, 福永哲夫,
+\newblock ``バイオメカニクス---身体運動の科学的基礎---'',
+\newblock 杏林書院, 2004.
+
+\end{thebibliography}
+
+
+
+%\bibliographystyle{junsrt}
+%\bibliography{bibTeX/aaa,bibTeX/bbb,bibTeX/running_robot,bibTeX/musculoskeletal_robot,bibTeX/biomechanics}
+
+\end{footnotesize}
+
+\end{document}

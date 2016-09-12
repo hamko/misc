@@ -1,0 +1,445 @@
+@
+article{napier1956prehensile,
+    title={The prehensile movements of the human hand},
+    author={Napier, John R},
+    journal={Journal of bone and Joint surgery},
+    volume={38},
+    number={4},
+    pages={902--913},
+    year={1956},
+    publisher={Ohm-sha}
+}
+
+@INPROCEEDINGS{JohanssonMinReqGripForce,
+    title={Afferent signals during manipulative tasks in humans},
+    author={Johansson, Roland S and Westling, Goran},
+    booktitle={{Wenner-Gren Center International Symposium Series}},
+    page=25,
+    year=1991,
+    organization={{Macmillan Academic and Professional Ltd}}
+}
+
+@article{johansson1987signals,
+    title={Signals in tactile afferents from the fingers eliciting adaptive motor responses during precision grip},
+    author={Johansson, RS and Westling, G},
+    journal={Experimental Brain Research},
+    volume={66},
+    number={1},
+    pages={141--154},
+    year={1987},
+    publisher={Springer}
+}
+
+@InProceedings{PSF:Okada:ICRA01,
+    author =	{K. Okada and S. Kagami and M. Inaba and H. Inoue},
+    title =	{Plane Segment Finder : Algorithm, Implementation and Applications},
+    booktitle =	{In Proceedings of International Conference on Robotics and Automation},
+    year =	{2001},
+    pages =	{2120--2125},
+    pdf =	"2001_icra_okada_psf.pdf"
+}
+
+@InProceedings{Ohmura:drift,
+    author =	{{大村吉幸, 國吉康夫}},
+    title =	{慣性センサによる手の姿勢計測時のドリフト削除},
+    booktitle =	{ロボティクスシンポジア予稿集},
+    year =	{2013},
+    volume =	{18},
+    pages =	{316--321},
+}
+
+@Article{teaching_by_showing,
+    author =	{國吉 康夫 and 井上 博允 and 稲葉 雅幸},
+    title =	{人間が実演して見せる作業の実時間視覚認識とそのロボット教示への応用},
+    journal =	{ロボット学会誌},
+    year =	1991,
+    volume =	9,
+    number =	3,
+    pages =	{295--303}
+}
+
+@Book{medical,
+    author =	{{糸満盛憲, 佐藤啓二, 高橋和久, 吉矢晋一(編)}},
+    title =	{TEXT整形外科学},
+    publisher =	{南山堂},
+    year =	2012
+}
+
+@MastersThesis{TAKUMA00,
+    author =	{宅間 信介},
+    title =	{ポータブルネットワークロボットの開発とそれを用いた遠隔対話システム},
+    school =	{東京大学},
+    type =	{修士論文},
+    year =	{2000}
+}
+
+@Misc{OOC,
+    title =	{Object Oriented Concepts, Inc.},
+    note =	{http://www.ooc.com/}
+}
+
+@Misc{VICON,
+    title =	{Vicon motion capture system.},
+    note =	{http://www.vicon.com/}
+}
+
+@Misc{CyberGlove,
+    title =	{Cyber{G}love {S}ystems {LLC}},
+    note =	{http://www.cyberglovesystems.com/}
+}
+
+
+@inproceedings{SagisakaONOK12,
+    added-at = {2012-05-31T00:00:00.000+0200},
+    author = {Sagisaka, Takashi and Ohmura, Yoshiyuki and Nagakubo, Akihiko and Ozaki, Kazuyuki and Kuniyoshi, Yasuo},
+    biburl = {http://www.bibsonomy.org/bibtex/2ad218071538f40b9e168bd365d662364/dblp},
+    booktitle = {EuroHaptics (1)},
+    ee = {http://dx.doi.org/10.1007/978-3-642-31401-8_40},
+    interhash = {aa17648dff57f914ac6ff3a875a62ed7},
+    intrahash = {ad218071538f40b9e168bd365d662364},
+    isbn = {978-3-642-31400-1},
+    keywords = {dblp},
+    pages = {445-456},
+    publisher = {Springer},
+    series = {Lecture Notes in Computer Science},
+    timestamp = {2012-05-31T00:00:00.000+0200},
+    title = {Development and Applications of High-Density Tactile Sensing Glove.},
+    volume = 7282,
+    year = 2012
+
+}
+%    url = {http://dblp.uni-trier.de/db/conf/haptics/eurohaptics2012-1.html#SagisakaONOK12},
+%    editor = {Isokoski, Poika and Springare, Jukka},
+
+@inproceedings{weinstein1968intensive,
+    title={Intensive and extensive aspects of tactile sensitivity as a function of body part, sex and laterality},
+    author={Weinstein, Sidney},
+    booktitle={the First Int'l symp. on the Skin Senses, 1968},
+    year={1968}
+}
+
+@article{Vallbo:1984tn,
+    added-at = {2010-03-01T21:54:28.000+0100},
+    au = {Vallbo, AB and Johansson, RS},
+    author = {Vallbo, A B and Johansson, R S},
+    biburl = {http://www.bibsonomy.org/bibtex/2db976993537ee3bddeb5b34a52ce32f2/barabas},
+    crdt = {1984/01/01 00:00},
+    da = {19840802},
+    date-added = {2009-01-23 01:26:38 -0500},
+    date-modified = {2009-01-23 01:26:38 -0500},
+    dcom = {19840802},
+    description = {References for general exam},
+    edat = {1984/01/01},
+    interhash = {11285149d1ad56674f0ad76a89718e10},
+    intrahash = {db976993537ee3bddeb5b34a52ce32f2},
+    issn = {0721-9075 (Print)},
+    jid = {8211530},
+    journal = {Human Neurobiology},
+    jt = {Human neurobiology},
+    keywords = {imported},
+    language = {eng},
+    lr = {20061115},
+    mhda = {1984/01/01 00:01},
+    number = 1,
+    own = {NLM},
+    pages = {3--14},
+    pl = {GERMANY, WEST},
+    pmid = {6330008},
+    pst = {ppublish},
+    pt = {Journal Article; Research Support, Non-U.S. Gov't},
+    sb = {IM; S},
+    so = {Hum Neurobiol. 1984;3(1):3-14.},
+    stat = {MEDLINE},
+    timestamp = {2010-03-01T21:54:28.000+0100},
+    title = {Properties of cutaneous mechanoreceptors in the human hand related to touch sensation.},
+    volume = 3,
+    year = 1984
+}
+
+
+@article{moberg1962criticism,
+    author={Moberg, E},
+    title={Criticism and study of methods for examining sensibility in the hand.},
+    journal={Neurology},
+    volume={12},
+    pages={8},
+    year={1962}
+}
+%    author={MOBERG, E},
+
+@article{flanagan1993coupling,
+    title={Coupling of grip force and load force during arm movements with grasped objects},
+    author={Flanagan, J Randall and Tresilian, James and Wing, Alan M},
+    journal={Neuroscience letters},
+    volume={152},
+    number={1},
+    pages={53--56},
+    year={1993},
+    publisher={Elsevier}
+}
+
+@book{デクステリティ巧みさとその発達,
+    title={デクステリティ巧みさとその発達},
+    author={ニコライ・アレクサンドロヴィッチ・ベルンシュタイン},
+    year={2003},
+    publisher={金子書房},
+    isbn={9784760828210}
+}
+%    author={アレクサンドロヴィッチベルンシュタインニコライ},
+%    url={http://books.google.co.jp/books?id=WzRHGQAACAAJ},
+
+@book{Kamakura,
+    title={手のかたち 手のうごき},
+    author={鎌倉矩子},
+    year={2009},
+    publisher={医歯薬出版}
+}
+
+
+@incollection{SensorimotorControlOfManipulationJohansson,
+    author="Johansson RS, Flanagan JR",
+    title="Sensorimotor Control of Manipulation",
+    year="2009",
+    booktitle="Encyclopedia of Neuroscience",
+    pages="593--604",
+    publisher="Academic Press",
+}
+%    address="Oxford",
+
+@inproceedings{cutkosky1986modeling,
+    title={Modeling manufacturing grips and correlations with the design of robotic hands},
+    author={Cutkosky, Mark and Wright, Paul},
+    booktitle={Proceedings of IEEE International Conference on Robotics and Automation},
+    volume={3},
+    pages={1533--1539},
+    year={1986},
+    organization={IEEE}
+}
+%    booktitle={Robotics and Automation. Proceedings. 1986 IEEE International Conference on},
+@InProceedings{Matsuo:ICAR09:Measurement,
+    author= "Matsuo, K. and   Murakami, K. and   Hasegawa, T. and   Tahara, K. and   Kurazume, R.",
+    title= {Measurement of static constraints imposed by a human hand on a grasped object},
+    booktitle= {2009 International Conference on Advanced Robotics},
+    pages= "1--6",
+    year= "2009"
+}
+
+@Article{Kondo,
+    author= "Masahiro Kondo and Jun Ueda and Tsukasa Ogasawara",
+    title= {Recognition of in-hand manipulation using contact state transition for multifingered robot hand control},
+    journal= "Robotics and Autonomous Systems",
+    volume =       56,
+    number =       1,
+    pages= "66-81",
+    year= "2008"
+}
+
+@Article{Bernardin:IEEE05:sensor-fusion,
+    author =       {K. Bernardin and K. Ogawara and K. Ikeuchi},
+    title =        "{A Sensor Fusion Approach for Recognizing Continuous Human Grasping Sequences Using Hidden Markov Models}",
+    journal =      {IEEE Transactions on Robotics},
+    year =         2005,
+    volume = 21,
+    number = 1,
+    pages =        {47--57}
+}
+
+@misc{HANDLEProject,
+    author   = {},
+    title    = {{HANDLE Project}},
+    howpublished = "\url{http://www.handle-project.eu/}",
+    note = "[Online; last accessed 20-Jan-2014]"
+}
+
+@misc{Tekscan,
+    author   = {},
+    title    = {{Tactile Grip Pressure | Tekscan}},
+    note = {http://www.tekscan.com/grip-pressure-measurement}
+}
+
+
+
+@inproceedings{Feix,
+    author = {T.Feix and R.Pawlik and H.Schmiedmayer and J.Romero and D.Kragic},
+    booktitle = {Proceedings of Robotics, Science and Systems: Workshop on Understanding the Human Hand for Advancing Robotic Manipulation},
+    title = {A Comprehensive Grasp Taxonomy},
+    year = {2009}
+}
+%    url = {http://grasp.xief.net}
+%    month = {June},
+
+
+@article{Faria,
+    title = "Extracting data from human manipulation of objects towards improving autonomous robotic grasping",
+    journal = "Robotics and Autonomous Systems",
+    volume = "60",
+    number = "3",
+    pages = "396 - 410",
+    year = "2012",
+    author = "Diego R. Faria and Ricardo Martins and Jorge Lobo and Jorge Dias",
+}
+
+@InProceedings{Lobo,
+    author= "J.Lobo and P.Trindade and J.Dias",
+    title= {Observing hand grasp type and contact points using hand distributed accelerometers and instrumented objects},
+    booktitle= {proceedings of IEEE International Conference on Robotics and Automation 2011 Workshop on Autonomous Grasping},
+    year= "2011"
+}
+
+@article{hosoda2006anthropomorphic,
+    title={Anthropomorphic robotic soft fingertip with randomly distributed receptors},
+    author={Hosoda, Koh and Tada, Yasunori and Asada, Minoru},
+    journal={Robotics and Autonomous Systems},
+    volume={54},
+    number={2},
+    pages={104--109},
+    year={2006},
+    publisher={Elsevier}
+}
+
+@INPROCEEDINGS{6386090, 
+    author={Prieur, U. and Perdereau, V. and Bernardino, A.}, 
+    booktitle={Intelligent Robots and Systems (IROS), 2012 IEEE/RSJ International Conference on}, 
+    title={Modeling and planning high-level in-hand manipulation actions from human knowledge and active learning from demonstration}, 
+    year={2012}, 
+    pages={1330-1336}, 
+    keywords={Markov processes;learning by example;manipulators;probability;MDP;Markov decision process;canonical grasp types;demonstration active learning;high-level in-hand manipulation action modelling;high-level in-hand manipulation action planning;human knowledge;human-like grasp transition sequences;robotic anthropomorphic hand;state action probability;Estimation;Humans;Learning systems;Markov processes;Planning;Probabilistic logic;Robots}, 
+    doi={10.1109/IROS.2012.6386090}, 
+    ISSN={2153-0858},
+}
+
+@article{johansson1984roles,
+    title={Roles of glabrous skin receptors and sensorimotor memory in automatic control of precision grip when lifting rougher or more slippery objects},
+    author={Johansson, RS and Westling, G},
+    journal={Experimental Brain Research},
+    volume={56},
+    number={3},
+    pages={550--564},
+    year={1984},
+    publisher={Springer}
+}
+
+@article{johansson1983tactile,
+    title={Tactile sensory coding in the glabrous skin of the human hand},
+    author={Johansson, Roland S and Vallbo, {\AA}ke B},
+    journal={Trends in Neurosciences},
+    volume={6},
+    pages={27--32},
+    year={1983},
+    publisher={Elsevier}
+}
+
+@ARTICLE{Okada, 
+    author={Okada, Tokuji}, 
+    journal={IEEE Transactions on Systems, Man and Cybernetics}, 
+    title={Object-Handling System for Manual Industry}, 
+    year={1979}, 
+    volume={9}, 
+    number={2}, 
+    pages={79-89}, 
+    keywords={Control systems;Equations;Fingers;Force control;Hardware;Humans;Kinematics;Servomechanisms;Torque control;Turning}, 
+    doi={10.1109/TSMC.1979.4310152}, 
+    ISSN={0018-9472},
+}
+
+@INPROCEEDINGS{penspinning, 
+    author={Ishihara, T. and Namiki, A. and Ishikawa, M. and Shimojo, M.}, 
+    booktitle={Proceedings of 6th IEEE-RAS International Conference on Humanoid Robots},
+    title={Dynamic Pen Spinning Using a High-speed Multifingered Hand with High-speed Tactile Sensor}, 
+    year={2006}, 
+    pages={258-263}, 
+    keywords={dexterous manipulators;feedback;manipulator dynamics;position control;stability;tactile sensors;dynamic pen spinning;finger motion;manipulation task;multifingered hand;tactile feedback control;tactile sensor;Feedback control;Fingers;Force feedback;Force sensors;Humans;Manipulator dynamics;Robot sensing systems;Sampling methods;Spinning;Tactile sensors}, 
+    doi={10.1109/ICHR.2006.321394},}
+
+@article{intelrobothand,
+    author="{溝口善智, 多田隈建二郎, 長谷川浩章, 明愛国, 石川正俊, 下条誠}",
+    title="近接・触・すべり覚を統合したインテリジェントロボットハンドの開発",
+    journal="計測自動制御学会論文集",
+    ISSN="04534654",
+    publisher="計測自動制御学会",
+    year="2010",
+    volume="46",
+    number="10",
+    pages="632-640",
+
+}
+%    URL="http://ci.nii.ac.jp/naid/10027445620/",
+%    DOI="",
+%    month="oct",
+
+@article{slipandgrip,
+    author="{郡司大輔, 荒木拓真, 並木明夫, 明愛国, 下条誠}",
+    title="触覚センサによる滑り検出に基づく多指ハンドの把持力制御",
+    journal="日本ロボット学会誌",
+    ISSN="02891824",
+    publisher="一般社団法人 日本ロボット学会",
+    year="2007",
+    volume="25",
+    number="6",
+    pages="970-978",
+    DOI="10.7210/jrsj.25.970",
+
+}
+%    journal="日本ロボット学会誌 = Journal of Robotics Society of Japan",
+%    month="Sep",
+
+@INPROCEEDINGS{6386090, 
+    author={Prieur, U. and Perdereau, V. and Bernardino, A.}, 
+    booktitle={Intelligent Robots and Systems (IROS), 2012 IEEE/RSJ International Conference on}, 
+    title={Modeling and planning high-level in-hand manipulation actions from human knowledge and active learning from demonstration}, 
+    year={2012}, 
+    pages={1330-1336}, 
+    keywords={Markov processes;learning by example;manipulators;probability;MDP;Markov decision process;canonical grasp types;demonstration active learning;high-level in-hand manipulation action modelling;high-level in-hand manipulation action planning;human knowledge;human-like grasp transition sequences;robotic anthropomorphic hand;state action probability;Estimation;Humans;Learning systems;Markov processes;Planning;Probabilistic logic;Robots}, 
+    doi={10.1109/IROS.2012.6386090}, 
+    ISSN={2153-0858},
+}
+
+@article{Wang:2009:RHC:1531326.1531369,
+    author = {Wang, Robert Y. and Popovi\'{c}, Jovan},
+    title = {Real-time Hand-tracking with a Color Glove},
+    journal = {ACM Trans. Graph.},
+    issue_date = {August 2009},
+    volume = {28},
+    number = {3},
+    month = jul,
+    year = {2009},
+    issn = {0730-0301},
+    pages = {63:1--63:8},
+    articleno = {63},
+    numpages = {8},
+    url = {http://doi.acm.org/10.1145/1531326.1531369},
+    doi = {10.1145/1531326.1531369},
+    acmid = {1531369},
+    publisher = {ACM},
+    address = {New York, NY, USA},
+    keywords = {augmented reality, hand tracking, motion capture, user interface},
+} 
+
+
+@inproceedings{mitobe2006development,
+    title={Development of a motion capture system for a hand using a magnetic three dimensional position sensor},
+    author={Mitobe, Kazutaka and Kaiga, Takaaki and Yukawa, Takashi and Miura, Takeshi and Tamamoto, Hideo and Rodgers, Al and Yoshimura, Noboru},
+    booktitle={ACM SIGGRAPH},
+    volume={102},
+    year={2006}
+}
+
+@article{bolanowski1988four,
+    title={Four channels mediate the mechanical aspects of touch},
+    author={Bolanowski Jr, Stanley J and Gescheider, George A and Verrillo, Ronald T and Checkosky, Christin M},
+    journal={The Journal of the Acoustical society of America},
+    volume={84},
+    pages={1680},
+    year={1988}
+}
+
+@article{kuniyoshi2004dynamic,
+    title={Dynamic roll-and-rise motion by an adult-size humanoid robot},
+    author={Kuniyoshi, Yasuo and Ohmura, Yoshiyuki and Terada, Koji and Nagakubo, Akihiko},
+    journal={International Journal of Humanoid Robotics},
+    volume={1},
+    number={03},
+    pages={497--516},
+    year={2004},
+    publisher={World Scientific}
+}
