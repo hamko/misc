@@ -1,0 +1,9 @@
+batch("matrix.max");
+A: [[a00, a01, a02], [a10, a11, a12], [a20, a21, a22]];
+b: [b0, b1, b2];
+c: [c0, c1, c2];
+
+
+/* A*cross(b, c); */
+cross_row(b, c);
+cross(transpose(b), transpose(c));
