@@ -1,7 +1,7 @@
 #http://qiita.com/hik0107/items/3dc541158fceb3156ee0#%E3%83%92%E3%82%B9%E3%83%88%E3%82%B0%E3%83%A9%E3%83%A0
 
 sudo easy-install -U  # なんかやれって言われたけど
-sudo aptitude install python-pip
+sudo apt-get install python-pip
 sudo pip install seaborn 
 pip install --upgrade numpy
 pip install --upgrade scipy
