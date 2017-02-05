@@ -71,18 +71,79 @@ bool ismatch(string s, string p) {
     return true;
 }
 
+pair<string, ll> get_pattern(string s) {
+    map<char, char> memo;
+    rep(i, s.length()) {
+        ll tmp = memo.size();
+        if (!memo.count(s[i]))
+            memo[s[i]] = tmp + 'A';
+    }
+    string ret;
+    rep(i, s.length()) {
+        ret += memo[s[i]];
+    }
+    return pair<string, ll>(ret, memo.size());
+}
+
+ll count_num(string pattern) {
+    ll counter = 0;
+    ifstream fin("eiwa.txt");
+    string line;
+    while (getline(fin, line)) {
+        string token;
+        istringstream stream(line);
+        while (getline(stream, token, '\t')) {
+            if (ismatch(token, pattern)) {
+                counter++;
+            }
+            break;
+        }
+    }
+    return counter;
+}
+vector<string> enumerate(string pattern) {
+    ll counter = 0;
+    ifstream fin("eiwa.txt");
+    string line;
+    vector<string> ret;
+    while (getline(fin, line)) {
+        string token;
+        istringstream stream(line);
+        while (getline(stream, token, '\t')) {
+            if (ismatch(token, pattern)) {
+                ret.push_back(token);
+                if (ret.size() > 20) return ret;
+            }
+            break;
+        }
+    }
+    return ret;
+}
 int main(int argc, char** argv) {
     cin.tie(0); ios::sync_with_stdio(false);
     ifstream fin("eiwa.txt");
 //    ifstream fin("test.txt");
+    set<string> memo;
     string line;
     while (getline(fin, line)) {
         string token;
         istringstream stream(line);
         ll counter = 0;
         while (getline(stream, token, '\t')) {
-            if (ismatch(token, (string)(argv[1])))
-                cout << token << endl;
+            if (token.find(".") != string::npos) break;
+            if (token.find(",") != string::npos) break;
+            if (token.find("@") != string::npos) break;
+            if (token.find("/") != string::npos) break;
+            if (token.find(" ") != string::npos) break;
+            auto tmp = get_pattern(token);
+            string pattern = tmp.fi;
+            if (memo.count(pattern)) break;
+            memo.insert(pattern);
+            ll comp = tmp.se;
+            if (enumerate(pattern).size() < 10 && comp < 5) {
+                cout << token << " " << pattern << endl;
+                cout << comp << " " << enumerate(pattern) << endl;
+            }
             break;
         }
     }

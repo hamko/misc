@@ -52,22 +52,24 @@ int main()
     // ArrayFire
     std::cout << "#ArrayFire" << std::endl;
     for(g_i = 1; g_i <= (1 << BITS); g_i <<= 1) {
-        for(g_j = 1; g_j <= (1 << BITS); g_j <<= 1) {
+        g_j = g_i;
+//        for(g_j = 1; g_j <= (1 << BITS); g_j <<= 1) {
             A = af::randu(g_i, g_j);
             A_trans = af::transpose(A);
             ev(calc);
-        }
+//        }
     }
 
 
     // Eigen
     std::cout << "#Eigen" << std::endl;
     for(g_i = 1; g_i <= (1 << BITS); g_i <<= 1) {
-        for(g_j = 1; g_j <= (1 << BITS); g_j <<= 1) {
+        g_j = g_i;
+//        for(g_j = 1; g_j <= (1 << BITS); g_j <<= 1) {
             A_Eigen = Eigen::MatrixXf::Random(g_i, g_j);
             A_Eigen_trans = A_Eigen.transpose();
             ev(calcEigen);
-        }
+//        }
     }
 
     /*
