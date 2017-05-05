@@ -1,0 +1,622 @@
+Makefile:12: 警告: ターゲット `forloop_omp' へのコマンドを置き換えます
+Makefile:10: 警告: ターゲット `forloop_omp' への古いコマンドは無視されます
+section_omp.cpp:19:7: error: expected nested-name-specifier before ‘ll’
+ using ll = long long; using vll = vector<ll>; using vvll = vector<vll>; using P = pair<ll, ll>;
+       ^
+section_omp.cpp:19:7: error: ‘ll’ has not been declared
+section_omp.cpp:19:10: error: expected ‘;’ before ‘=’ token
+ using ll = long long; using vll = vector<ll>; using vvll = vector<vll>; using P = pair<ll, ll>;
+          ^
+section_omp.cpp:19:10: error: expected unqualified-id before ‘=’ token
+section_omp.cpp:19:29: error: expected nested-name-specifier before ‘vll’
+ using ll = long long; using vll = vector<ll>; using vvll = vector<vll>; using P = pair<ll, ll>;
+                             ^
+section_omp.cpp:19:29: error: ‘vll’ has not been declared
+section_omp.cpp:19:33: error: expected ‘;’ before ‘=’ token
+ using ll = long long; using vll = vector<ll>; using vvll = vector<vll>; using P = pair<ll, ll>;
+                                 ^
+section_omp.cpp:19:33: error: expected unqualified-id before ‘=’ token
+section_omp.cpp:19:53: error: expected nested-name-specifier before ‘vvll’
+ using ll = long long; using vll = vector<ll>; using vvll = vector<vll>; using P = pair<ll, ll>;
+                                                     ^
+section_omp.cpp:19:53: error: ‘vvll’ has not been declared
+section_omp.cpp:19:58: error: expected ‘;’ before ‘=’ token
+ using ll = long long; using vll = vector<ll>; using vvll = vector<vll>; using P = pair<ll, ll>;
+                                                          ^
+section_omp.cpp:19:58: error: expected unqualified-id before ‘=’ token
+section_omp.cpp:19:79: error: expected nested-name-specifier before ‘P’
+ using ll = long long; using vll = vector<ll>; using vvll = vector<vll>; using P = pair<ll, ll>;
+                                                                               ^
+section_omp.cpp:19:79: error: ‘P’ has not been declared
+section_omp.cpp:19:81: error: expected ‘;’ before ‘=’ token
+ using ll = long long; using vll = vector<ll>; using vvll = vector<vll>; using P = pair<ll, ll>;
+                                                                                 ^
+section_omp.cpp:19:81: error: expected unqualified-id before ‘=’ token
+section_omp.cpp:20:7: error: expected nested-name-specifier before ‘ld’
+ using ld = long double;  using vld = vector<ld>; 
+       ^
+section_omp.cpp:20:7: error: ‘ld’ has not been declared
+section_omp.cpp:20:10: error: expected ‘;’ before ‘=’ token
+ using ld = long double;  using vld = vector<ld>; 
+          ^
+section_omp.cpp:20:10: error: expected unqualified-id before ‘=’ token
+section_omp.cpp:20:32: error: expected nested-name-specifier before ‘vld’
+ using ld = long double;  using vld = vector<ld>; 
+                                ^
+section_omp.cpp:20:32: error: ‘vld’ has not been declared
+section_omp.cpp:20:36: error: expected ‘;’ before ‘=’ token
+ using ld = long double;  using vld = vector<ld>; 
+                                    ^
+section_omp.cpp:20:36: error: expected unqualified-id before ‘=’ token
+section_omp.cpp:21:7: error: expected nested-name-specifier before ‘vi’
+ using vi = vector<int>; using vvi = vector<vi>; vll conv(vi& v) { vll r(v.size()); rep(i, v.size()) r[i] = v[i]; return r; }
+       ^
+section_omp.cpp:21:7: error: ‘vi’ has not been declared
+section_omp.cpp:21:10: error: expected ‘;’ before ‘=’ token
+ using vi = vector<int>; using vvi = vector<vi>; vll conv(vi& v) { vll r(v.size()); rep(i, v.size()) r[i] = v[i]; return r; }
+          ^
+section_omp.cpp:21:10: error: expected unqualified-id before ‘=’ token
+section_omp.cpp:21:31: error: expected nested-name-specifier before ‘vvi’
+ using vi = vector<int>; using vvi = vector<vi>; vll conv(vi& v) { vll r(v.size()); rep(i, v.size()) r[i] = v[i]; return r; }
+                               ^
+section_omp.cpp:21:31: error: ‘vvi’ has not been declared
+section_omp.cpp:21:35: error: expected ‘;’ before ‘=’ token
+ using vi = vector<int>; using vvi = vector<vi>; vll conv(vi& v) { vll r(v.size()); rep(i, v.size()) r[i] = v[i]; return r; }
+                                   ^
+section_omp.cpp:21:35: error: expected unqualified-id before ‘=’ token
+section_omp.cpp:21:49: error: ‘vll’ does not name a type
+ using vi = vector<int>; using vvi = vector<vi>; vll conv(vi& v) { vll r(v.size()); rep(i, v.size()) r[i] = v[i]; return r; }
+                                                 ^
+section_omp.cpp:22:7: error: expected nested-name-specifier before ‘Pos’
+ using Pos = complex<double>;
+       ^
+section_omp.cpp:22:7: error: ‘Pos’ has not been declared
+section_omp.cpp:22:11: error: expected ‘;’ before ‘=’ token
+ using Pos = complex<double>;
+           ^
+section_omp.cpp:22:11: error: expected unqualified-id before ‘=’ token
+section_omp.cpp:25:16: warning: variadic templates only available with -std=c++11 or -std=gnu++11 [enabled by default]
+ template<size_t...> struct seq{}; template<size_t N, size_t... Is> struct gen_seq : gen_seq<N-1, N-1, Is...>{}; template<size_t... Is> struct gen_seq<0, Is...> : seq<Is...>{};
+                ^
+section_omp.cpp:25:64: warning: variadic templates only available with -std=c++11 or -std=gnu++11 [enabled by default]
+ template<size_t...> struct seq{}; template<size_t N, size_t... Is> struct gen_seq : gen_seq<N-1, N-1, Is...>{}; template<size_t... Is> struct gen_seq<0, Is...> : seq<Is...>{};
+                                                                ^
+section_omp.cpp:25:132: warning: variadic templates only available with -std=c++11 or -std=gnu++11 [enabled by default]
+ template<size_t...> struct seq{}; template<size_t N, size_t... Is> struct gen_seq : gen_seq<N-1, N-1, Is...>{}; template<size_t... Is> struct gen_seq<0, Is...> : seq<Is...>{};
+                                                                                                                                    ^
+section_omp.cpp:26:53: warning: variadic templates only available with -std=c++11 or -std=gnu++11 [enabled by default]
+ template<class Ch, class Tr, class Tuple, size_t... Is>
+                                                     ^
+section_omp.cpp: In function ‘void print_tuple(std::basic_ostream<_CharT, _Traits>&, const Tuple&, seq<Is ...>)’:
+section_omp.cpp:27:79: error: expected nested-name-specifier before ‘s’
+ void print_tuple(basic_ostream<Ch,Tr>& os, Tuple const& t, seq<Is...>){ using s = int[]; (void)s{0, (void(os << (Is == 0? "" : ", ") << get<Is>(t)), 0)...}; }
+                                                                               ^
+section_omp.cpp:27:79: error: ‘s’ has not been declared
+section_omp.cpp:27:81: error: expected ‘;’ before ‘=’ token
+ void print_tuple(basic_ostream<Ch,Tr>& os, Tuple const& t, seq<Is...>){ using s = int[]; (void)s{0, (void(os << (Is == 0? "" : ", ") << get<Is>(t)), 0)...}; }
+                                                                                 ^
+section_omp.cpp:27:81: error: expected primary-expression before ‘=’ token
+section_omp.cpp:27:83: error: expected primary-expression before ‘int’
+ void print_tuple(basic_ostream<Ch,Tr>& os, Tuple const& t, seq<Is...>){ using s = int[]; (void)s{0, (void(os << (Is == 0? "" : ", ") << get<Is>(t)), 0)...}; }
+                                                                                   ^
+section_omp.cpp:27:83: error: expected ‘;’ before ‘int’
+section_omp.cpp:27:96: error: ‘s’ was not declared in this scope
+ void print_tuple(basic_ostream<Ch,Tr>& os, Tuple const& t, seq<Is...>){ using s = int[]; (void)s{0, (void(os << (Is == 0? "" : ", ") << get<Is>(t)), 0)...}; }
+                                                                                                ^
+section_omp.cpp:27:97: error: expected ‘;’ before ‘{’ token
+ void print_tuple(basic_ostream<Ch,Tr>& os, Tuple const& t, seq<Is...>){ using s = int[]; (void)s{0, (void(os << (Is == 0? "" : ", ") << get<Is>(t)), 0)...}; }
+                                                                                                 ^
+section_omp.cpp: At global scope:
+section_omp.cpp:28:35: warning: variadic templates only available with -std=c++11 or -std=gnu++11 [enabled by default]
+ template<class Ch, class Tr, class... Args> 
+                                   ^
+section_omp.cpp:29:44: error: ‘tuple’ has not been declared
+ auto operator<<(basic_ostream<Ch, Tr>& os, tuple<Args...> const& t) -> basic_ostream<Ch, Tr>& { os << "("; print_tuple(os, t, gen_seq<sizeof...(Args)>()); return os << ")"; }
+                                            ^
+section_omp.cpp:29:49: error: expected ‘,’ or ‘...’ before ‘<’ token
+ auto operator<<(basic_ostream<Ch, Tr>& os, tuple<Args...> const& t) -> basic_ostream<Ch, Tr>& { os << "("; print_tuple(os, t, gen_seq<sizeof...(Args)>()); return os << ")"; }
+                                                 ^
+section_omp.cpp:29:93: error: ISO C++ forbids declaration of ‘operator<<’ with no type [-fpermissive]
+ auto operator<<(basic_ostream<Ch, Tr>& os, tuple<Args...> const& t) -> basic_ostream<Ch, Tr>& { os << "("; print_tuple(os, t, gen_seq<sizeof...(Args)>()); return os << ")"; }
+                                                                                             ^
+section_omp.cpp:29:93: error: top-level declaration of ‘operator<<’ specifies ‘auto’
+section_omp.cpp:29:93: error: trailing return type only available with -std=c++11 or -std=gnu++11
+section_omp.cpp:30:39: error: ‘vvll’ does not name a type
+ ostream &operator<<(ostream &o, const vvll &v) { rep(i, v.size()) { rep(j, v[i].size()) o << v[i][j] << " "; o << endl; } return o; }
+                                       ^
+section_omp.cpp:30:45: error: ISO C++ forbids declaration of ‘v’ with no type [-fpermissive]
+ ostream &operator<<(ostream &o, const vvll &v) { rep(i, v.size()) { rep(j, v[i].size()) o << v[i][j] << " "; o << endl; } return o; }
+                                             ^
+section_omp.cpp: In function ‘std::ostream& operator<<(std::ostream&, const int&)’:
+section_omp.cpp:30:59: error: request for member ‘size’ in ‘v’, which is of non-class type ‘const int’
+ ostream &operator<<(ostream &o, const vvll &v) { rep(i, v.size()) { rep(j, v[i].size()) o << v[i][j] << " "; o << endl; } return o; }
+                                                           ^
+section_omp.cpp:6:55: note: in definition of macro ‘rep’
+ #define rep(i,n) for(long long i = 0; i < (long long)(n); i++)
+                                                       ^
+section_omp.cpp:30:79: error: invalid types ‘const int[long long int]’ for array subscript
+ ostream &operator<<(ostream &o, const vvll &v) { rep(i, v.size()) { rep(j, v[i].size()) o << v[i][j] << " "; o << endl; } return o; }
+                                                                               ^
+section_omp.cpp:6:55: note: in definition of macro ‘rep’
+ #define rep(i,n) for(long long i = 0; i < (long long)(n); i++)
+                                                       ^
+section_omp.cpp:30:97: error: invalid types ‘const int[long long int]’ for array subscript
+ ostream &operator<<(ostream &o, const vvll &v) { rep(i, v.size()) { rep(j, v[i].size()) o << v[i][j] << " "; o << endl; } return o; }
+                                                                                                 ^
+section_omp.cpp: In function ‘std::ostream& operator<<(std::ostream&, const std::set<T>&)’:
+section_omp.cpp:32:95: error: ‘it’ does not name a type
+ template <typename T>  ostream &operator<<(ostream &o, const set<T> &m) { o << '['; for (auto it = m.begin(); it != m.end(); it++) o << *it << (next(it) != m.end() ? ", " : ""); o << "]";  return o; }
+                                                                                               ^
+section_omp.cpp:32:111: error: expected ‘;’ before ‘it’
+ template <typename T>  ostream &operator<<(ostream &o, const set<T> &m) { o << '['; for (auto it = m.begin(); it != m.end(); it++) o << *it << (next(it) != m.end() ? ", " : ""); o << "]";  return o; }
+                                                                                                               ^
+section_omp.cpp:32:111: error: ‘it’ was not declared in this scope
+section_omp.cpp:32:152: error: there are no arguments to ‘next’ that depend on a template parameter, so a declaration of ‘next’ must be available [-fpermissive]
+ template <typename T>  ostream &operator<<(ostream &o, const set<T> &m) { o << '['; for (auto it = m.begin(); it != m.end(); it++) o << *it << (next(it) != m.end() ? ", " : ""); o << "]";  return o; }
+                                                                                                                                                        ^
+section_omp.cpp:32:152: note: (if you use ‘-fpermissive’, G++ will accept your code, but allowing the use of an undeclared name is deprecated)
+section_omp.cpp: In function ‘std::ostream& operator<<(std::ostream&, const std::map<T, U>&)’:
+section_omp.cpp:33:110: error: ‘it’ does not name a type
+ template <typename T, typename U>  ostream &operator<<(ostream &o, const map<T, U> &m) { o << '['; for (auto it = m.begin(); it != m.end(); it++) o << *it << (next(it) != m.end() ? ", " : ""); o << "]";  return o; }
+                                                                                                              ^
+section_omp.cpp:33:126: error: expected ‘;’ before ‘it’
+ template <typename T, typename U>  ostream &operator<<(ostream &o, const map<T, U> &m) { o << '['; for (auto it = m.begin(); it != m.end(); it++) o << *it << (next(it) != m.end() ? ", " : ""); o << "]";  return o; }
+                                                                                                                              ^
+section_omp.cpp:33:126: error: ‘it’ was not declared in this scope
+section_omp.cpp:33:167: error: there are no arguments to ‘next’ that depend on a template parameter, so a declaration of ‘next’ must be available [-fpermissive]
+ template <typename T, typename U>  ostream &operator<<(ostream &o, const map<T, U> &m) { o << '['; for (auto it = m.begin(); it != m.end(); it++) o << *it << (next(it) != m.end() ? ", " : ""); o << "]";  return o; }
+                                                                                                                                                                       ^
+section_omp.cpp: At global scope:
+section_omp.cpp:34:86: error: ‘unordered_map’ does not name a type
+ template <typename T, typename U, typename V>  ostream &operator<<(ostream &o, const unordered_map<T, U, V> &m) { o << '['; for (auto it = m.begin(); it != m.end(); it++) o << *it; o << "]";  return o; }
+                                                                                      ^
+section_omp.cpp:34:86: error: ISO C++ forbids declaration of ‘parameter’ with no type [-fpermissive]
+section_omp.cpp:34:99: error: expected ‘,’ or ‘...’ before ‘<’ token
+ template <typename T, typename U, typename V>  ostream &operator<<(ostream &o, const unordered_map<T, U, V> &m) { o << '['; for (auto it = m.begin(); it != m.end(); it++) o << *it; o << "]";  return o; }
+                                                                                                   ^
+section_omp.cpp: In function ‘std::ostream& operator<<(std::ostream&, int)’:
+section_omp.cpp:34:135: error: ‘it’ does not name a type
+ template <typename T, typename U, typename V>  ostream &operator<<(ostream &o, const unordered_map<T, U, V> &m) { o << '['; for (auto it = m.begin(); it != m.end(); it++) o << *it; o << "]";  return o; }
+                                                                                                                                       ^
+section_omp.cpp:34:151: error: expected ‘;’ before ‘it’
+ template <typename T, typename U, typename V>  ostream &operator<<(ostream &o, const unordered_map<T, U, V> &m) { o << '['; for (auto it = m.begin(); it != m.end(); it++) o << *it; o << "]";  return o; }
+                                                                                                                                                       ^
+section_omp.cpp:34:151: error: ‘it’ was not declared in this scope
+section_omp.cpp:34:157: error: ‘m’ was not declared in this scope
+ template <typename T, typename U, typename V>  ostream &operator<<(ostream &o, const unordered_map<T, U, V> &m) { o << '['; for (auto it = m.begin(); it != m.end(); it++) o << *it; o << "]";  return o; }
+                                                                                                                                                             ^
+section_omp.cpp: In function ‘std::vector<int> range(int, int)’:
+section_omp.cpp:35:99: error: ‘iota’ was not declared in this scope
+ vector<int> range(const int x, const int y) { vector<int> v(y - x + 1); iota(v.begin(), v.end(), x); return v; }
+                                                                                                   ^
+section_omp.cpp: At global scope:
+section_omp.cpp:37:23: error: ‘ll’ was not declared in this scope
+ string bits_to_string(ll input, ll n=64) { string s; rep(i, n) s += '0' + !!(input & (1ll << i)); reverse(all(s)); return s; }
+                       ^
+section_omp.cpp:37:33: error: ‘ll’ was not declared in this scope
+ string bits_to_string(ll input, ll n=64) { string s; rep(i, n) s += '0' + !!(input & (1ll << i)); reverse(all(s)); return s; }
+                                 ^
+section_omp.cpp:37:42: error: expected ‘,’ or ‘;’ before ‘{’ token
+ string bits_to_string(ll input, ll n=64) { string s; rep(i, n) s += '0' + !!(input & (1ll << i)); reverse(all(s)); return s; }
+                                          ^
+section_omp.cpp:39:23: error: ‘unordered_map’ does not name a type
+ template <typename T> unordered_map<T, ll> counter(vector<T> vec){unordered_map<T, ll> ret; for (auto&& x : vec) ret[x]++; return ret;};
+                       ^
+section_omp.cpp:40:25: error: ‘P’ has not been declared
+ string substr(string s, P x) {return s.substr(x.fi, x.se - x.fi); }
+                         ^
+section_omp.cpp: In function ‘std::string substr(std::string, int)’:
+section_omp.cpp:10:12: error: request for member ‘first’ in ‘x’, which is of non-class type ‘int’
+ #define fi first
+            ^
+section_omp.cpp:40:49: note: in expansion of macro ‘fi’
+ string substr(string s, P x) {return s.substr(x.fi, x.se - x.fi); }
+                                                 ^
+section_omp.cpp:11:12: error: request for member ‘second’ in ‘x’, which is of non-class type ‘int’
+ #define se second
+            ^
+section_omp.cpp:40:55: note: in expansion of macro ‘se’
+ string substr(string s, P x) {return s.substr(x.fi, x.se - x.fi); }
+                                                       ^
+section_omp.cpp:10:12: error: request for member ‘first’ in ‘x’, which is of non-class type ‘int’
+ #define fi first
+            ^
+section_omp.cpp:40:62: note: in expansion of macro ‘fi’
+ string substr(string s, P x) {return s.substr(x.fi, x.se - x.fi); }
+                                                              ^
+section_omp.cpp: At global scope:
+section_omp.cpp:41:51: error: ‘ll’ was not declared in this scope
+ struct ci : public iterator<forward_iterator_tag, ll> { ll n; ci(const ll n) : n(n) { } bool operator==(const ci& x) { return n == x.n; } bool operator!=(const ci& x) { return !(*this == x); } ci &operator++() { n++; return *this; } ll operator*() const { return n; } };
+                                                   ^
+section_omp.cpp:41:53: error: template argument 2 is invalid
+ struct ci : public iterator<forward_iterator_tag, ll> { ll n; ci(const ll n) : n(n) { } bool operator==(const ci& x) { return n == x.n; } bool operator!=(const ci& x) { return !(*this == x); } ci &operator++() { n++; return *this; } ll operator*() const { return n; } };
+                                                     ^
+section_omp.cpp:41:53: error: template argument 4 is invalid
+section_omp.cpp:41:53: error: template argument 5 is invalid
+section_omp.cpp:41:57: error: ‘ll’ does not name a type
+ struct ci : public iterator<forward_iterator_tag, ll> { ll n; ci(const ll n) : n(n) { } bool operator==(const ci& x) { return n == x.n; } bool operator!=(const ci& x) { return !(*this == x); } ci &operator++() { n++; return *this; } ll operator*() const { return n; } };
+                                                         ^
+section_omp.cpp:41:72: error: ‘ll’ does not name a type
+ struct ci : public iterator<forward_iterator_tag, ll> { ll n; ci(const ll n) : n(n) { } bool operator==(const ci& x) { return n == x.n; } bool operator!=(const ci& x) { return !(*this == x); } ci &operator++() { n++; return *this; } ll operator*() const { return n; } };
+                                                                        ^
+section_omp.cpp:41:75: error: ISO C++ forbids declaration of ‘n’ with no type [-fpermissive]
+ struct ci : public iterator<forward_iterator_tag, ll> { ll n; ci(const ll n) : n(n) { } bool operator==(const ci& x) { return n == x.n; } bool operator!=(const ci& x) { return !(*this == x); } ci &operator++() { n++; return *this; } ll operator*() const { return n; } };
+                                                                           ^
+section_omp.cpp:41:234: error: ‘ll’ does not name a type
+ struct ci : public iterator<forward_iterator_tag, ll> { ll n; ci(const ll n) : n(n) { } bool operator==(const ci& x) { return n == x.n; } bool operator!=(const ci& x) { return !(*this == x); } ci &operator++() { n++; return *this; } ll operator*() const { return n; } };
+                                                                                                                                                                                                                                          ^
+section_omp.cpp: In constructor ‘ci::ci(int)’:
+section_omp.cpp:41:80: error: class ‘ci’ does not have any field named ‘n’
+ struct ci : public iterator<forward_iterator_tag, ll> { ll n; ci(const ll n) : n(n) { } bool operator==(const ci& x) { return n == x.n; } bool operator!=(const ci& x) { return !(*this == x); } ci &operator++() { n++; return *this; } ll operator*() const { return n; } };
+                                                                                ^
+section_omp.cpp: In member function ‘bool ci::operator==(const ci&)’:
+section_omp.cpp:41:127: error: ‘n’ was not declared in this scope
+ struct ci : public iterator<forward_iterator_tag, ll> { ll n; ci(const ll n) : n(n) { } bool operator==(const ci& x) { return n == x.n; } bool operator!=(const ci& x) { return !(*this == x); } ci &operator++() { n++; return *this; } ll operator*() const { return n; } };
+                                                                                                                               ^
+section_omp.cpp:41:134: error: ‘const struct ci’ has no member named ‘n’
+ struct ci : public iterator<forward_iterator_tag, ll> { ll n; ci(const ll n) : n(n) { } bool operator==(const ci& x) { return n == x.n; } bool operator!=(const ci& x) { return !(*this == x); } ci &operator++() { n++; return *this; } ll operator*() const { return n; } };
+                                                                                                                                      ^
+section_omp.cpp: In member function ‘ci& ci::operator++()’:
+section_omp.cpp:41:213: error: ‘n’ was not declared in this scope
+ struct ci : public iterator<forward_iterator_tag, ll> { ll n; ci(const ll n) : n(n) { } bool operator==(const ci& x) { return n == x.n; } bool operator!=(const ci& x) { return !(*this == x); } ci &operator++() { n++; return *this; } ll operator*() const { return n; } };
+                                                                                                                                                                                                                     ^
+section_omp.cpp: At global scope:
+section_omp.cpp:43:43: error: expected nested-name-specifier before ‘argument_type’
+ size_t random_seed; namespace std { using argument_type = P; template<> struct hash<argument_type> { size_t operator()(argument_type const& x) const { size_t seed = random_seed; seed ^= hash<ll>{}(x.fi); seed ^= (hash<ll>{}(x.se) << 1); return seed; } }; }; // hash for various class
+                                           ^
+section_omp.cpp:43:43: error: ‘argument_type’ has not been declared
+section_omp.cpp:43:57: error: expected ‘;’ before ‘=’ token
+ size_t random_seed; namespace std { using argument_type = P; template<> struct hash<argument_type> { size_t operator()(argument_type const& x) const { size_t seed = random_seed; seed ^= hash<ll>{}(x.fi); seed ^= (hash<ll>{}(x.se) << 1); return seed; } }; }; // hash for various class
+                                                         ^
+section_omp.cpp:43:57: error: expected unqualified-id before ‘=’ token
+section_omp.cpp:43:80: error: ‘hash’ is not a class template
+ size_t random_seed; namespace std { using argument_type = P; template<> struct hash<argument_type> { size_t operator()(argument_type const& x) const { size_t seed = random_seed; seed ^= hash<ll>{}(x.fi); seed ^= (hash<ll>{}(x.se) << 1); return seed; } }; }; // hash for various class
+                                                                                ^
+section_omp.cpp:43:85: error: ‘argument_type’ was not declared in this scope
+ size_t random_seed; namespace std { using argument_type = P; template<> struct hash<argument_type> { size_t operator()(argument_type const& x) const { size_t seed = random_seed; seed ^= hash<ll>{}(x.fi); seed ^= (hash<ll>{}(x.se) << 1); return seed; } }; }; // hash for various class
+                                                                                     ^
+section_omp.cpp:43:100: error: explicit specialization of non-template ‘std::hash’
+ size_t random_seed; namespace std { using argument_type = P; template<> struct hash<argument_type> { size_t operator()(argument_type const& x) const { size_t seed = random_seed; seed ^= hash<ll>{}(x.fi); seed ^= (hash<ll>{}(x.se) << 1); return seed; } }; }; // hash for various class
+                                                                                                    ^
+section_omp.cpp:43:120: error: ‘argument_type’ has not been declared
+ size_t random_seed; namespace std { using argument_type = P; template<> struct hash<argument_type> { size_t operator()(argument_type const& x) const { size_t seed = random_seed; seed ^= hash<ll>{}(x.fi); seed ^= (hash<ll>{}(x.se) << 1); return seed; } }; }; // hash for various class
+                                                                                                                        ^
+section_omp.cpp: In member function ‘std::size_t std::hash::operator()(const int&) const’:
+section_omp.cpp:43:187: error: ‘std::hash’ is not a template
+ size_t random_seed; namespace std { using argument_type = P; template<> struct hash<argument_type> { size_t operator()(argument_type const& x) const { size_t seed = random_seed; seed ^= hash<ll>{}(x.fi); seed ^= (hash<ll>{}(x.se) << 1); return seed; } }; }; // hash for various class
+                                                                                                                                                                                           ^
+section_omp.cpp:43:192: error: ‘ll’ was not declared in this scope
+ size_t random_seed; namespace std { using argument_type = P; template<> struct hash<argument_type> { size_t operator()(argument_type const& x) const { size_t seed = random_seed; seed ^= hash<ll>{}(x.fi); seed ^= (hash<ll>{}(x.se) << 1); return seed; } }; }; // hash for various class
+                                                                                                                                                                                                ^
+section_omp.cpp:43:194: warning: extended initializer lists only available with -std=c++11 or -std=gnu++11 [enabled by default]
+ size_t random_seed; namespace std { using argument_type = P; template<> struct hash<argument_type> { size_t operator()(argument_type const& x) const { size_t seed = random_seed; seed ^= hash<ll>{}(x.fi); seed ^= (hash<ll>{}(x.se) << 1); return seed; } }; }; // hash for various class
+                                                                                                                                                                                                  ^
+section_omp.cpp:10:12: error: request for member ‘first’ in ‘x’, which is of non-class type ‘const int’
+ #define fi first
+            ^
+section_omp.cpp:43:200: note: in expansion of macro ‘fi’
+ size_t random_seed; namespace std { using argument_type = P; template<> struct hash<argument_type> { size_t operator()(argument_type const& x) const { size_t seed = random_seed; seed ^= hash<ll>{}(x.fi); seed ^= (hash<ll>{}(x.se) << 1); return seed; } }; }; // hash for various class
+                                                                                                                                                                                                        ^
+section_omp.cpp:43:214: error: ‘std::hash’ is not a template
+ size_t random_seed; namespace std { using argument_type = P; template<> struct hash<argument_type> { size_t operator()(argument_type const& x) const { size_t seed = random_seed; seed ^= hash<ll>{}(x.fi); seed ^= (hash<ll>{}(x.se) << 1); return seed; } }; }; // hash for various class
+                                                                                                                                                                                                                      ^
+section_omp.cpp:43:214: warning: extended initializer lists only available with -std=c++11 or -std=gnu++11 [enabled by default]
+section_omp.cpp:11:12: error: request for member ‘second’ in ‘x’, which is of non-class type ‘const int’
+ #define se second
+            ^
+section_omp.cpp:43:227: note: in expansion of macro ‘se’
+ size_t random_seed; namespace std { using argument_type = P; template<> struct hash<argument_type> { size_t operator()(argument_type const& x) const { size_t seed = random_seed; seed ^= hash<ll>{}(x.fi); seed ^= (hash<ll>{}(x.se) << 1); return seed; } }; }; // hash for various class
+                                                                                                                                                                                                                                   ^
+section_omp.cpp: In member function ‘std::size_t myhash::myhash<T>::operator()(const T&) const’:
+section_omp.cpp:44:512: error: ‘std::hash’ is not a template
+ namespace myhash{ const int Bsizes[]={3,9,13,17,21,25,29,33,37,41,45,49,53,57,61,65,69,73,77,81}; const int xor_nums[]={0x100007d1,0x5ff049c9,0x14560859,0x07087fef,0x3e277d49,0x4dba1f17,0x709c5988,0x05904258,0x1aa71872,0x238819b3,0x7b002bb7,0x1cf91302,0x0012290a,0x1083576b,0x76473e49,0x3d86295b,0x20536814,0x08634f4d,0x115405e8,0x0e6359f2}; const int hash_key=xor_nums[rand()%20]; const int mod_key=xor_nums[rand()%20]; template <typename T> struct myhash{ std::size_t operator()(const T& val) const { return (hash<T>{}(val)%mod_key)^hash_key; } }; };
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ^
+section_omp.cpp:44:512: warning: extended initializer lists only available with -std=c++11 or -std=gnu++11 [enabled by default]
+section_omp.cpp: At global scope:
+section_omp.cpp:45:59: error: expected template-name before ‘<’ token
+ template <typename T> class uset:public std::unordered_set<T,myhash::myhash<T>> { using SET=std::unordered_set<T,myhash::myhash<T>>; public: uset():SET(){SET::rehash(myhash::Bsizes[rand()%20]);} };
+                                                           ^
+section_omp.cpp:45:59: error: expected ‘{’ before ‘<’ token
+section_omp.cpp:45:59: error: expected unqualified-id before ‘<’ token
+section_omp.cpp:46:70: error: expected template-name before ‘<’ token
+ template <typename T,typename U> class umap:public std::unordered_map<T,U,myhash::myhash<T>> { public: using MAP=std::unordered_map<T,U,myhash::myhash<T>>; umap():MAP(){MAP::rehash(myhash::Bsizes[rand()%20]);} };    
+                                                                      ^
+section_omp.cpp:46:70: error: expected ‘{’ before ‘<’ token
+section_omp.cpp:46:70: error: expected unqualified-id before ‘<’ token
+section_omp.cpp: In function ‘int main()’:
+section_omp.cpp:57:5: error: ‘ll’ was not declared in this scope
+     ll n = 10;
+     ^
+section_omp.cpp:57:8: error: expected ‘;’ before ‘n’
+     ll n = 10;
+        ^
+section_omp.cpp:58:5: error: ‘vll’ was not declared in this scope
+     vll a(n), b(n), c(n), d(n);
+     ^
+section_omp.cpp:58:9: error: expected ‘;’ before ‘a’
+     vll a(n), b(n), c(n), d(n);
+         ^
+section_omp.cpp:59:12: error: ‘n’ was not declared in this scope
+     rep(i, n) {
+            ^
+section_omp.cpp:6:55: note: in definition of macro ‘rep’
+ #define rep(i,n) for(long long i = 0; i < (long long)(n); i++)
+                                                       ^
+section_omp.cpp:60:9: error: ‘a’ was not declared in this scope
+         a[i] = i;
+         ^
+section_omp.cpp:61:9: error: ‘b’ was not declared in this scope
+         b[i] = rand() % 3;
+         ^
+section_omp.cpp:69:24: error: ‘n’ was not declared in this scope
+                 rep(i, n) {
+                        ^
+section_omp.cpp:6:55: note: in definition of macro ‘rep’
+ #define rep(i,n) for(long long i = 0; i < (long long)(n); i++)
+                                                       ^
+section_omp.cpp:70:21: error: ‘c’ was not declared in this scope
+                     c[i] = a[i] + b[i];
+                     ^
+section_omp.cpp:70:28: error: ‘a’ was not declared in this scope
+                     c[i] = a[i] + b[i];
+                            ^
+section_omp.cpp:70:35: error: ‘b’ was not declared in this scope
+                     c[i] = a[i] + b[i];
+                                   ^
+section_omp.cpp:71:40: error: ambiguous overload for ‘operator<<’ (operand types are ‘std::basic_ostream<char>’ and ‘int’)
+                     cout << "thrread " << omp_get_thread_num() << " " << i << " " << c[i] << endl;
+                                        ^
+section_omp.cpp:71:40: note: candidates are:
+In file included from /usr/include/c++/4.8/istream:39:0,
+                 from /usr/include/c++/4.8/sstream:38,
+                 from /usr/include/c++/4.8/complex:45,
+                 from /usr/include/x86_64-linux-gnu/c++/4.8/bits/stdc++.h:66,
+                 from section_omp.cpp:2:
+/usr/include/c++/4.8/ostream:108:7: note: std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(std::basic_ostream<_CharT, _Traits>::__ostream_type& (*)(std::basic_ostream<_CharT, _Traits>::__ostream_type&)) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>] <near match>
+       operator<<(__ostream_type& (*__pf)(__ostream_type&))
+       ^
+/usr/include/c++/4.8/ostream:108:7: note:   no known conversion for argument 1 from ‘int’ to ‘std::basic_ostream<char>::__ostream_type& (*)(std::basic_ostream<char>::__ostream_type&) {aka std::basic_ostream<char>& (*)(std::basic_ostream<char>&)}’
+/usr/include/c++/4.8/ostream:117:7: note: std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(std::basic_ostream<_CharT, _Traits>::__ios_type& (*)(std::basic_ostream<_CharT, _Traits>::__ios_type&)) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>; std::basic_ostream<_CharT, _Traits>::__ios_type = std::basic_ios<char>] <near match>
+       operator<<(__ios_type& (*__pf)(__ios_type&))
+       ^
+/usr/include/c++/4.8/ostream:117:7: note:   no known conversion for argument 1 from ‘int’ to ‘std::basic_ostream<char>::__ios_type& (*)(std::basic_ostream<char>::__ios_type&) {aka std::basic_ios<char>& (*)(std::basic_ios<char>&)}’
+/usr/include/c++/4.8/ostream:127:7: note: std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(std::ios_base& (*)(std::ios_base&)) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>] <near match>
+       operator<<(ios_base& (*__pf) (ios_base&))
+       ^
+/usr/include/c++/4.8/ostream:127:7: note:   no known conversion for argument 1 from ‘int’ to ‘std::ios_base& (*)(std::ios_base&)’
+/usr/include/c++/4.8/ostream:166:7: note: std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(long int) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>]
+       operator<<(long __n)
+       ^
+/usr/include/c++/4.8/ostream:170:7: note: std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(long unsigned int) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>]
+       operator<<(unsigned long __n)
+       ^
+/usr/include/c++/4.8/ostream:174:7: note: std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(bool) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>]
+       operator<<(bool __n)
+       ^
+In file included from /usr/include/c++/4.8/ostream:612:0,
+                 from /usr/include/c++/4.8/istream:39,
+                 from /usr/include/c++/4.8/sstream:38,
+                 from /usr/include/c++/4.8/complex:45,
+                 from /usr/include/x86_64-linux-gnu/c++/4.8/bits/stdc++.h:66,
+                 from section_omp.cpp:2:
+/usr/include/c++/4.8/bits/ostream.tcc:91:5: note: std::basic_ostream<_CharT, _Traits>& std::basic_ostream<_CharT, _Traits>::operator<<(short int) [with _CharT = char; _Traits = std::char_traits<char>]
+     basic_ostream<_CharT, _Traits>::
+     ^
+In file included from /usr/include/c++/4.8/istream:39:0,
+                 from /usr/include/c++/4.8/sstream:38,
+                 from /usr/include/c++/4.8/complex:45,
+                 from /usr/include/x86_64-linux-gnu/c++/4.8/bits/stdc++.h:66,
+                 from section_omp.cpp:2:
+/usr/include/c++/4.8/ostream:181:7: note: std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(short unsigned int) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>]
+       operator<<(unsigned short __n)
+       ^
+In file included from /usr/include/c++/4.8/ostream:612:0,
+                 from /usr/include/c++/4.8/istream:39,
+                 from /usr/include/c++/4.8/sstream:38,
+                 from /usr/include/c++/4.8/complex:45,
+                 from /usr/include/x86_64-linux-gnu/c++/4.8/bits/stdc++.h:66,
+                 from section_omp.cpp:2:
+/usr/include/c++/4.8/bits/ostream.tcc:105:5: note: std::basic_ostream<_CharT, _Traits>& std::basic_ostream<_CharT, _Traits>::operator<<(int) [with _CharT = char; _Traits = std::char_traits<char>]
+     basic_ostream<_CharT, _Traits>::
+     ^
+In file included from /usr/include/c++/4.8/istream:39:0,
+                 from /usr/include/c++/4.8/sstream:38,
+                 from /usr/include/c++/4.8/complex:45,
+                 from /usr/include/x86_64-linux-gnu/c++/4.8/bits/stdc++.h:66,
+                 from section_omp.cpp:2:
+/usr/include/c++/4.8/ostream:192:7: note: std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(unsigned int) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>]
+       operator<<(unsigned int __n)
+       ^
+/usr/include/c++/4.8/ostream:201:7: note: std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(long long int) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>]
+       operator<<(long long __n)
+       ^
+/usr/include/c++/4.8/ostream:205:7: note: std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(long long unsigned int) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>]
+       operator<<(unsigned long long __n)
+       ^
+/usr/include/c++/4.8/ostream:220:7: note: std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(double) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>]
+       operator<<(double __f)
+       ^
+/usr/include/c++/4.8/ostream:224:7: note: std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(float) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>]
+       operator<<(float __f)
+       ^
+/usr/include/c++/4.8/ostream:232:7: note: std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(long double) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>]
+       operator<<(long double __f)
+       ^
+/usr/include/c++/4.8/ostream:245:7: note: std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(const void*) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>] <near match>
+       operator<<(const void* __p)
+       ^
+/usr/include/c++/4.8/ostream:245:7: note:   no known conversion for argument 1 from ‘int’ to ‘const void*’
+In file included from /usr/include/c++/4.8/ostream:612:0,
+                 from /usr/include/c++/4.8/istream:39,
+                 from /usr/include/c++/4.8/sstream:38,
+                 from /usr/include/c++/4.8/complex:45,
+                 from /usr/include/x86_64-linux-gnu/c++/4.8/bits/stdc++.h:66,
+                 from section_omp.cpp:2:
+/usr/include/c++/4.8/bits/ostream.tcc:119:5: note: std::basic_ostream<_CharT, _Traits>& std::basic_ostream<_CharT, _Traits>::operator<<(std::basic_ostream<_CharT, _Traits>::__streambuf_type*) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__streambuf_type = std::basic_streambuf<char>] <near match>
+     basic_ostream<_CharT, _Traits>::
+     ^
+/usr/include/c++/4.8/bits/ostream.tcc:119:5: note:   no known conversion for argument 1 from ‘int’ to ‘std::basic_ostream<char>::__streambuf_type* {aka std::basic_streambuf<char>*}’
+section_omp.cpp:30:10: note: std::ostream& operator<<(std::ostream&, const int&)
+ ostream &operator<<(ostream &o, const vvll &v) { rep(i, v.size()) { rep(j, v[i].size()) o << v[i][j] << " "; o << endl; } return o; }
+          ^
+In file included from /usr/include/c++/4.8/istream:39:0,
+                 from /usr/include/c++/4.8/sstream:38,
+                 from /usr/include/c++/4.8/complex:45,
+                 from /usr/include/x86_64-linux-gnu/c++/4.8/bits/stdc++.h:66,
+                 from section_omp.cpp:2:
+/usr/include/c++/4.8/ostream:493:5: note: std::basic_ostream<char, _Traits>& std::operator<<(std::basic_ostream<char, _Traits>&, unsigned char) [with _Traits = std::char_traits<char>]
+     operator<<(basic_ostream<char, _Traits>& __out, unsigned char __c)
+     ^
+/usr/include/c++/4.8/ostream:488:5: note: std::basic_ostream<char, _Traits>& std::operator<<(std::basic_ostream<char, _Traits>&, signed char) [with _Traits = std::char_traits<char>]
+     operator<<(basic_ostream<char, _Traits>& __out, signed char __c)
+     ^
+/usr/include/c++/4.8/ostream:482:5: note: std::basic_ostream<char, _Traits>& std::operator<<(std::basic_ostream<char, _Traits>&, char) [with _Traits = std::char_traits<char>]
+     operator<<(basic_ostream<char, _Traits>& __out, char __c)
+     ^
+/usr/include/c++/4.8/ostream:476:5: note: std::basic_ostream<_CharT, _Traits>& std::operator<<(std::basic_ostream<_CharT, _Traits>&, char) [with _CharT = char; _Traits = std::char_traits<char>]
+     operator<<(basic_ostream<_CharT, _Traits>& __out, char __c)
+     ^
+section_omp.cpp:76:24: error: ‘n’ was not declared in this scope
+                 rep(i, n) {
+                        ^
+section_omp.cpp:6:55: note: in definition of macro ‘rep’
+ #define rep(i,n) for(long long i = 0; i < (long long)(n); i++)
+                                                       ^
+section_omp.cpp:77:21: error: ‘d’ was not declared in this scope
+                     d[i] = a[i] * b[i];
+                     ^
+section_omp.cpp:77:28: error: ‘a’ was not declared in this scope
+                     d[i] = a[i] * b[i];
+                            ^
+section_omp.cpp:77:35: error: ‘b’ was not declared in this scope
+                     d[i] = a[i] * b[i];
+                                   ^
+section_omp.cpp:78:40: error: ambiguous overload for ‘operator<<’ (operand types are ‘std::basic_ostream<char>’ and ‘int’)
+                     cout << "thrread " << omp_get_thread_num() << " " << i << " " << c[i] << endl;
+                                        ^
+section_omp.cpp:78:40: note: candidates are:
+In file included from /usr/include/c++/4.8/istream:39:0,
+                 from /usr/include/c++/4.8/sstream:38,
+                 from /usr/include/c++/4.8/complex:45,
+                 from /usr/include/x86_64-linux-gnu/c++/4.8/bits/stdc++.h:66,
+                 from section_omp.cpp:2:
+/usr/include/c++/4.8/ostream:108:7: note: std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(std::basic_ostream<_CharT, _Traits>::__ostream_type& (*)(std::basic_ostream<_CharT, _Traits>::__ostream_type&)) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>] <near match>
+       operator<<(__ostream_type& (*__pf)(__ostream_type&))
+       ^
+/usr/include/c++/4.8/ostream:108:7: note:   no known conversion for argument 1 from ‘int’ to ‘std::basic_ostream<char>::__ostream_type& (*)(std::basic_ostream<char>::__ostream_type&) {aka std::basic_ostream<char>& (*)(std::basic_ostream<char>&)}’
+/usr/include/c++/4.8/ostream:117:7: note: std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(std::basic_ostream<_CharT, _Traits>::__ios_type& (*)(std::basic_ostream<_CharT, _Traits>::__ios_type&)) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>; std::basic_ostream<_CharT, _Traits>::__ios_type = std::basic_ios<char>] <near match>
+       operator<<(__ios_type& (*__pf)(__ios_type&))
+       ^
+/usr/include/c++/4.8/ostream:117:7: note:   no known conversion for argument 1 from ‘int’ to ‘std::basic_ostream<char>::__ios_type& (*)(std::basic_ostream<char>::__ios_type&) {aka std::basic_ios<char>& (*)(std::basic_ios<char>&)}’
+/usr/include/c++/4.8/ostream:127:7: note: std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(std::ios_base& (*)(std::ios_base&)) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>] <near match>
+       operator<<(ios_base& (*__pf) (ios_base&))
+       ^
+/usr/include/c++/4.8/ostream:127:7: note:   no known conversion for argument 1 from ‘int’ to ‘std::ios_base& (*)(std::ios_base&)’
+/usr/include/c++/4.8/ostream:166:7: note: std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(long int) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>]
+       operator<<(long __n)
+       ^
+/usr/include/c++/4.8/ostream:170:7: note: std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(long unsigned int) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>]
+       operator<<(unsigned long __n)
+       ^
+/usr/include/c++/4.8/ostream:174:7: note: std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(bool) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>]
+       operator<<(bool __n)
+       ^
+In file included from /usr/include/c++/4.8/ostream:612:0,
+                 from /usr/include/c++/4.8/istream:39,
+                 from /usr/include/c++/4.8/sstream:38,
+                 from /usr/include/c++/4.8/complex:45,
+                 from /usr/include/x86_64-linux-gnu/c++/4.8/bits/stdc++.h:66,
+                 from section_omp.cpp:2:
+/usr/include/c++/4.8/bits/ostream.tcc:91:5: note: std::basic_ostream<_CharT, _Traits>& std::basic_ostream<_CharT, _Traits>::operator<<(short int) [with _CharT = char; _Traits = std::char_traits<char>]
+     basic_ostream<_CharT, _Traits>::
+     ^
+In file included from /usr/include/c++/4.8/istream:39:0,
+                 from /usr/include/c++/4.8/sstream:38,
+                 from /usr/include/c++/4.8/complex:45,
+                 from /usr/include/x86_64-linux-gnu/c++/4.8/bits/stdc++.h:66,
+                 from section_omp.cpp:2:
+/usr/include/c++/4.8/ostream:181:7: note: std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(short unsigned int) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>]
+       operator<<(unsigned short __n)
+       ^
+In file included from /usr/include/c++/4.8/ostream:612:0,
+                 from /usr/include/c++/4.8/istream:39,
+                 from /usr/include/c++/4.8/sstream:38,
+                 from /usr/include/c++/4.8/complex:45,
+                 from /usr/include/x86_64-linux-gnu/c++/4.8/bits/stdc++.h:66,
+                 from section_omp.cpp:2:
+/usr/include/c++/4.8/bits/ostream.tcc:105:5: note: std::basic_ostream<_CharT, _Traits>& std::basic_ostream<_CharT, _Traits>::operator<<(int) [with _CharT = char; _Traits = std::char_traits<char>]
+     basic_ostream<_CharT, _Traits>::
+     ^
+In file included from /usr/include/c++/4.8/istream:39:0,
+                 from /usr/include/c++/4.8/sstream:38,
+                 from /usr/include/c++/4.8/complex:45,
+                 from /usr/include/x86_64-linux-gnu/c++/4.8/bits/stdc++.h:66,
+                 from section_omp.cpp:2:
+/usr/include/c++/4.8/ostream:192:7: note: std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(unsigned int) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>]
+       operator<<(unsigned int __n)
+       ^
+/usr/include/c++/4.8/ostream:201:7: note: std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(long long int) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>]
+       operator<<(long long __n)
+       ^
+/usr/include/c++/4.8/ostream:205:7: note: std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(long long unsigned int) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>]
+       operator<<(unsigned long long __n)
+       ^
+/usr/include/c++/4.8/ostream:220:7: note: std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(double) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>]
+       operator<<(double __f)
+       ^
+/usr/include/c++/4.8/ostream:224:7: note: std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(float) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>]
+       operator<<(float __f)
+       ^
+/usr/include/c++/4.8/ostream:232:7: note: std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(long double) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>]
+       operator<<(long double __f)
+       ^
+/usr/include/c++/4.8/ostream:245:7: note: std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(const void*) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>] <near match>
+       operator<<(const void* __p)
+       ^
+/usr/include/c++/4.8/ostream:245:7: note:   no known conversion for argument 1 from ‘int’ to ‘const void*’
+In file included from /usr/include/c++/4.8/ostream:612:0,
+                 from /usr/include/c++/4.8/istream:39,
+                 from /usr/include/c++/4.8/sstream:38,
+                 from /usr/include/c++/4.8/complex:45,
+                 from /usr/include/x86_64-linux-gnu/c++/4.8/bits/stdc++.h:66,
+                 from section_omp.cpp:2:
+/usr/include/c++/4.8/bits/ostream.tcc:119:5: note: std::basic_ostream<_CharT, _Traits>& std::basic_ostream<_CharT, _Traits>::operator<<(std::basic_ostream<_CharT, _Traits>::__streambuf_type*) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__streambuf_type = std::basic_streambuf<char>] <near match>
+     basic_ostream<_CharT, _Traits>::
+     ^
+/usr/include/c++/4.8/bits/ostream.tcc:119:5: note:   no known conversion for argument 1 from ‘int’ to ‘std::basic_ostream<char>::__streambuf_type* {aka std::basic_streambuf<char>*}’
+section_omp.cpp:30:10: note: std::ostream& operator<<(std::ostream&, const int&)
+ ostream &operator<<(ostream &o, const vvll &v) { rep(i, v.size()) { rep(j, v[i].size()) o << v[i][j] << " "; o << endl; } return o; }
+          ^
+In file included from /usr/include/c++/4.8/istream:39:0,
+                 from /usr/include/c++/4.8/sstream:38,
+                 from /usr/include/c++/4.8/complex:45,
+                 from /usr/include/x86_64-linux-gnu/c++/4.8/bits/stdc++.h:66,
+                 from section_omp.cpp:2:
+/usr/include/c++/4.8/ostream:493:5: note: std::basic_ostream<char, _Traits>& std::operator<<(std::basic_ostream<char, _Traits>&, unsigned char) [with _Traits = std::char_traits<char>]
+     operator<<(basic_ostream<char, _Traits>& __out, unsigned char __c)
+     ^
+/usr/include/c++/4.8/ostream:488:5: note: std::basic_ostream<char, _Traits>& std::operator<<(std::basic_ostream<char, _Traits>&, signed char) [with _Traits = std::char_traits<char>]
+     operator<<(basic_ostream<char, _Traits>& __out, signed char __c)
+     ^
+/usr/include/c++/4.8/ostream:482:5: note: std::basic_ostream<char, _Traits>& std::operator<<(std::basic_ostream<char, _Traits>&, char) [with _Traits = std::char_traits<char>]
+     operator<<(basic_ostream<char, _Traits>& __out, char __c)
+     ^
+/usr/include/c++/4.8/ostream:476:5: note: std::basic_ostream<_CharT, _Traits>& std::operator<<(std::basic_ostream<_CharT, _Traits>&, char) [with _CharT = char; _Traits = std::char_traits<char>]
+     operator<<(basic_ostream<_CharT, _Traits>& __out, char __c)
+     ^
+section_omp.cpp:78:86: error: ‘c’ was not declared in this scope
+                     cout << "thrread " << omp_get_thread_num() << " " << i << " " << c[i] << endl;
+                                                                                      ^
+section_omp.cpp:84:13: error: ‘a’ was not declared in this scope
+     cout << a<< endl;
+             ^
+section_omp.cpp:85:13: error: ‘b’ was not declared in this scope
+     cout << b<< endl;
+             ^
+section_omp.cpp:86:13: error: ‘c’ was not declared in this scope
+     cout << c<< endl;
+             ^
+section_omp.cpp:87:13: error: ‘d’ was not declared in this scope
+     cout << d<< endl;
+             ^
+make: *** [section_omp] エラー 1
