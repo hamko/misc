@@ -69,7 +69,11 @@ explorer = chainerrl.explorers.LinearDecayEpsilonGreedy(
 # Experience ReplayというDQNで用いる学習手法で使うバッファ
 replay_buffer = chainerrl.replay_buffer.ReplayBuffer(capacity=10 ** 6)
 # Agentの生成（replay_buffer等を共有する2つ）
-agent = chainerrl.agents.DoubleDQN(
+agent_p1 = chainerrl.agents.DoubleDQN(
+    q_func, optimizer, replay_buffer, gamma, explorer,
+    replay_start_size=500, update_interval=1,
+    target_update_interval=100)
+agent_p2 = chainerrl.agents.DoubleDQN(
     q_func, optimizer, replay_buffer, gamma, explorer,
     replay_start_size=500, update_interval=1,
     target_update_interval=100)
@@ -81,34 +85,38 @@ lose = 0
 win = 0
 #エピソードの繰り返し実行
 for i in range(1, n_episodes + 1):
+    agents = [agent_p1, agent_p2]
     turn = np.random.choice([0, 1])
 
     obs = b.reset()
     reward = 0
+    last_state = 0;
     while 1:
-        action = agent.act_and_train(obs, reward) # ここでいうrewardというのは前回の行動によるrewardということ
+#        pobs = obs
+#        print(pobs)
+        action = agents[turn].act_and_train(obs, reward) # ここでいうrewardというのは前回の行動によるrewardということ
         obs, reward, done, _ = b.step(action)
 #        print(pobs, action, obs, done, reward);
         #配置の結果、終了時には報酬とカウンタに値をセットして学習
         if done:
             #エピソードを終了して学習
-            agent.stop_episode_and_train(b.n.copy(), reward, True)
+            agents[turn].stop_episode_and_train(b.n.copy(), reward, True)
             break
         else:
             #ターンを切り替え
             turn = 1 if turn == 0 else 0
+            last_state = obs
 
     #コンソールに進捗表示
     if i % 100 == 0:
-        print("episode:", i, " / rnd:", ra.random_count, " / statistics:", agent.get_statistics(), " / epsilon:", agent.explorer.epsilon)
+        print("episode:", i, " / rnd:", ra.random_count, " / statistics:", agent_p1.get_statistics(), " / epsilon:", agent_p1.explorer.epsilon)
         #カウンタの初期化
-        
         lose = 0
         win = 0
         ra.random_count = 0
     if i % 10000 == 0:
         # 10000エピソードごとにモデルを保存
-        agent.save("result_" + str(i))
+        agent_p1.save("result_" + str(i))
 
 print("Training finished.")
 
@@ -136,14 +144,14 @@ for i in range(10):
     while 1:
         #DQN
         b.show()
-        action = agent.act(b.n.copy())
+        action = agent_p1.act(b.n.copy())
         obs, reward, done, _ = b.step(action)
         if done:
             if reward > 0:
                 print("DQN Win")
             else:
                 print("DQN Lose")
-            agent.stop_episode()
+            agent_p1.stop_episode()
             break;
 
         #人間
@@ -155,7 +163,7 @@ for i in range(10):
                 print("Human Win")
             else:
                 print("Human Lose")
-            agent.stop_episode()
+            agent_p1.stop_episode()
             break;
 
 print("Test finished.")
