@@ -79,7 +79,7 @@ agent_p2 = chainerrl.agents.DoubleDQN(
     target_update_interval=100)
 
 #学習ゲーム回数
-n_episodes = 2000
+n_episodes = 10000
 #カウンタの宣言
 lose = 0
 win = 0
