@@ -4,6 +4,19 @@ import chainer.links as L
 import chainerrl
 import numpy as np
 import random
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--load', type=str, default='')
+parser.add_argument('--learn', type=str, default='no')
+args = parser.parse_args()
+
+if not args.load and args.learn == 'no':
+    print('load agent, or specify --learn yes')
+    print('Example:')
+    print('python main.py --load result_100000')
+    print('python main.py --learn yes')
+    exit();
 
 #ゲームボード
 class Board():
@@ -65,7 +78,7 @@ optimizer.setup(q_func)
 gamma = 0.95
 # Epsilon-greedyを使ってたまに冒険。50000ステップでend_epsilonとなる
 explorer = chainerrl.explorers.LinearDecayEpsilonGreedy(
-    start_epsilon=1.0, end_epsilon=0.3, decay_steps=50000, random_action_func=ra.random_action_func)
+    start_epsilon=1.0, end_epsilon=0.1, decay_steps=50000, random_action_func=ra.random_action_func)
 # Experience ReplayというDQNで用いる学習手法で使うバッファ
 replay_buffer = chainerrl.replay_buffer.ReplayBuffer(capacity=10 ** 6)
 # Agentの生成（replay_buffer等を共有する2つ）
@@ -77,48 +90,65 @@ agent_p2 = chainerrl.agents.DoubleDQN(
     q_func, optimizer, replay_buffer, gamma, explorer,
     replay_start_size=500, update_interval=1,
     target_update_interval=100)
+if args.load:
+    agent_p1.load(args.load)
+    agent_p2.load(args.load)
 
-#学習ゲーム回数
-n_episodes = 10000
-#カウンタの宣言
-lose = 0
-win = 0
-#エピソードの繰り返し実行
-for i in range(1, n_episodes + 1):
-    agents = [agent_p1, agent_p2]
-    turn = np.random.choice([0, 1])
+def printAgent(a): 
+    print("Action of agent.")
+    for i in range(21):
+        print(i, a.act(np.array([i], dtype=np.float32)));
 
-    obs = b.reset()
-    reward = 0
-    last_state = 0;
-    while 1:
-#        pobs = obs
-#        print(pobs)
-        action = agents[turn].act_and_train(obs, reward) # ここでいうrewardというのは前回の行動によるrewardということ
-        obs, reward, done, _ = b.step(action)
-#        print(pobs, action, obs, done, reward);
-        #配置の結果、終了時には報酬とカウンタに値をセットして学習
-        if done:
-            #エピソードを終了して学習
-            agents[turn].stop_episode_and_train(b.n.copy(), reward, True)
-            break
-        else:
-            #ターンを切り替え
-            turn = 1 if turn == 0 else 0
-            last_state = obs
+if args.learn == 'yes':
+    #学習ゲーム回数
+    n_episodes = 100000
+    #カウンタの宣言
+    lose = 0
+    win = 0
+    #エピソードの繰り返し実行
+    for i in range(1, n_episodes + 1):
+        agents = [agent_p1, agent_p2]
+        turn = np.random.choice([0, 1])
 
-    #コンソールに進捗表示
-    if i % 100 == 0:
-        print("episode:", i, " / rnd:", ra.random_count, " / statistics:", agent_p1.get_statistics(), " / epsilon:", agent_p1.explorer.epsilon)
-        #カウンタの初期化
-        lose = 0
-        win = 0
-        ra.random_count = 0
-    if i % 10000 == 0:
-        # 10000エピソードごとにモデルを保存
-        agent_p1.save("result_" + str(i))
+        obs = b.reset()
+        reward = 0
+        last_state = 0;
+        while 1:
+    #        print(turn, obs, reward)
 
-print("Training finished.")
+            # ここでいうrewardというのは前回の行動によるrewardということ
+            action = agents[turn].act_and_train(obs, reward)
+
+            obs, reward, done, _ = b.step(action)
+
+            #配置の結果、終了時には報酬とカウンタに値をセットして学習
+            if done:
+                #エピソードを終了して学習
+                agents[    turn].stop_episode_and_train(b.n.copy(), +reward, True)
+    #            print(turn, b.n.copy(), +reward)
+                agents[not turn].stop_episode_and_train(last_state.copy(), -reward, True)
+    #           print(not turn, last_state.copy(), -reward)
+                break
+            else:
+                #ターンを切り替え
+                turn = not turn
+                last_state = obs
+
+        #コンソールに進捗表示
+        if i % 100 == 0:
+            print("episode:", i, " / rnd:", ra.random_count, " / statistics:", agent_p1.get_statistics(), " / epsilon:", agent_p1.explorer.epsilon)
+            printAgent(agent_p1)
+            #カウンタの初期化
+            lose = 0
+            win = 0
+            ra.random_count = 0
+        if i % 10000 == 0:
+            # 10000エピソードごとにモデルを保存
+            agent_p1.save("result_" + str(i))
+
+    print("Training finished.")
+
+
 
 #人間のプレーヤー
 class HumanPlayer:
