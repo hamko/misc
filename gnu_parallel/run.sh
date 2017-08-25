@@ -1,3 +1,5 @@
+ls ./* | parallel -j 10 "echo {}.org {/}.dir_cut"
+
 g++ -std=c++11 -o a.out template.cpp 
 time seq 1000 | parallel -j 1 ./a.out > tmp
 time seq 1000 | parallel -j 10 ./a.out > tmp
