@@ -71,6 +71,7 @@ double pdf_gauss(double x, double mu, double sigma) {
 }
 
 // Xがf=N(0, 1)に従う時、P(X>=5)を計算する。
+// 真値: 2.86651570352e-07
 int main(void) {
     ll num = 1e6; //cin >> num;
 
