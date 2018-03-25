@@ -2,7 +2,7 @@
 
 # libtool - Provide generalized library-building support services.
 # Generated automatically by config.status (glpk) 4.60
-# Libtool was configured on host hamko-All-Series:
+# Libtool was configured on host hamko-ThinkPad-X1-Carbon-4th:
 # NOTE: Changes made to this file will be lost: look at ltmain.sh.
 #
 #   Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001, 2003, 2004, 2005,
@@ -269,10 +269,10 @@ finish_eval=""
 hardcode_into_libs=yes
 
 # Compile-time system search path for libraries.
-sys_lib_search_path_spec="/usr/lib/gcc/x86_64-linux-gnu/4.8 /usr/lib/x86_64-linux-gnu /usr/lib /lib/x86_64-linux-gnu /lib /opt/intel/compilers_and_libraries_2016.3.210/linux/ipp/lib/intel64 /opt/intel/compilers_and_libraries_2016.3.210/linux/compiler/lib/intel64 /opt/intel/compilers_and_libraries_2016.3.210/linux/mkl/lib/intel64 /opt/intel/compilers_and_libraries_2016.3.210/linux/tbb/lib/intel64/gcc4.4 /opt/intel/compilers_and_libraries_2016.3.210/linux/daal/lib/intel64_lin /opt/intel/compilers_and_libraries_2016.3.210/linux/compiler/lib/intel64_lin /opt/intel/compilers_and_libraries_2016.3.210/linux/tbb/lib/intel64_lin/gcc4.4 "
+sys_lib_search_path_spec="/usr/lib/gcc/x86_64-linux-gnu/5 /usr/lib/x86_64-linux-gnu /usr/lib /lib/x86_64-linux-gnu /lib "
 
 # Run-time system search path for libraries.
-sys_lib_dlsearch_path_spec="/lib /usr/lib /usr/lib/x86_64-linux-gnu/libfakeroot /opt/gurobi652/linux64/lib /usr/local/lib /lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/mesa-egl /usr/lib/x86_64-linux-gnu/mesa /usr/lib/x86_64-linux-gnu/mir/clientplatform/mesa "
+sys_lib_dlsearch_path_spec="/lib /usr/lib /usr/lib/x86_64-linux-gnu/libfakeroot /lib/i386-linux-gnu /usr/lib/i386-linux-gnu /lib/i686-linux-gnu /usr/lib/i686-linux-gnu /usr/local/lib /lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/mesa-egl /usr/lib/x86_64-linux-gnu/mesa "
 
 # Whether dlopen is supported.
 dlopen_support=unknown

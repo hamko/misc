@@ -437,7 +437,7 @@ Copyright (C) 2012 Free Software Foundation, Inc.
 This config.status script is free software; the Free Software Foundation
 gives unlimited permission to copy, distribute and modify it."
 
-ac_pwd='/home/hamko/Downloads/glpk-4.60'
+ac_pwd='/home/hamko/git/sample/glpk-4.60'
 srcdir='.'
 INSTALL='/usr/bin/install -c'
 MKDIR_P='/bin/mkdir -p'
@@ -674,8 +674,8 @@ postuninstall_cmds=''
 finish_cmds='PATH="\$PATH:/sbin" ldconfig -n $libdir'
 finish_eval=''
 hardcode_into_libs='yes'
-sys_lib_search_path_spec='/usr/lib/gcc/x86_64-linux-gnu/4.8 /usr/lib/x86_64-linux-gnu /usr/lib /lib/x86_64-linux-gnu /lib /opt/intel/compilers_and_libraries_2016.3.210/linux/ipp/lib/intel64 /opt/intel/compilers_and_libraries_2016.3.210/linux/compiler/lib/intel64 /opt/intel/compilers_and_libraries_2016.3.210/linux/mkl/lib/intel64 /opt/intel/compilers_and_libraries_2016.3.210/linux/tbb/lib/intel64/gcc4.4 /opt/intel/compilers_and_libraries_2016.3.210/linux/daal/lib/intel64_lin /opt/intel/compilers_and_libraries_2016.3.210/linux/compiler/lib/intel64_lin /opt/intel/compilers_and_libraries_2016.3.210/linux/tbb/lib/intel64_lin/gcc4.4 '
-sys_lib_dlsearch_path_spec='/lib /usr/lib /usr/lib/x86_64-linux-gnu/libfakeroot /opt/gurobi652/linux64/lib /usr/local/lib /lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/mesa-egl /usr/lib/x86_64-linux-gnu/mesa /usr/lib/x86_64-linux-gnu/mir/clientplatform/mesa '
+sys_lib_search_path_spec='/usr/lib/gcc/x86_64-linux-gnu/5 /usr/lib/x86_64-linux-gnu /usr/lib /lib/x86_64-linux-gnu /lib '
+sys_lib_dlsearch_path_spec='/lib /usr/lib /usr/lib/x86_64-linux-gnu/libfakeroot /lib/i386-linux-gnu /usr/lib/i386-linux-gnu /lib/i686-linux-gnu /usr/lib/i686-linux-gnu /usr/local/lib /lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/mesa-egl /usr/lib/x86_64-linux-gnu/mesa '
 hardcode_action='immediate'
 enable_dlopen='unknown'
 enable_dlopen_self='unknown'
@@ -877,12 +877,12 @@ S["mkdir_p"]="$(MKDIR_P)"
 S["MKDIR_P"]="/bin/mkdir -p"
 S["INSTALL_STRIP_PROGRAM"]="$(install_sh) -c -s"
 S["STRIP"]="strip"
-S["install_sh"]="${SHELL} /home/hamko/Downloads/glpk-4.60/install-sh"
-S["MAKEINFO"]="${SHELL} /home/hamko/Downloads/glpk-4.60/missing --run makeinfo"
-S["AUTOHEADER"]="${SHELL} /home/hamko/Downloads/glpk-4.60/missing --run autoheader"
-S["AUTOMAKE"]="${SHELL} /home/hamko/Downloads/glpk-4.60/missing --run automake-1.12"
-S["AUTOCONF"]="${SHELL} /home/hamko/Downloads/glpk-4.60/missing --run autoconf"
-S["ACLOCAL"]="${SHELL} /home/hamko/Downloads/glpk-4.60/missing --run aclocal-1.12"
+S["install_sh"]="${SHELL} /home/hamko/git/sample/glpk-4.60/install-sh"
+S["MAKEINFO"]="${SHELL} /home/hamko/git/sample/glpk-4.60/missing --run makeinfo"
+S["AUTOHEADER"]="${SHELL} /home/hamko/git/sample/glpk-4.60/missing --run autoheader"
+S["AUTOMAKE"]="${SHELL} /home/hamko/git/sample/glpk-4.60/missing --run automake-1.12"
+S["AUTOCONF"]="${SHELL} /home/hamko/git/sample/glpk-4.60/missing --run autoconf"
+S["ACLOCAL"]="${SHELL} /home/hamko/git/sample/glpk-4.60/missing --run aclocal-1.12"
 S["VERSION"]="4.60"
 S["PACKAGE"]="glpk"
 S["CYGPATH_W"]="echo"
@@ -909,6 +909,7 @@ S["infodir"]="${datarootdir}/info"
 S["docdir"]="${datarootdir}/doc/${PACKAGE_TARNAME}"
 S["oldincludedir"]="/usr/include"
 S["includedir"]="${prefix}/include"
+S["runstatedir"]="${localstatedir}/run"
 S["localstatedir"]="${prefix}/var"
 S["sharedstatedir"]="${prefix}/com"
 S["sysconfdir"]="${prefix}/etc"
