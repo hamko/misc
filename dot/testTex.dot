@@ -1,0 +1,88 @@
+// sudo apt-get install python
+// sudo apt-get install python-pyparsing python-pydot graphviz
+// sudo apt-get install preview-latex-style auctex
+// sudo apt-get install latex-xcolor pgf
+// sudo apt-get install dot2tex
+// 
+// dot2tex -f tikz --tikzedgelabels --graphstyle=automaton --crop -w --nominsize --autosize  testTex.dot > testTex.tex
+digraph
+{
+    layout=dot; // dotは階層性のあるグラフ、neartoとfdpはバネモデル, sfdpはノードが多数のバネモデル, twopiは放射状, circoは円上
+    splines=true; // splines=falseで辺が曲がるのを防ぐが、同じノード間に多重辺がある場合重なってしまう…
+    compound = true;
+
+    // 全体設定
+    graph [
+        rankdir = TB, // LRは左右、TBは上から下へ
+    ]
+
+
+        // TeXのTikzの設定
+        // 全体的にノードの設定ができない。
+        // しょうがないので、ノードの色や形はTikzで設定することにした
+        // ノードで設定できないもの: peripheries, shape, fillcolor
+        d2tdocpreamble = "
+        \usetikzlibrary{arrows, automata, positioning}
+    \tikzstyle{automaton}=[shorten >=1pt, pos=.5, >=stealth', initial text=]
+        \tikzstyle{state}=[circle,fill=white]
+        \tikzstyle{gray}=[circle,fill=lightgray]
+        \tikzstyle{black}=[circle,white,fill=black]
+        \tikzstyle{accepting}=[accepting by arrow]
+        "
+
+
+        subgraph cluster_hod {
+            style=invis;
+            node [texmode = "math", style="state"] // node[]を書くとそれ以下のもののデフォルトの設定となる。
+                0 [label = "z^{-1}", style="gray"]
+                1 [label = "d y", style="black"]
+                2 [label = "p"]
+                3 [label = "z^*"]
+                4 [label = "b^*"]
+
+                edge [texmode = "math", lblstyle = auto]
+                0 -> 1 [label = "a", color="purple"]
+                1 -> 1 [label = "b"]
+                2 -> 1 [label = "a, b", style=dotted]
+                1 -> 2 [label = "\displaystyle \frac{c}{d}"]
+                1 -> 3 [label = "\rm{test}"]
+                2 -> 2 [label = "b"]
+                2 -> 4 [label = "c"]
+                3 -> 3 [label = "b"]
+                3 -> 4 [label = "a, b"]
+                4 -> 4 [label = "b"]
+        };
+
+    subgraph cluster_1 {
+        delta [label = "delta"];
+        epsilon [label = "epsilon"];
+        zeta [label = "zeta"];
+        theta [label = "theta"];
+
+        delta -> epsilon;
+        delta -> zeta;
+        delta -> theta;
+    };
+
+    subgraph cluster_2 {
+        lambda [texmode = "math", label = "\lambda", shape = "octagon"];
+        mu [texmode = "math", label = "\mu", shape = "octagon"];
+
+        lambda -> mu;
+    };
+
+    subgraph cluster_3 {
+        label = "clu3";
+        labelloc = "t";
+        labeljust = "l";
+        fillcolor = "#888888";
+
+        nu [label = "nu", shape = "trapezium"];
+        xi [label = "xi", shape = "trapezium"];
+
+        nu -> xi;
+    };
+
+    0->nu;
+}
+
